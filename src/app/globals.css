@@ -1,15 +1,41 @@
+/* ---------------------------------------------- */
+/* 🌐 Tailwind Setup for Tailwind v4+ */
+/* ---------------------------------------------- */
 @import "tailwindcss";
 
+/* ---------------------------------------------- */
+/* ⚙️ Scroll Behaviour Setup */
+/* ---------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem; /* matches total header height including border */
+}
+
+
+/* ---------------------------------------------- */
+/* 🎨 Font Definitions */
+/* ---------------------------------------------- */
+:root {
+  --font-inter: 'Inter', sans-serif;
+  --font-lora: 'Lora', serif;
+}
+
+/* ---------------------------------------------- */
+/* 🩶 Corporate Color Palette (JP Morgan / Goldman Sachs tone) */
+/* ---------------------------------------------- */
+:root {
+  --color-steel-700: #1E355B; /* deep navy */
+  --color-steel-500: #5B7EA3; /* muted blue-gray */
+  --color-steel-200: #AFC3D8; /* soft desaturated blue */
+  --color-steel-50:  #E7EEF5; /* off-white steel */
+}
+
+/* ---------------------------------------------- */
+/* 🌓 Light/Dark Mode Theme Tokens */
+/* ---------------------------------------------- */
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +45,34 @@
   }
 }
 
+/* ---------------------------------------------- */
+/* ✍️ Base Typography */
+/* ---------------------------------------------- */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter);
+  letter-spacing: 0.01em;
+  line-height: 1.6;
+}
+
+/* ---------------------------------------------- */
+/* 📈 Stock Ticker Marquee Animation */
+/* ---------------------------------------------- */
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
 }
