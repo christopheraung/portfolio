@@ -37,15 +37,15 @@ export default function Navbar() {
   if (!mounted) return null; //
 
   return (
-<nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-10 py-2 border-b border-gray-200 bg-white text-gray-800">
+<nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-7 py-2 border-b border-gray-200 bg-white text-gray-800">
 
       {/* Left section */}
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-5">
   <a
   href="https://www.linkedin.com/in/christopher-mhaung/"
   target="_blank"
   rel="noopener noreferrer"
-  className="flex items-center justify-center w-4 h-4 bg-blue-900 text-white rounded-sm transition-colors duration-300 hover:bg-steel-500"
+  className="flex items-center justify-center w-4.5 h-4.5 bg-blue-950 text-white rounded-sm transition-colors duration-300 hover:bg-steel-500"
   aria-label="LinkedIn"
 >
 <TfiLinkedin size={10}/>
@@ -54,7 +54,7 @@ export default function Navbar() {
   href="https://smu-sg.academia.edu/CAung"
   target="_blank"
   rel="noopener noreferrer"
-  className="flex items-center justify-center w-4 h-4 bg-blue-900 text-white rounded-sm transition-colors duration-300 hover:bg-steel-500"
+  className="flex items-center justify-center w-4.5 h-4.5 bg-blue-950 text-white rounded-sm transition-colors duration-300 hover:bg-steel-500"
   aria-label="Academia.edu"
 >
   <SiAcademia size={9} />

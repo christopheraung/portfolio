@@ -31,12 +31,16 @@ html {
 }
 
 /* ---------------------------------------------- */
-/* 🌓 Light/Dark Mode Theme Tokens */
+/*  Fading Effects */
 /* ---------------------------------------------- */
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
+.animate-fadeIn {
+  animation: fadeIn 1s ease-out forwards;
+}
+
 
 @media (prefers-color-scheme: dark) {
   :root {
