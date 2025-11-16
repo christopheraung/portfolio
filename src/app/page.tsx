@@ -525,7 +525,7 @@ A commentary piece dated April 18th, 2017 in the Today newspaper argued low pay 
   {/* Image */}
   <div className="relative h-52 w-full overflow-hidden">
     <img
-      src="/images/polli.png"
+      src="/images/mediaa.png"
 
       className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
     />
