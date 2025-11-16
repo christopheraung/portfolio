@@ -42,7 +42,7 @@ export default function ClientLogin() {
 
           <form className="space-y-8 max-w-sm">
             <div>
-              <label htmlFor="userId" className="block text-[13px] uppercase tracking-wider text-gray-400 mb-2">User ID</label>
+              <label htmlFor="userId" className="block text-[12px] uppercase tracking-wider text-gray-400 mb-1">User ID</label>
               <input
                 id="userId"
                 type="text"
@@ -52,7 +52,7 @@ export default function ClientLogin() {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-[13px] uppercase tracking-wider text-gray-400 mb-2">Password</label>
+              <label htmlFor="password" className="block text-[12px] uppercase tracking-wider text-gray-400 mb-1">Password</label>
               <div className="relative">
                 <input
                   id="password"
@@ -60,9 +60,7 @@ export default function ClientLogin() {
                   placeholder="Enter your password"
                   className="w-full bg-transparent border-b border-gray-600 focus:border-steel-500 outline-none py-1 text-white placeholder-gray-500"
                 />
-                <button type="button" className="absolute right-0 top-0 text-gray-400 hover:text-white text-[10px]">
-                  Case Sensitive
-                </button>
+
               </div>
             </div>
 
