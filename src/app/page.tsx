@@ -23,7 +23,7 @@ return (
 
 
       {/* Sidebar Navigation */}
-      <nav className="w-44 bg-bluebrand-100 border-r border-bluebrand-200 text-bluebrand-700 pl-9 pr-4 py-51 fixed top-[2.5rem] left-0 h-[calc(100%-2.5rem)]">
+      <nav className="w-44 bg-bluebrand-100 border-r border-bluebrand-200 text-bluebrand-700 pl-9 pr-4 py-38.5 fixed top-[2.5rem] left-0 h-[calc(100%-2.5rem)]">
         <ul className="space-y-4 text-[15px] font-regular tracking-wide mt-12">
           <li><a href="#about" className="hover:text-bluebrand-800 transition-colors">About</a></li>
           <li><a href="#Policies" className="hover:text-bluebrand-800 transition-colors">Policies</a></li>
