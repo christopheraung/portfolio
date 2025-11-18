@@ -2,24 +2,86 @@
 import { useState, useEffect } from "react";
 import clsx from "clsx";
 
-
 export default function Home() {
   const [fadeIn, setFadeIn] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setFadeIn(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
+  return (
+    <div
+      className={clsx(
+        "flex min-h-screen bg-white text-gray-800 transition-opacity duration-1000",
+        fadeIn ? "opacity-100" : "opacity-0"
+      )}
+    >
+      {/* === MOBILE MENU BUTTON === */}
+      <button
+        onClick={() => setMenuOpen(true)}
+        className="md:hidden fixed top-4 left-4 z-50 bg-[#1b1e27] text-white px-3 py-2 rounded-md shadow-lg"
+      >
+        Menu
+      </button>
 
+      {/* === MOBILE DRAWER OVERLAY === */}
+      {menuOpen && (
+        <div
+          onClick={() => setMenuOpen(false)}
+          className="md:hidden fixed inset-0 bg-black/50 z-40 backdrop-blur-sm"
+        ></div>
+      )}
 
-return (
-  <div
-    className={clsx(
-      "flex min-h-screen bg-white text-gray-800 transition-opacity duration-1000",
-      fadeIn ? "opacity-100" : "opacity-0"
-    )}
-  >
+      {/* === MOBILE SLIDING DRAWER === */}
+      <aside
+        className={clsx(
+          "md:hidden fixed top-0 left-0 z-50 w-64 h-full bg-[#1b1e27] text-gray-200 p-6 transform transition-transform duration-300",
+          menuOpen ? "translate-x-0" : "-translate-x-full"
+        )}
+      >
+        <button
+          onClick={() => setMenuOpen(false)}
+          className="text-gray-400 text-sm mb-6 hover:text-white"
+        >
+          Close ✕
+        </button>
+
+        <ul className="space-y-5 text-[16px] tracking-wide">
+          <li>
+            <a href="#about" onClick={() => setMenuOpen(false)} className="hover:text-white">
+              About
+            </a>
+          </li>
+          <li>
+            <a href="#Policies" onClick={() => setMenuOpen(false)} className="hover:text-white">
+              Policies
+            </a>
+          </li>
+          <li>
+            <a href="#Commodities" onClick={() => setMenuOpen(false)} className="hover:text-white">
+              Commodities
+            </a>
+          </li>
+          <li>
+            <a href="#Marketplace" onClick={() => setMenuOpen(false)} className="hover:text-white">
+              Marketplace
+            </a>
+          </li>
+          <li>
+            <a href="#Lectures" onClick={() => setMenuOpen(false)} className="hover:text-white">
+              Lectures
+            </a>
+          </li>
+          <li>
+            <a href="/client" className="hover:text-white" onClick={() => setMenuOpen(false)}>
+              Client Login
+            </a>
+          </li>
+        </ul>
+      </aside>
+
 
 
       {/* Sidebar Navigation */}
