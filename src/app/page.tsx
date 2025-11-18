@@ -82,28 +82,28 @@ export default function Home() {
         </ul>
       </aside>
 
-
-
-      {/* Sidebar Navigation */}
-      <nav className="w-44 bg-bluebrand-100 border-r border-bluebrand-200 text-bluebrand-700 pl-9 pr-4 py-38.5 fixed top-[2.5rem] left-0 h-[calc(100%-2.5rem)]">
+      {/* === DESKTOP SIDEBAR === */}
+      <nav className="hidden md:block w-44 bg-bluebrand-100 border-r border-bluebrand-200 text-bluebrand-700 pl-9 pr-4 py-38.5 fixed top-[2.5rem] left-0 h-[calc(100%-2.5rem)]">
         <ul className="space-y-4 text-[15px] font-regular tracking-wide mt-12">
-          <li><a href="#about" className="hover:text-bluebrand-800 transition-colors">About</a></li>
-          <li><a href="#Policies" className="hover:text-bluebrand-800 transition-colors">Policies</a></li>
-          <li><a href="#Commodities" className="hover:text-bluebrand-800 transition-colors">Commodities</a></li>
-          <li><a href="#Marketplace" className="hover:text-bluebrand-800 transition-colors">Marketplace</a></li>
-          <li><a href="#Lectures" className="hover:text-bluebrand-800 transition-colors">Lectures</a></li>
-          <li><a href="/client" className="hover:text-bluebrand-800 transition-colors">Client Login</a></li>
+          <li><a href="#about" className="hover:text-bluebrand-800">About</a></li>
+          <li><a href="#Policies" className="hover:text-bluebrand-800">Policies</a></li>
+          <li><a href="#Commodities" className="hover:text-bluebrand-800">Commodities</a></li>
+          <li><a href="#Marketplace" className="hover:text-bluebrand-800">Marketplace</a></li>
+          <li><a href="#Lectures" className="hover:text-bluebrand-800">Lectures</a></li>
+          <li><a href="/client" className="hover:text-bluebrand-800">Client Login</a></li>
         </ul>
       </nav>
 
-      {/* Main Content */}
-      <main className="ml-44 flex-1 flex flex-col items-start justify-center px-25 py-20">
-        
+      {/* === MAIN CONTENT WRAPPER === */}
+      <main className="flex-1 md:ml-44 px-6 sm:px-10 md:px-24 py-20 max-w-5xl mx-auto">
+
         {/* === ABOUT SECTION === */}
-        <section id="about" className="pt-10 mb-110 max-w-5xl">
-          <h1 className="text-5xl font-bold font-lora tracking-tight text-[#1a1f2b] mb-10">
+        <section id="about" className="pt-10 mb-32">
+          <h1 className="text-5xl font-bold font-lora tracking-tight text-[#1a1f2b] mb-8">
             Christopher Lee
           </h1>
+
+
           <h2 className="text-3xl font-semibold text-[#3b465c] mb-1">
             Senior Economist
           </h2>
@@ -112,16 +112,18 @@ export default function Home() {
           </h3>
 
           <p className="text-[15px] leading-relaxed mb-5 text-justify">
-            Christopher is a professional econometrician specialising in commodity and capital market index analysis. His portfolio has been engaged by C Suit Executives to navigate policy intervention, and industry analysts alongside investors to decompose price latent behaviour. Autonomous universities regularly contact him for under and post graduate modular studies in quantitative economics and inter-disciplinary analytical training. 
-
+            Christopher is a professional econometrician specialising in commodity and capital
+            market index analysis. His portfolio has been engaged by C Suit Executives to navigate
+            policy intervention, and industry analysts alongside investors to decompose price latent
+            behaviour. Autonomous universities regularly contact him for under and post graduate
+            modular studies in quantitative economics and inter-disciplinary analytical training.
           </p>
 
-<div className="flex gap-7">
-  {/* Route to client login page */}
-  <a
-    href="/client"
-    className="bg-blue-950 text-white px-5 py-1.5 rounded-lg text-[14px] font-medium hover:bg-steel-500 transition-colors"
-  >
+          <div className="flex flex-col sm:flex-row gap-5 sm:gap-7 mt-5">
+            <a
+              href="/client"
+              className="bg-blue-950 text-white px-5 py-2 rounded-lg text-[14px] hover:bg-steel-500"
+            >
     Industry Clients
   </a>
 
