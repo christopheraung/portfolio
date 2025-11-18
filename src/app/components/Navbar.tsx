@@ -35,11 +35,14 @@ export default function Navbar() {
     return () => clearInterval(interval);
   }, []);
 
-  return (
-<nav className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-8 py-3 border-b border-gray-200 bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+return (
+  <nav className="fixed top-0 left-0 w-full z-50 px-8 py-3 border-b border-gray-200 bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100">
 
-      {/* Left */}
-      <div className="flex items-center gap-5">
+    {/* RESPONSIVE WRAPPER — INSERT THIS */}
+    <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between w-full">
+
+      {/* LEFT ICONS */}
+      <div className="flex items-center gap-4 sm:gap-6 md:gap-8 mt-1 sm:mt-0 mb-1 sm:mb-0">
         <a
           href="https://www.linkedin.com/in/christopher-mhaung/"
           target="_blank"
@@ -49,20 +52,19 @@ export default function Navbar() {
         >
           <FaLinkedin size={20} />
         </a>
-<a
-  href="https://smu-sg.academia.edu/CAung"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="bg-[#4B5563] text-white p-1 rounded-[3px] flex items-center justify-center hover:opacity-90 transition"
->
-  <SiAcademia size={9} />
-</a>
 
-</div>
+        <a
+          href="https://smu-sg.academia.edu/CAung"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-[#4B5563] text-white p-1 rounded-[3px] flex items-center justify-center hover:opacity-90 transition"
+        >
+          <SiAcademia size={9} />
+        </a>
+      </div>
 
-
-      {/* Right – Stock ticker */}
-      <div className="flex items-center gap-4 text-xs font-mono">
+      {/* RIGHT: PRICE TICKER */}
+      <div className="flex items-center gap-5 text-xs font-mono">
         {stocks.map((s) => (
           <div
             key={s.symbol}
@@ -77,6 +79,11 @@ export default function Navbar() {
           </div>
         ))}
       </div>
-    </nav>
-  );
+
+    </div>
+    {/* END RESPONSIVE WRAPPER */}
+
+  </nav>
+);
+
 }

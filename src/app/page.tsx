@@ -21,9 +21,9 @@ export default function Home() {
       {/* === MOBILE MENU BUTTON === */}
       <button
         onClick={() => setMenuOpen(true)}
-        className="md:hidden fixed top-4 left-4 z-50 bg-[#1b1e27] text-white px-3 py-2 rounded-md shadow-lg"
+        className="md:hidden fixed top-22 left-6 z-50 bg-[#1b1e27] text-white px-2 py-1 rounded-md shadow-lg text-xs"
       >
-        Menu
+        Solutions
       </button>
 
       {/* === MOBILE DRAWER OVERLAY === */}
@@ -119,13 +119,15 @@ export default function Home() {
             modular studies in quantitative economics and inter-disciplinary analytical training.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-5 sm:gap-7 mt-5">
-            <a
-              href="/client"
-              className="bg-blue-950 text-white px-5 py-2 rounded-lg text-[14px] hover:bg-steel-500"
-            >
-    Industry Clients
-  </a>
+	<div className="flex flex-col sm:flex-row gap-5 sm:gap-7 mt-5 items-start">
+
+<a
+  href="/client"
+  className="bg-blue-950 text-white px-5 py-2 rounded-lg text-[14px] hover:bg-steel-500 w-auto"
+>
+  Industry Clients
+</a>
+
 
   {/* Pre-filled email link */}
 <a
