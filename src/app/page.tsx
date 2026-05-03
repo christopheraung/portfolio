@@ -23,7 +23,7 @@ const NAV_ITEMS = [
 
 const EMAIL = "mhaung.2021@mse.smu.edu.sg";
 
-const EMAIL_TEMPLATE = `Dear Christopher,
+const EMAIL_TEMPLATE = `To: Christopher
 
 I would like to submit an enquiry for review.
 
@@ -118,6 +118,24 @@ const policies: Project[] = [
 ];
 
 const capital: Project[] = [
+
+ {
+    title: "Covariant Environmental Factors in Floating Solar Capital Depreciation within ESG Investing",
+    description:
+      "Floating solar capital experiences additional depreciation from default environmental conditions. Physical mitigation measures are profiled as investment premiums to offset valuation loss.",
+    image: "/images/solar.jpg",
+    status: "Active",
+    statusColor: "bg-green-400",
+    client: "Private",
+    domain: "Capital, Insurance, Risk",
+    methodologies: ["Time Series Analysis", "Statistical Inference", "Dynamic Modelling", "Underwriting"],
+  },
+
+
+];
+
+const commodities: Project[] = [
+ 
   {
     title: "De-meaned Inferences Paradoxically Yield Distorted Market Conclusions",
     description:
@@ -153,22 +171,6 @@ const capital: Project[] = [
       "Fourier Transformation",
       "Spectral Analysis",
     ],
-  },
-
-
-];
-
-const commodities: Project[] = [
-  {
-    title: "Covariant Environmental Factors in Floating Solar Capital Depreciation within ESG Investing",
-    description:
-      "Floating solar capital experiences additional depreciation from default environmental conditions. Physical mitigation measures are profiled as investment premiums to offset valuation loss.",
-    image: "/images/solar.jpg",
-    status: "Active",
-    statusColor: "bg-green-400",
-    client: "Private",
-    domain: "Capital, Insurance, Risk",
-    methodologies: ["Time Series Analysis", "Statistical Inference", "Dynamic Modelling", "Underwriting"],
   },
 
 ];
@@ -341,11 +343,9 @@ export default function Home() {
             Christopher Lee
           </h1>
           <h2 className="mb-1 text-3xl font-semibold text-[#3b465c]">Senior Economist</h2>
-          <h3 className="mb-6 text-[18px] text-gray-400">Commodity and Capital Markets Econometrician</h3>
+          <h3 className="mb-6 text-[18px] text-gray-400">Commodity Econometrician</h3>
           <p className="mb-5 text-justify text-[15px] leading-relaxed">
-            Christopher is a professional econometrician specialising in commodity and capital market index analysis.
-            His portfolio supports executives, industry analysts, investors, and academic programmes requiring applied
-            statistical reasoning across policy intervention, price behaviour, and market risk.
+            Christopher is a professional econometrician specialising in commodity market and capital valuation analysis. His portfolio has supported C-suit executives through policy implementations and analysts through market behaviour. Autonomous and private universities also contact him for modules in quantitative economics and applied statistics.
           </p>
 
           <div className="mt-5 flex flex-col items-start gap-5 sm:flex-row sm:gap-7">
