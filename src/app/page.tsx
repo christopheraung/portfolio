@@ -16,6 +16,7 @@ type Project = {
 
 const NAV_ITEMS = [
   { label: "About", href: "#about" },
+  { label: "Research", href: "#research" },
   { label: "Policies", href: "#policies" },
   { label: "Capital", href: "#capital" },
   { label: "Commodities", href: "#commodities" },
@@ -357,6 +358,47 @@ export default function Home() {
             </a>
           </div>
         </section>
+
+<section id="research" className="mb-32 w-full max-w-5xl pt-0">
+  <SectionTitle title="Research" />
+
+  <div className="mb-8 rounded-2xl border border-gray-200 bg-white p-7 shadow-sm">
+    <h2 className="mb-4 text-2xl font-semibold text-[#1a1f2b]">
+      Hidden Markov Regime Detection in Electricity Demand
+    </h2>
+
+    <p className="mb-4 text-justify text-[14px] leading-relaxed text-gray-600">
+      This research interface deploys a Hidden Markov Model onto electricity
+      demand observations to identify latent demand regimes. Rather than treating
+      demand as a single stationary process, the model allows the observed series
+      to transition between unobserved states that may correspond to normal-load,
+      elevated-load, or stress-load conditions.
+    </p>
+
+    <p className="mb-4 text-justify text-[14px] leading-relaxed text-gray-600">
+      The objective is to examine whether demand behaviour contains persistent
+      regime structure that is not immediately visible from standard trend
+      smoothing or descriptive aggregation. The framework estimates state
+      probabilities, assigns decoded regimes, and profiles the distribution of
+      demand shocks across latent states.
+    </p>
+
+    <p className="text-justify text-[14px] leading-relaxed text-gray-600">
+      The Shiny interface below provides an applied research layer for inspecting
+      demand dynamics, regime persistence, transition behaviour, and shock
+      classification. It is intended as a reproducible econometric diagnostic
+      rather than a deterministic forecasting dashboard.
+    </p>
+  </div>
+
+  <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+    <iframe
+      src="https://christopherleeaung.shinyapps.io/DemandHMM/"
+      title="Demand HMM Shiny Research Interface"
+      className="h-[780px] w-full"
+    />
+  </div>
+</section>
 
         <section id="policies" className="w-full max-w-5xl pt-0">
           <SectionTitle title="Policies" />
