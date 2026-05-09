@@ -354,51 +354,73 @@ export default function Home() {
               href={enquiryHref}
               className="rounded-lg border border-steel-500 px-5 py-1.5 text-[14px] font-medium text-steel-500 transition-colors hover:bg-gray-100"
             >
-              Enquiry Form
+              Enquiries
             </a>
           </div>
         </section>
 
+
 <section id="research" className="mb-32 w-full max-w-5xl pt-0">
   <SectionTitle title="Research" />
 
-  <div className="mb-8 rounded-2xl border border-gray-200 bg-white p-7 shadow-sm">
-    <h2 className="mb-4 text-2xl font-semibold text-[#1a1f2b]">
-      Hidden Markov Regime Detection in Electricity Demand
-    </h2>
+  <details className="group border-b border-gray-200 py-6">
+    
+    <summary className="cursor-pointer list-none">
+      
+      <div className="flex items-start justify-between">
+        <div>
+          <h2 className="text-2xl font-semibold text-[#1a1f2b]">
+            Hidden Markov Regimes in Electricity Demand
+          </h2>
 
-    <p className="mb-4 text-justify text-[14px] leading-relaxed text-gray-600">
-      This research interface deploys a Hidden Markov Model onto electricity
-      demand observations to identify latent demand regimes. Rather than treating
-      demand as a single stationary process, the model allows the observed series
-      to transition between unobserved states that may correspond to normal-load,
-      elevated-load, or stress-load conditions.
-    </p>
+<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+            A regime-switching research interface designed to identify latent
+            structural demand states within Singapore’s electricity system.
+            The framework profiles persistence, conditional volatility, and
+            transition behaviour in aggregate electricity demand to study
+            national grid stress conditions and long-run electricity usage
+            trajectories.
+          </p>
+        </div>
 
-    <p className="mb-4 text-justify text-[14px] leading-relaxed text-gray-600">
-      The objective is to examine whether demand behaviour contains persistent
-      regime structure that is not immediately visible from standard trend
-      smoothing or descriptive aggregation. The framework estimates state
-      probabilities, assigns decoded regimes, and profiles the distribution of
-      demand shocks across latent states.
-    </p>
+        <span className="ml-6 text-xl transition-transform duration-300 group-open:rotate-45">
+          +
+        </span>
+      </div>
+      
+    </summary>
 
-    <p className="text-justify text-[14px] leading-relaxed text-gray-600">
-      The Shiny interface below provides an applied research layer for inspecting
-      demand dynamics, regime persistence, transition behaviour, and shock
-      classification. It is intended as a reproducible econometric diagnostic
-      rather than a deterministic forecasting dashboard.
-    </p>
-  </div>
+    <div className="mt-6 space-y-5">
+      
+      <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
+        This custom research interface deploys a Hidden Markov Model on aggregate
+        electricity demand in Singapore to identify latent regimes. These regimes
+        are proposed auxiliary states that serve two time-based purposes. In the
+        short run, it seeks to identify both the magnitude and propensity of
+        additional stress on the national grid. In the long run, it aids in
+        determining electricity usage trajectories to evaluate and diversify
+        electricity generation investment.
+      </p>
 
-  <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-    <iframe
-      src="https://christopherleeaung.shinyapps.io/DemandHMM/"
-      title="Demand HMM Shiny Research Interface"
-      className="h-[780px] w-full"
-    />
-  </div>
+      <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
+        The interface below is constructed using a Hidden Markov regime-switching
+        model algorithm. Latent regimes are profiled based on the conditional
+        mean, variance, and persistence of extracted trends in electricity demand.
+        A transition probability matrix is also deployed to support immediate
+        market behaviour analysis.
+      </p>
+
+      <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+        <iframe
+          src="https://christopherleeaung.shinyapps.io/DemandHMM/"
+          title="Demand HMM Shiny Research Interface"
+          className="h-[780px] w-full"
+        />
+      </div>
+    </div>
+  </details>
 </section>
+
 
         <section id="policies" className="w-full max-w-5xl pt-0">
           <SectionTitle title="Policies" />
