@@ -419,6 +419,46 @@ export default function Home() {
       </div>
     </div>
   </details>
+
+<details className="group border-b border-gray-200 py-6">
+  <summary className="cursor-pointer list-none">
+    <div className="flex items-start justify-between">
+      <div>
+        <h2 className="text-2xl font-semibold text-[#1a1f2b]">
+          BEAST Point Detection and Decomposition of the USEP
+        </h2>
+
+        <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+          The Bayesian Estimator of Abrupt change, Seasonality and Trend (BEAST) is a fast Bayesian model averaging algorithm used to decompose time series. Its objective lies in identifying how many structural regimes exist, when did they occur, and how confident are these estimates.
+        </p>
+      </div>
+
+      <span className="ml-6 text-xl transition-transform duration-300 group-open:rotate-45">
+        +
+      </span>
+    </div>
+  </summary>
+
+  <div className="mt-6 space-y-5">
+    <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
+      This custom research interface deploys the BEAST algorithm on daily either mean or median representative USEP values to detect probabilistic structural changes in the energy market. BEAST is still considerably generic and is objectively useful in identifying change-point detections characterised by breakpoints, structural breaks, joinpoints, regime shifts, and anomalies. The algorithm was described first by Zhao et al. (2019). 
+    </p>
+
+    <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
+      The interface below is constructed as a Bayesian decomposition
+      tool for electricity price analysis. The threshold simply determines the probability level determined to classify if a regime break has occurred. For example, a low value lesser than 0.5 would yield detection of many regimes, and hence finds utility in exploratory analysis where high volatility can be inspected. These values are hence equivalent to values reflecting minimised expected classification error. 
+    </p>
+
+    <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+      <iframe
+        src="https://christopherleeaung.shinyapps.io/BeastR/"
+        title="BEAST USEP Shiny Research Interface"
+        className="h-[780px] w-full"
+      />
+    </div>
+  </div>
+</details>
+
 </section>
 
 
