@@ -14,7 +14,7 @@ interface Stock {
 export default function Navbar() {
   const [stocks, setStocks] = useState<Stock[]>([
     { symbol: "USEP", price: 218.12, change: 1.02 },
-    { symbol: "STI", price: 262.44, change: -0.87 },
+    { symbol: "STI", price: 4882.68, change: 52.87 },
     { symbol: "NQSG0001", price: 446.58, change: 0.2718 },
   ]);
   const [pulse, setPulse] = useState(false);
