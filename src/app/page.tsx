@@ -15,7 +15,7 @@ type Project = {
 };
 
 type HmmTab = "demand" | "standard" | "methodology" | "application" | "forecast";
-type ForecastTab = "bayesian_mc" | "bayesian_sarima";
+type ForecastTab = "bayesian_mc" | "bayesian_sarima" | "indusover";
 
 const HMM_TABS: { value: HmmTab; label: string }[] = [
   { value: "demand", label: "Understanding Demand" },
