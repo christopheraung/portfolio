@@ -1205,6 +1205,7 @@ Before understanding this, the context of observed behaviour so far from density
 
 
 
+{/*
 <details className="group border-b border-gray-200 py-6">
   <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
     <div className="flex items-start justify-between">
@@ -1311,6 +1312,8 @@ Before understanding this, the context of observed behaviour so far from density
     </div>
   </div>
 </details>
+
+*/}
 
 </section>
 
