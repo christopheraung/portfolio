@@ -837,7 +837,7 @@ It was surprising to note that a Bayesian treated TimesFM model based Monte Carl
      <img
         loading="lazy"
         decoding="async"
-        src="/images/timesB.png"
+        src="/images/TimesB.png"
         alt="Monte Carlo Demand"
         className="my-5 mr-auto w-full max-w-[800px] object-contain"
       />
@@ -845,7 +845,7 @@ It was surprising to note that a Bayesian treated TimesFM model based Monte Carl
      <img
         loading="lazy"
         decoding="async"
-        src="/images/timesT.png"
+        src="/images/TimesT.png"
         alt="Monte Carlo Demand"
         className="my-5 mr-auto w-full max-w-[800px] object-contain"
       />
