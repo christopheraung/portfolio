@@ -1,28 +1,42 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useState,
+  type Dispatch,
+  type SetStateAction,
+} from "react";
+import dynamic from "next/dynamic";
 import clsx from "clsx";
-import { InlineMath } from "react-katex";
-type Project = {
-  title: string;
-  description: string;
-  image: string;
-  status: "Active" | "Internal" | "Archived";
-  statusColor: string;
-  client: string;
-  domain: string;
-  methodologies: string[];
-};
 
-type HmmTab = "demand" | "standard" | "methodology" | "application" | "forecast";
+const InlineMath = dynamic(
+  () => import("react-katex").then((mod) => mod.InlineMath),
+  { ssr: false },
+);
+
+type HmmTab =
+  | "demand"
+  | "standard"
+  | "methodology"
+  | "application"
+  | "forecast";
 type ForecastTab = "bayesian_mc" | "bayesian_sarima" | "indusover";
+type BeastTab = "profiling" | "issues" | "methodology" | "modelling";
 
 const HMM_TABS: { value: HmmTab; label: string }[] = [
-  { value: "demand", label: "Understanding Demand" },
-  { value: "standard", label: "Standard Modelling" },
+  { value: "demand", label: "Profiling Demand" },
+  { value: "standard", label: "Issues in Conventional State Modelling" },
   { value: "methodology", label: "Methodology" },
   { value: "application", label: "Latent States in Demand" },
   { value: "forecast", label: " " },
+];
+
+const BEAST_TABS: { value: BeastTab; label: string }[] = [
+  { value: "profiling", label: "Solar Generation" },
+  { value: "issues", label: "Disruptions and Growth in Solar" },
+  { value: "methodology", label: "Methodology" },
+  { value: "modelling", label: "BEAST Modelling" },
 ];
 
 const NAV_ITEMS = [
@@ -77,7 +91,7 @@ Additional notes:
 `;
 
 const enquiryHref = `mailto:${EMAIL}?subject=${encodeURIComponent(
-  "Portfolio enquiry — client information form"
+  "Portfolio enquiry — client information form",
 )}&body=${encodeURIComponent(EMAIL_TEMPLATE)}`;
 
 const policies: Project[] = [
@@ -90,10 +104,15 @@ const policies: Project[] = [
     statusColor: "bg-blue-400",
     client: "Government and Private",
     domain: "Wage, Social Work",
-    methodologies: ["Time Series Analysis", "Statistical Inference", "Parameter Estimation"],
+    methodologies: [
+      "Time Series Analysis",
+      "Statistical Inference",
+      "Parameter Estimation",
+    ],
   },
   {
-    title: "Female Ambition Mitigates the Wicked Problem of Declining Birthrates",
+    title:
+      "Female Ambition Mitigates the Wicked Problem of Declining Birthrates",
     description:
       "Singapore's resident Total Fertility Rate stood at a historic low of 0.97 in 2023, below the population replacement rate of 2.1. However, small-town evidence from the United States offers an alternate narrative to this first-world country tale.",
     image: "/images/Birth.png",
@@ -101,10 +120,15 @@ const policies: Project[] = [
     statusColor: "bg-orange-400",
     client: "Public",
     domain: "Domestic, Gender, Culture",
-    methodologies: ["Statistical Inference", "Dynamic Modelling", "Structural Break Analysis"],
+    methodologies: [
+      "Statistical Inference",
+      "Dynamic Modelling",
+      "Structural Break Analysis",
+    ],
   },
   {
-    title: "The Myth of Substitutionality between Social Workers and Volunteers",
+    title:
+      "The Myth of Substitutionality between Social Workers and Volunteers",
     description:
       "A commentary piece dated April 18, 2017 in Today argued that low pay in the social sector was the primary issue behind poor talent retention among NPOs. This project examines whether volunteer substitution distorted the labour-market interpretation.",
     image: "/images/social.jpg",
@@ -112,7 +136,10 @@ const policies: Project[] = [
     statusColor: "bg-orange-400",
     client: "Government and Private",
     domain: "Wage, Social Work",
-    methodologies: ["Statistical Inference", "Computational General Equilibrium"],
+    methodologies: [
+      "Statistical Inference",
+      "Computational General Equilibrium",
+    ],
   },
   {
     title: "The Wicked Problem of Going Woke",
@@ -128,9 +155,9 @@ const policies: Project[] = [
 ];
 
 const capital: Project[] = [
-
- {
-    title: "Covariant Environmental Factors in Floating Solar Capital Depreciation within ESG Investing",
+  {
+    title:
+      "Covariant Environmental Factors in Floating Solar Capital Depreciation within ESG Investing",
     description:
       "Floating solar capital experiences additional depreciation from default environmental conditions. Physical mitigation measures are profiled as investment premiums to offset valuation loss.",
     image: "/images/solar.jpg",
@@ -138,16 +165,19 @@ const capital: Project[] = [
     statusColor: "bg-green-400",
     client: "Private",
     domain: "Capital, Insurance, Risk",
-    methodologies: ["Time Series Analysis", "Statistical Inference", "Dynamic Modelling", "Underwriting"],
+    methodologies: [
+      "Time Series Analysis",
+      "Statistical Inference",
+      "Dynamic Modelling",
+      "Underwriting",
+    ],
   },
-
-
 ];
 
 const commodities: Project[] = [
- 
   {
-    title: "De-meaned Inferences Paradoxically Yield Distorted Market Conclusions",
+    title:
+      "De-meaned Inferences Paradoxically Yield Distorted Market Conclusions",
     description:
       "Postulate commentaries framed market interventions between 2018 and 2021 as inflation targeted measures when the policy was actually directed towards volatility dampening. Macro analysis revealed conclusions based on simplistic methods yield non-reflective conclusions.",
     image: "/images/ElecVolal.jpg",
@@ -163,7 +193,6 @@ const commodities: Project[] = [
       "Applied Mathematics",
     ],
   },
-
 
   {
     title: "Bayesian Fourier Decomposition of Refined Oil Index",
@@ -182,7 +211,6 @@ const commodities: Project[] = [
       "Spectral Analysis",
     ],
   },
-
 ];
 
 function SectionTitle({ title }: { title: string }) {
@@ -193,7 +221,13 @@ function SectionTitle({ title }: { title: string }) {
   );
 }
 
-function ArrowLink({ children, href = enquiryHref }: { children: React.ReactNode; href?: string }) {
+function ArrowLink({
+  children,
+  href = "#enquiry",
+}: {
+  children: React.ReactNode;
+  href?: string;
+}) {
   return (
     <a
       href={href}
@@ -206,7 +240,12 @@ function ArrowLink({ children, href = enquiryHref }: { children: React.ReactNode
         viewBox="0 0 24 24"
         stroke="currentColor"
       >
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M9 5l7 7-7 7"
+        />
       </svg>
       {children}
     </a>
@@ -237,7 +276,10 @@ function ProjectCard({ project }: { project: Project }) {
         <div className="mb-3 flex items-center justify-between text-[13px] text-gray-600">
           <span>Referential Status</span>
           <span className="flex items-center gap-2">
-            <span className={clsx("h-2 w-2 rounded-full", project.statusColor)} /> {project.status}
+            <span
+              className={clsx("h-2 w-2 rounded-full", project.statusColor)}
+            />{" "}
+            {project.status}
           </span>
         </div>
 
@@ -256,7 +298,10 @@ function ProjectCard({ project }: { project: Project }) {
             <p className="mb-2 text-gray-400">Methodologies:</p>
             <div className="flex flex-wrap gap-2">
               {project.methodologies.map((method) => (
-                <span key={method} className="rounded-md bg-blue-950 px-3 py-0.5 text-[12px] text-white">
+                <span
+                  key={method}
+                  className="rounded-md bg-blue-950 px-3 py-0.5 text-[12px] text-white"
+                >
                   {method}
                 </span>
               ))}
@@ -282,19 +327,584 @@ function ProjectGrid({ projects }: { projects: Project[] }) {
   );
 }
 
+function StandardModellingContent({
+  forecastTab,
+  setForecastTab,
+}: {
+  forecastTab: ForecastTab;
+  setForecastTab: Dispatch<SetStateAction<ForecastTab>>;
+}) {
+  return (
+    <div className="space-y-5">
+      <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+This study compares the utility of applying Bayesian filtering to machine learning and machine learning fine tuned traditional forecasting models built on SARIMA specifications. The context relates to seeking better forecasts of an uncertain future in electricity marked by strong volatility midst a mean reverting index. Traditional models are first assessed if Bayesian filtering has any impact on forecasting performance before and after XGBoost based fine tuning. TimesFM by Google is the baseline model for ML forecasting, and comparing its performance before and after Bayesian filtering is of interest. The non-Bayesian treated SARIMA model is not of interest as it is understood as a baseline block of a model rather than a standalone component. The overall workflow is visualised as: </p>
+
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/diagnosis.png"
+            alt="Monte Carlo Demand"
+            className="my-5 mx-auto w-full max-w-[800px] object-contain"
+          />
+
+     <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+
+The argument on applying Bayesian filters is slightly different depending on the class of model applied. On one hand, fine tuning parameters using machine learning on traditional models based on "well behaving" data is almost redundant as Bayesian filtering already help discern relevant statistical properties from noisy raw data. On the other hand, subjecting Bayesian treated data onto a ML model will yield poorer performance that subjecting to it non-treated data owing to overfitting. 
+ </p>
+
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/BayeP.png"
+            className="my-5 mx-auto w-full max-w-[700px] object-contain"
+          />
+
+
+          <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
+            As a baseline example, consider some time series of demand. Let
+            Event A be the event where observable demand remains above 6000 MW,
+            and hence any demand that is 6000 MW or below will be Event -A. Let
+            Event B be demand reaching above 6500 MW. As such only high prices
+            given sustained high demand from previous time periods will be used
+            to train stressful periods in the market. This means spikes are not
+            periodic nor temporal, but conditional on the extend demand has
+            "dipped" in its seasonal low. In this quick example,{" "}
+            <InlineMath math="P(B \mid A)" /> is utilised to bootstrap stressed
+            demand. This gives a set up for Monte Carlo simulations to not base
+            trajectory on the entirety of observed behaviour but only on how the
+            market may look if stressful conditions persist and grow.
+          </p>
+
+      {/* SECONDARY MODELLING TABS */}
+      <div className="mt-5 mb-5 inline-flex rounded-full border border-gray-200 bg-gray-50 p-1">
+        <button
+          type="button"
+          onClick={() => setForecastTab("indusover")}
+          className={`rounded-full px-4 py-1.5 text-[11.5px] transition-all duration-300 ${
+            forecastTab === "indusover"
+              ? "!bg-blue-950 !text-white shadow-sm"
+              : "text-gray-500 hover:text-gray-800"
+          }`}
+        >
+          Industry Models Overview
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setForecastTab("bayesian_mc")}
+          className={`rounded-full px-4 py-1.5 text-[11.5px] transition-all duration-300 ${
+            forecastTab === "bayesian_mc"
+              ? "!bg-blue-950 !text-white shadow-sm"
+              : "text-gray-500 hover:text-gray-800"
+          }`}
+        >
+          SARIMA Modelling
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setForecastTab("bayesian_sarima")}
+          className={`rounded-full px-4 py-1.5 text-[11.5px] transition-all duration-300 ${
+            forecastTab === "bayesian_sarima"
+              ? "!bg-blue-950 !text-white shadow-sm"
+              : "text-gray-500 hover:text-gray-800"
+          }`}
+        >
+          Time Series FM Modelling
+        </button>
+      </div>
+
+      {/* BAYESIAN MONTE CARLO */}
+      {forecastTab === "bayesian_mc" && (
+        <div className="origin-top space-y-4 animate-fadeIn transition-all duration-500 ease-in-out">
+
+
+          <h2 className="text-[14.5px] font-semibold text-[#1a1f2b]">
+            Monte Carlo Simulations non fine tuned Bayesian SARIMA
+            baseline model
+          </h2>
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/SARIMAwoML.png"
+            alt="Monte Carlo Demand"
+            className="my-5 mr-auto w-full max-w-[800px] object-contain"
+          />
+
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/SARIMAwoMLdiag.png"
+            alt="Monte Carlo Demand"
+            className="my-5 mr-auto w-full max-w-[800px] object-contain"
+          />
+
+          <p className="text-justify text-[8px] leading-relaxed text-gray-600">
+            Monte Carlo Simulations based on bootstrapped Bayesian filtered data
+            trained SARIMA for stressful market projection. Data from National
+            Electricity Market Singapore, Demand 2021 to 2022. Output source:
+            Author
+          </p>
+
+          <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
+            The standard SARIMA framework demonstrated an overall competent
+            forecast, achieving low RMSE 134.387 with MAE 87.216, and an
+            impressive analytical interval coverage rate of 96.23%. Seemingly the
+            model successfully captured key characteristics of underlying
+            demand, notably inferred by a low MAPE of 1.44% resulting in stable trajectories. SARIMA’s diagnosis of (3,0,0)[7] indicates
+            regardless the degree of stress experienced by market demand, it
+still reflected regular oscillatory structure.
+          </p>
+
+
+          <h2 className="text-[14.5px] font-semibold text-[#1a1f2b]">
+            Monte Carlo Simulations from fine tuned Bayesian SARIMA
+            baseline model
+          </h2>
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/SARIMAwML.png"
+            alt="Monte Carlo Demand"
+            className="my-5 mr-auto w-full max-w-[800px] object-contain"
+          />
+
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/SARIMAwMLdiag.png"
+            alt="Monte Carlo Demand"
+            className="my-5 mr-auto w-full max-w-[800px] object-contain"
+          />
+
+          <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
+
+Noticeably the differences are extremely marginal, indicating parameter fine tuning does little to improve the model apart from providing slightly additional better technical performance. 
+
+</p>
+
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/Diff_SARIMA.png"
+            alt="Monte Carlo Demand"
+            className="my-5 mr-auto w-full max-w-[800px] object-contain"
+          />
+
+          <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
+            Key points of less competent forecasting are highlighted when
+            historical demand was noted to transit across different volatility
+            regimes. Between May 2022 and September 2022, projections
+            persistently underpredicted realised demand spikes, particularly
+            during abrupt deviations associated with high volatility. This
+            reflects the previously highlighted structural limitation of
+            determining market states through observable parameter bounds
+            regardless their technical fine tuning; SARIMA can only extrapolate
+            and undertake profiling future states from historically stable
+            autocorrelation structures and assumes all behaviour will eventually
+            revert towards seasonal means. This also explains why variance from
+            October 2022 to January 2023, the framework began to overpredict
+            realised demand levels. Collectively this otherwise strongly
+            powerful trait is why SARIMA models must be adapted further to
+            anticipate abrupt and symmetric volatility shifts by incorporating
+            nonlinear or additional state dependent correction mechanisms.
+          </p>
+        </div>
+      )}
+
+      {/* BAYESIAN ML SARIMA */}
+      {forecastTab === "bayesian_sarima" && (
+        <div className="origin-top space-y-4 animate-fadeIn transition-all duration-500 ease-in-out">
+          <h2 className="text-[14.5px] font-semibold text-[#1a1f2b]">
+            Paradox in treating data for TimesFM
+          </h2>
+
+          <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
+            It was surprising to note a Bayesian treated TimesFM model forecasting Monte Carlo simulations did not perform better than a non-Bayesian treated TimesFM base model. While aspects mitigating error terms  were better, the regular model remained
+            stronger still in point forecast accuracy.
+          </p>
+
+
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/timesraw.png"
+            alt="Monte Carlo Demand"
+            className="my-5 mr-auto w-full max-w-[800px] object-contain"
+          />
+
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/timeswell.png"
+            alt="Monte Carlo Demand"
+            className="my-5 mr-auto w-full max-w-[800px] object-contain"
+          />
+
+
+
+          <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
+            The weaker performance of the Bayesian treated TimesFM model likely
+            arises from Bayesian processes interfering and altering otherwise
+            well captured structural properties of the demand process. Demand
+            behaviour is already dominated by deterministic seasonality and
+            persistent cyclical behaviour which the original TimesFM algorithm
+            captures through directly learned temporal and autoregressive embedding mechanisms. The introduction of a
+            Bayesian filter has proven unwarranted as it "forced" stressed
+            information into the model, overfitting moments of stress into the model. The result
+            is an additional Bayesian layer acting more like a variance
+            smoothing filter than an information supplementing one. This explains why the
+            Bayesian model exhibits higher residual variance, RMSE, and MAE
+            despite wider predictive intervals.
+          </p>
+
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/TimesB.png"
+            alt="Monte Carlo Demand"
+            className="my-5 mr-auto w-full max-w-[800px] object-contain"
+          />
+
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/TimesT.png"
+            alt="Monte Carlo Demand"
+            className="my-5 mr-auto w-full max-w-[800px] object-contain"
+          />
+
+          <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
+            Comparatively, the Bayesian treated model performs better only in
+            interval estimation noted by its better residual accounts. A reason why this comes about is strongly likely to be technical since having overfitted dramatic data results in wider confidence intervals, observably by comparing average widths of 616.654 against 401.521. The paradoxical effect however is that despite the Bayesian treated model having a wider interval width to account for more deviations such that it can "contain" more accurate forecasts, it had a larger error rate and poorer convergence rate. Coupling this with residual diagnostics, the Bayesian model systematically under predicts given its positive mean error of approximately 72 MW, which results in huge residual variance difference of roughly 62,900. While MAPE still remains relatively impressive, it means the model captures underlying demand relatively well but the problem of not being able to account for unforeseen spikes despite Bayesian conditioning still remains. </p>
+        </div>
+      )}
+
+      {/* Industry Overview */}
+      {forecastTab === "indusover" && (
+        <div className="origin-top space-y-4 animate-fadeIn transition-all duration-500 ease-in-out">
+          <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
+            Monte Carlos of Linear, Multi-linear, SARIMA Models
+          </h2>
+
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/13.png"
+            alt="Statistical Tests inferring similarity between 2021 and 2022 Demand"
+            className="my-5 mr-auto w-full max-w-[800px] object-contain"
+          />
+
+          <p className="text-justify text-[8px] leading-relaxed text-gray-600">
+            Individual Monte Carlo simulated paths expanding MSE against
+            realised historical demand. Data from National Electricity Market,
+            USEP 2021 and 2022. Output Source: Author
+          </p>
+
+          <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+The performance of industry contained forecasting models can be overviewed through a spaghetti plot regarding their forecast <InlineMath math="\text{MSE}_{i,t}=\frac{1}{t}\sum_{\tau=1}^{t}(\hat{y}_{i,\tau}-y_{\tau})^2" /> trajectories. 
+
+The solid black line represents the median expanding MSE path, or the typical degree of forecast uncertainty faced by any participant relying on a SARIMA baseline forecasting model. Across all models, upward shifts around January and February 2022 highlight the difficulty faced in all model permutations in these challenging environments. This is strongly likely owing to observed instability following December 2021's regime.
+The dotted point series represents MSE path of a Bayesian treated SARIMA model, highlighting the strong contrast between performances in fit, albeit still experiencing the same issues. 
+
+</p>
+
+          <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+
+The wide dispersion reflects all models' instability in cumulative forecasting based on repeated stochastic settings of its inherent SARIMA process. The upper fan of grey trajectories expands with dissipating density, indicating that market participants have preferences towards "doomsday" models, either reflecting extremely risk adverse appetite facing uncertainty, or simple a reflection of model unreliability.
+ </p> 
+
+
+          <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+            A review of median MSE when comparing Bayesian treated SARIMA Monte Carlo models reflect a good preference for Bayesian treated data when undertaking modelling. The interesting note is that while it does account for fitting better, it is not immune to the same shocks experienced by all other models, and most interestingly still share the same miss rate; if anything performing poorer during January 2022 when the market demand behaved erratically. 
+          </p>
+
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/industry.png"
+            className="my-5 mr-auto w-full max-w-[900px] object-contain"
+          />
+
+          <p className="text-justify text-[8px] leading-relaxed text-gray-600">
+            Evaluation of Aggregate Monte Carlo simulated paths against realised
+            historical demand. Data from National Electricity Market, USEP 2021
+            and 2022. Output Source: Author
+          </p>
+
+          <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+            Observably even with supposed "realistic" projections of how erratic
+            the market would behave in the short run (approximately 6 months
+            forward), the models' mean projections began faltering from February
+            2022 onwards, with Median performance consistently faring poorly
+            from the start. It seems a more nuanced understanding of why certain
+            market participants find value in these projections can be uncovered
+            through variance projections. The progressive tighter intervals,
+            albeit deducible only in hindsight, give indication that perhaps
+            market participants are not seeking doomsday predictions for the
+            sake of it, but perhaps they have see personal inside information
+            being reflected in other models not of their own. Collectively if
+            all agents undertake this approach, the rational on why market
+            participants preferring paranoid predictions can be framed as a
+            coincidentally collative decision rather than a mass self affirming
+            attitude.
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+const ENQUIRY_CLASSIFICATIONS = [
+  "Capital market research",
+  "Commodity market research",
+  "Policy impact analysis",
+  "Lecture / workshop request",
+  "Document / manuscript review",
+  "Private client engagement",
+];
+
+const INTENDED_USES = [
+  "Internal decision support",
+  "Academic / teaching use",
+  "Executive briefing",
+  "Investment / market monitoring",
+  "Policy / regulatory interpretation",
+];
+
+const SALUTATIONS = ["Mr", "Ms", "Mx", "Dr", "Prof"];
+
+function EnquiryInput({
+  label,
+  name,
+  type = "text",
+}: {
+  label: string;
+  name: string;
+  type?: string;
+}) {
+  return (
+    <label className="block">
+      <span className="mb-2 block border-b border-[#C9CCD0] pb-1 text-[13px] leading-none text-[#545454]">
+        {label}
+      </span>
+      <input
+        name={name}
+        type={type}
+        className="h-7 w-full rounded-[4px] border border-[#D8D8D8] bg-white px-2 text-[12.5px] text-[#545454] outline-none transition-all focus:border-[#545454] focus:ring-1 focus:ring-[#545454]"
+      />
+    </label>
+  );
+}
+
+function EnquirySelect({
+  label,
+  name,
+  options,
+}: {
+  label: string;
+  name: string;
+  options: string[];
+}) {
+  return (
+    <label className="block">
+      <span className="mb-2 block border-b border-[#C9CCD0] pb-1 text-[13px] leading-none text-[#545454]">
+        {label}
+      </span>
+      <select
+        name={name}
+        defaultValue=""
+        className="h-7 w-full rounded-[4px] border border-[#D8D8D8] bg-white px-2 text-[12.5px] text-[#545454] outline-none transition-all focus:border-[#545454] focus:ring-1 focus:ring-[#545454]"
+      >
+        <option value="" disabled>
+          Select
+        </option>
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+}
+
+function EnquirySection() {
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "sending" | "sent" | "error"
+  >("idle");
+
+  async function handleEnquirySubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setSubmitStatus("sending");
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const payload = Object.fromEntries(formData.entries());
+
+    try {
+      const response = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) throw new Error("Enquiry submission failed");
+
+      form.reset();
+      setSubmitStatus("sent");
+    } catch {
+      setSubmitStatus("error");
+    }
+  }
+
+  return (
+    <section
+      id="enquiry"
+      className="mt-24 w-full max-w-5xl pt-0 text-[#545454]"
+    >
+      <div className="mx-auto w-full max-w-[760px] bg-white px-3 py-8 sm:px-8">
+        <SectionTitle title="Enquiries" />
+
+        <p className="mb-14 max-w-4xl text-justify text-[12.5px] leading-relaxed text-[#545454]">
+          Requests for research support, manuscript review, executive analysis,
+          applied econometric engagement and media enquiries are welcomed.
+          Information shared must not be confidential on initial correspondence,
+          and collected information is strictly limited to enquiry nature
+          identification, suitability assessment, conflict screening, and
+          whether further correspondence should proceed under stated
+          confidentiality terms. Only verified and active formal institutional work e-mails are permitted for communication.
+        </p>
+
+        <form onSubmit={handleEnquirySubmit} className="space-y-10">
+          <div className="grid gap-x-10 gap-y-8 md:grid-cols-[0.55fr_2.15fr]">
+            <EnquirySelect
+              label="Salutation"
+              name="salutation"
+              options={SALUTATIONS}
+            />
+            <EnquiryInput label="Preferred Name" name="preferred_name" />
+          </div>
+
+          <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">
+            <EnquiryInput label="First Name" name="first_name" />
+            <EnquiryInput label="Last Name" name="last_name" />
+            <EnquiryInput label="Designation / Job title" name="job_title" />
+            <EnquiryInput
+              label="Company Email"
+              name="company_email"
+              type="email"
+            />
+            <EnquiryInput label="Company / Institution" name="company" />
+            <EnquiryInput label="Business function" name="business_function" />
+            <EnquirySelect
+              label="Enquiry Classification"
+              name="enquiry_classification"
+              options={ENQUIRY_CLASSIFICATIONS}
+            />
+            <EnquirySelect
+              label="Intended Use"
+              name="intended_use"
+              options={INTENDED_USES}
+            />
+          </div>
+
+          <label className="block">
+            <span className="mb-2 block w-full max-w-[300px] border-b border-[#C9CCD0] pb-1 text-[13px] leading-none text-[#545454]">
+              Mandate / request summary
+            </span>
+            <textarea
+              name="mandate_summary"
+              rows={6}
+              className="w-full rounded-[4px] border border-[#D8D8D8] bg-white px-3 py-3 text-[12.5px] text-[#545454] outline-none transition-all focus:border-[#545454] focus:ring-1 focus:ring-[#545454]"
+            />
+          </label>
+
+          <div className="grid gap-10 md:grid-cols-[0.95fr_1.35fr] md:items-center">
+            <button
+              type="submit"
+              disabled={submitStatus === "sending"}
+              className="h-11 rounded-full border border-[#C9CCD0] bg-white px-8 text-[13px] font-semibold text-[#545454] transition-colors hover:border-[#545454] disabled:cursor-wait disabled:opacity-60"
+            >
+              {submitStatus === "sending" ? "Submitting" : "Submit Enquiry"}
+            </button>
+
+            <p className="text-justify text-[10.5px] font-semibold leading-relaxed text-[#545454]">
+              I confirm that the information shared may be reviewed for the
+              purpose of assessing this enquiry. I understand that further
+              correspondence may require explicit consent and confidentiality
+              terms.
+            </p>
+          </div>
+
+          {submitStatus === "sent" && (
+            <p className="text-[12.5px] font-medium text-[#545454]">
+              Enquiry submitted.
+            </p>
+          )}
+
+          {submitStatus === "error" && (
+            <p className="text-[12.5px] font-medium text-[#545454]">
+              Submission failed. Please try again later.
+            </p>
+          )}
+
+          <div className="space-y-3 text-justify text-[8.5px] leading-relaxed text-[#545454]">
+            <p>
+              By submitting this form, you acknowledge that the personal data
+              provided may be collected, used, and disclosed for the limited
+              purpose of assessing and responding to this enquiry. This
+              submission is intended to operate as notice and consent under
+              Singapore's Personal Data Protection Act 2012, which governs
+              organisational collection, use, and disclosure of personal data.
+              The legal effect of this consent is limited to the purposes stated
+              here: enquiry assessment, conflict screening, correspondence, and
+              preparation of suitable engagement terms. Personal data should not
+              be used for unrelated purposes unless further consent, deemed
+              consent, or another lawful exception applies. Further
+              correspondence may require separate confidentiality terms.
+            </p>
+            <p>
+              Legal reference basis: Singapore Personal Data Protection Act
+              2012; Personal Data Protection Commission guidance on consent,
+              notification, purpose limitation, and appropriate collection, use,
+              or disclosure of personal data.
+            </p>
+            <p>
+              https://sso.agc.gov.sg/Act/PDPA2012
+              <br />
+              https://www.pdpc.gov.sg/about/the-legislation/pdpa-overview
+              <br />
+              https://www.pdpc.gov.sg/data-protection-obligations
+            </p>
+          </div>
+        </form>
+      </div>
+    </section>
+  );
+}
+
 function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <ul className="space-y-4 text-[15px] tracking-wide">
       {NAV_ITEMS.map((item) => (
         <li key={item.href}>
-          <a href={item.href} onClick={onNavigate} className="hover:text-bluebrand-800">
+          <a
+            href={item.href}
+            onClick={onNavigate}
+            className="hover:text-bluebrand-800"
+          >
             {item.label}
           </a>
         </li>
       ))}
       <li>
-        <a href={enquiryHref} onClick={onNavigate} className="hover:text-bluebrand-800">
-          Enquiry Form
+        <a
+          href="#enquiry"
+          onClick={onNavigate}
+          className="hover:text-bluebrand-800"
+        >
+          Enquiries
         </a>
       </li>
     </ul>
@@ -306,7 +916,8 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const [hmmTab, setHmmTab] = useState<HmmTab>("demand");
-  const [forecastTab, setForecastTab] = useState<ForecastTab>("bayesian_mc");
+  const [forecastTab, setForecastTab] = useState<ForecastTab>("indusover");
+const [beastTab, setBeastTab] = useState<BeastTab>("profiling");
 
   useEffect(() => {
     setFadeIn(true);
@@ -316,9 +927,9 @@ export default function Home() {
     () =>
       clsx(
         "min-h-screen bg-white text-gray-700 transition-opacity duration-700",
-        fadeIn ? "opacity-100" : "opacity-0"
+        fadeIn ? "opacity-100" : "opacity-0",
       ),
-    [fadeIn]
+    [fadeIn],
   );
 
   return (
@@ -340,10 +951,13 @@ export default function Home() {
       <aside
         className={clsx(
           "fixed left-0 top-0 z-50 h-full w-64 transform bg-[#1b1e27] p-6 text-gray-200 transition-transform duration-300 md:hidden",
-          menuOpen ? "translate-x-0" : "-translate-x-full"
+          menuOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
-        <button onClick={() => setMenuOpen(false)} className="mb-6 text-sm text-gray-400 hover:text-white">
+        <button
+          onClick={() => setMenuOpen(false)}
+          className="mb-6 text-sm text-gray-400 hover:text-white"
+        >
           Close ✕
         </button>
         <Sidebar onNavigate={() => setMenuOpen(false)} />
@@ -355,20 +969,29 @@ export default function Home() {
         </div>
       </nav>
 
-      <main className="mx-auto max-w-5xl flex-1 px-6 py-20 sm:px-10 md:ml-44 md:px-24">
-        <section id="about" className="mb-32 pt-10">
+      <main className="mx-auto max-w-5xl flex-1 px-6 py-30 sm:px-10 md:ml-44 md:px-24">
+        <section id="about" className="mb-50 pt-10">
           <h1 className="mb-8 font-lora text-5xl font-bold tracking-tight text-[#1a1f2b]">
             Christopher Lee
           </h1>
-          <h2 className="mb-1 text-3xl font-semibold text-[#3b465c]">Senior Economist</h2>
-          <h3 className="mb-6 text-[18px] text-gray-400">Commodity Econometrician</h3>
+          <h2 className="mb-1 text-3xl font-semibold text-[#3b465c]">
+            Senior Economist
+          </h2>
+          <h3 className="mb-6 text-[18px] text-gray-400">
+            Commodity Econometrician
+          </h3>
           <p className="mb-5 text-justify text-[15px] leading-relaxed">
-            Christopher is a professional econometrician specialising in commodity market and capital valuation analysis. His portfolio has supported C-suit executives through policy implementations and analysts through market behaviour. Autonomous and private universities engage him to lecture modules in quantitative economics and applied econometrics.
+            Christopher is a professional econometrician specialising in
+            commodity market and capital valuation analysis. His portfolio has
+            supported C-suit executives through policy implementations and
+            analysts through market behaviour. Autonomous and private
+            universities engage him to lecture modules in quantitative economics
+            and applied econometrics.
           </p>
 
           <div className="mt-5 flex flex-col items-start gap-5 sm:flex-row sm:gap-7">
             <a
-              href={enquiryHref}
+              href="#enquiry"
               className="rounded-lg border border-steel-500 px-5 py-1.5 text-[14px] font-medium text-steel-500 transition-colors hover:bg-gray-100"
             >
               Enquiries
@@ -376,947 +999,761 @@ export default function Home() {
           </div>
         </section>
 
+        <section
+          id="research"
+          className="mb-32 w-full max-w-5xl pt-0 text-[#545454] [&_*]:text-[#545454]"
+        >
+          <SectionTitle title="Research" />
 
-<section id="research" className="mb-32 w-full max-w-5xl pt-0">
-  <SectionTitle title="Research" />
+          <div className="w-full max-w-4xl bg-white/40">
+            <div className="mb-11">
+              <h2 className="mb-2 text-[22px] font-semibold tracking-tight text-[#4a4a4a]">
+                Market Intelligence
+              </h2>
+              <div className="border-t border-[#C9CCD0] pt-6">
+                <div className="space-y-2">
+                  <details className="group py-5">
+                    <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                      <div className="flex items-start justify-between">
+                        <div>
+                          <h3 className="text-[15px] font-semibold leading-snug text-[#1a1f2b]">
+                            Latent States in Electricity Demand
+                          </h3>
+                        </div>
 
- <details className="group border-b border-gray-200 py-6">
+                        <span className="ml-6 text-xl transition-transform duration-500 ease-out group-open:rotate-45">
+                          +
+                        </span>
+                      </div>
+                    </summary>
+                    <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-700 ease-out group-open:grid-rows-[1fr]">
+                      <div className="overflow-hidden">
+                        <div className="mt-6 origin-top opacity-0 -translate-y-2 scale-y-[0.985] transition-all duration-700 ease-out group-open:opacity-100 group-open:translate-y-0 group-open:scale-y-100">
+                          <p className="mb-6 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+
+        During the second half of 2021, Singapore was recovering from both economic and operational constraints imposed during the COVID-19 pandemic. As energy markets tightened, higher than anticipated volatility contributed to six electricity retailers withdrawing from the open electricity market, prompting intervention by the Electricity Market Authority (EMA). Among key issues faced by market participants and authorities, an interesting one was the limitation of relying on observable indices to predict future market states with little or no appropriate priors. Latent state modelling becomes a plausible alternative. Here market behaviour is assumed governed by underlying unobservable states. In the context of Singapore's electricity market, these latent states represent different demand regimes, supply conditions and market stress from exogenous indexes. Markov chains are then introduced to inspect latent state propensities to remain or transit following underlying seasonality and macro shocks. 
+                          </p>
+
+                          {/* TABS */}
+                          <div className="mb-6 flex gap-8 overflow-x-auto border-b border-gray-200">
+                            {HMM_TABS.map((tab) => (
+                              <button
+                                key={tab.value}
+                                type="button"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  setHmmTab(tab.value);
+                                }}
+                                className={`pb-2 text-[13px] font-medium transition-all duration-300 ${
+                                  hmmTab === tab.value
+                                    ? "border-b-2 border-blue-950 text-blue-950"
+                                    : "text-gray-500 hover:text-gray-800"
+                                }`}
+                              >
+                                {tab.label}
+                              </button>
+                            ))}
+                          </div>
+
+                          <div className="relative min-h-[400px]">
+                            {/* DEMAND TAB */}
+                            <div
+                              className={`origin-top transition-all duration-500 ease-in-out ${
+                                hmmTab === "demand"
+                                  ? "opacity-100 translate-y-0 scale-y-100"
+                                  : "pointer-events-none absolute inset-0 opacity-0 -translate-y-2 scale-y-[0.985]"
+                              }`}
+                            >
+                              <div className="space-y-5">
+  
+                                <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
+                                  Demand across 2021 and 2022
+                                </h2>
+
+                                <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+                                  Singapore's electricity market can
+                                  superficially seem to exhibit relatively well
+                                  defined seasonality and trends, giving
+                                  impression that strict parameter boundaries
+                                  can serve as competent settings for profile
+                                  states. However annual time series
+                                  decompositions yield statistical differences
+                                  to exist, highlighting the inappropriateness
+                                  of relying on historical parameter boundaries
+                                  for state analysis. This was particularly
+                                  evident for demand behaviour across 2021 and
+                                  2022.
+                                </p>
+
+                                <img
+                                  loading="lazy"
+                                  decoding="async"
+                                  src="/images/01a.png"
+                                  alt="Electricity Demand Time Series Decompositions"
+                                  className="my-5 mr-auto w-full max-w-[900px] object-contain"
+                                />
+
+                                <p className="text-justify text-[8px] leading-relaxed text-gray-600">
+                                  Overviewing the Singapore Electricity Market
+                                  based on its Spot Price Index, (USEP) from
+                                  2021 to 2022. Data from National Electricity
+                                  Market, USEP 2021 and 2022. Output Source:
+                                  Author
+                                </p>
+
+                                <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+                                  During this post pandemic period, market participants had strong incentives to undertake responsible market profiling. Understanding market demand was crucial to maintain electricity supply; a volatile market spot price index can induce paranoid hedging with LNG suppliers as well as profiting opportunities off electricity retailers. As examples, if the
+                                  participant was a Genco, then forecasting
+                                  demand primarily serves ensuring undisrupted supply within appropriate financial objectives. If the participant
+                                  was an electricity retailer, then forecasting
+                                  demand ensured adequate supply scheduling without taking on losses
+                                  was key. Only through understanding demand then can subsequent analysis regarding related commodity markets and resulting USEP behaviour be understood competently.
+                                </p>
+
+                                <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+                                  By mid 2021, it was evident that utilising
+                                  market behaviour from 2020 or earlier LNG
+                                  shock periods to filter data for
+                                  2022 simulations was insufficient. This was primarily
+                                  because the degree of market
+                                  liberalisation has changed sufficiently. However some market participants still went on to affirm such simulations owing to two key reasons. First, there was conviction that
+                                  truncated market data when treated as
+                                  historical priors rather than market data as a
+                                  whole would be sufficient to model future
+                                  uncertainty. This means there is strong belief that regardless Covid recovery, the underlying trends and seasonality in demand retain statistically unchanged. Additional conditions relating to stress are seen simply as permutations of previously seen stress. For example, if the past saw irregular demand as a result of LNG supply disruptions and interest rate shocks, then projected regular demand from LNG supply disruptions and macroeconomic shocks can be profiled too after adjusting for expected magnitudes. Secondly, there was little relevant data either from too much market noise or limited index information. This meant some market participants with increased exposure to market anxiety may not necessarily have additional information regarding market behaviour, and that there were only a few other exogenous indices such as LNG markets and logistical shipping trackers to estimate demand. As such, rather than undertaking extensive efforts to incorporate and filter all data for urgent short run projections, demand data is utilised alone. 
+                                </p>
+
+
+                                <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
+                                  Differences in Annual Demand
+                                </h2>
+
+                                <img
+                                  loading="lazy"
+                                  decoding="async"
+                                  src="/images/02.png"
+                                  alt="Statistical Tests inferring similarity between 2021 and 2022 Demand"
+                                  className="my-5 mr-auto w-full max-w-[800px] object-contain"
+                                />
+
+                                <p className="text-justify text-[8px] leading-relaxed text-gray-600">
+                                  Overviewing the Singapore Electricity Market
+                                  based on its Spot Price Index, (USEP) from
+                                  2021 to 2022. Data from National Electricity
+                                  Market, USEP 2021 and 2022. Output Source:
+                                  Author
+                                </p>
+
+                                <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+                                  Formal statistical decompositions
+                                  present no statistical similarity between the two years. This means market participants assumptions on demand remaining characteristically similar are unfounded, mitigating projections that utilise repeated historical patterns. Again, this implies if 2021 served as a training prior, even non-parametric bootstrapped variations can only repeat already observed behaviour. Conditioning previous market periods of stress becomes redundant since their priors are not reflected. For example, if low demand was conditioned on short bursts of sporadic demand prior, 2022 projections can only reflect stressful periods if such similar prior behaviour was observed. </p> 
+
+                               <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+
+The Kolmogorov-Smirnov
+                                  (KS) test to inspect differences in
+                                  non-parametric distributions through vertical
+                                  differences, the Wilcoxon test to identify
+                                  differences in non-parametric distributions
+                                  through data rank and a superficial median
+                                  split comparison test to identify proportions
+                                  of data above and below the respective medians
+                                  present conclusively evidence that
+                                  statistically significant differences exists
+                                  between the two years' distributional
+                                  structures. 
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* STANDARD TAB */}
+                            <div
+                              className={`origin-top transition-all duration-500 ease-in-out ${
+                                hmmTab === "standard"
+                                  ? "opacity-100 translate-y-0 scale-y-100"
+                                  : "pointer-events-none absolute inset-0 opacity-0 -translate-y-2 scale-y-[0.985]"
+                              }`}
+                            >
+                              <div className="space-y-5">
+                                <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
+                                 Type I and Type II errors in Identifying Market States
+                                </h2>
+
+                                <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+To understand how market state misidentification arises from observing literal indexes only, it begins from examining the conventional impression that a market state is defined by boundaries of observed values. This means an arbitrary market index observation <InlineMath math=" y_i \in C_j" /> is defined so as long as <InlineMath math=" y_i \in [C_{1,\min}, C_{1,\max}]" />. This is primarily problematic across three reasons. Firstly, it does not account for non-stationary trend behaviour. As such if market index <InlineMath math=" Y" /> were to grow quarterly as an example where <InlineMath math=" \bar{Y}_{Q1} < \bar{Y}_{Q2}" />, then identified market states in Q2 are considerably higher than those in Q1. So should the prior framing be adopted, then it concludes that the market is entering a higher phase indefinitely, giving little utility for analysis. The question then arises if market states should be defined by the resulting variance instead; which introduces the second reason why boundary definitions are problematic. Variance, mean or median parameters are conditional on observed values, meaning any arbitrary parameter  <InlineMath math=" \theta_k" /> must exist as a posterior element based on the subset of observed values prior. Market states are now defined by their observed parameters, with state boundaries determined by the range of observations which contribute to statistical indifferent parameter values. The probability of a market state manifesting is now <InlineMath math=" P(\theta_k \mid C_j)" />. Consider this quick illustration of Gaussian distributed data where the parameter of interest is the mean <InlineMath math="\theta_{k,j} = \bar{C_j}" />. This notation is used so that other parameters such as variance can be represented by <InlineMath math="\theta_{l,j} = \sigma^2_{C_j}" />.
+
+</p>
+
+                        <img
+                                      loading="lazy"
+                                      decoding="async"
+                                      src="/images/53.png"
+                                      alt="Market observation distributions that contribute to state identification "
+                                      className="my-5 mx-auto w-full max-w-[600px] object-contain"
+                                    />
+
+                                <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+Observably notions of how erroneous market state identification arises can be induced. The overlapping areas which contribute to <InlineMath math="\theta_{k,\neg j}" /> come to represent both type I and type II errors. This shows that market states are defined by distribution priors rather than value ranges, and the boundaries that conventional impression has are actually based on confidence intervals. Which leads to the third reason; market states dependent on parameters rely strongly on technical methodologies to identify these parameters. In this example it is easy to define both parameters and confidence intervals since example distributions are homogeneously parametric; all Gaussian. But given the actual distribution of market indexes which may not be the mean, this assumption is unlikely to hold. 
+</p>
+
+
+                        <img
+                                      loading="lazy"
+                                      decoding="async"
+                                      src="/images/52.png"
+                                      alt="Monte Carlo Demand"
+                                      className="my-5 mx-auto w-full max-w-[600px] object-contain"
+                                    />
+
+
+
+                                <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+Now consider two arbitrary market phase subsets <InlineMath math=" C_1 \bigcup C_2 \subset Y " /> to exist. Let <InlineMath math=" C_1 : \{c_{\tiny{1,i}} \}_{\tiny{i=1}}^{|{\tiny{C_1}|}}" /> represent a stable market where market observations are distributed in the manner <InlineMath math=" C_1 \sim f_1(\theta_{k,1}, \theta_{l,1}) " /> assuming a gaussian like distribution for simplicity. Likewise, <InlineMath math=" C_2 : \{c_{\tiny{2,i}} \}_{\tiny{i=1}}^{|{\tiny{C_2}|}}" /> contains all observations that represent an unstable market phase. In this state, market observations are distributed in the manner  <InlineMath math=" C_2 \sim f_2(\theta_{k,2}, \theta_{l,2}) " />. 
+                                </p>
+
+                                <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+There are three market observations of interest; <InlineMath math=" y_1 \in C_1, y_2 \in C_1 \cap C_2, y_3 \in C_2." /> When analysing the market based on these observations, it is easy to deduce the market state when observing <InlineMath math=" y_1 \text{ and }y_3 " /> since their subset membership is well defined, or explicitly their underlying distribution priors are well defined. So there can be no confusion on what state the market is existing in when these values manifest. 
+</p>
+
+
+<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+The problem arises when <InlineMath math="  y_2 \in C_1 \cap C_2 " /> is concerned as distribution priors overlap. This shows how the previously highlighted Type I and Type II errors come about; should observation <InlineMath math="  y_2" /> be defined based on <InlineMath math="  f_1 " />, it runs into chance of being a type 2 error. It may be a false negative denoting the market state has not changed when the market has transited to <InlineMath math="  C_2 " />. 
+
+</p>
+
+                              </div>
+                            </div>
+
+                            {/* METHODOLOGY TAB */}
+                            <div
+                              className={`origin-top transition-all duration-500 ease-in-out ${
+                                hmmTab === "methodology"
+                                  ? "opacity-100 translate-y-0 scale-y-100"
+                                  : "pointer-events-none absolute inset-0 opacity-0 -translate-y-2 scale-y-[0.985]"
+                              }`}
+                            >
+                              <div className="space-y-5">
+                                <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
+                                  The Framework
+                                </h2>
+
+                                <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+
+ There are two components beyond technical methodology approach which separates Hidden Markov Modeling from classical regime modelling. First is the definition and approach to identify market states, and secondly is to also incorporate transition chains into its analysis.  A latent state model assumes that observed market index values{" "}
+  <InlineMath math="Y=\{y_t\}_{t=1}^{T}" /> are generated by an
+  unobserved state process comprising of K latent states from <InlineMath math="\Psi=\{\psi_1,\dots,\psi_K\}" />. This means market observations at time t are assumed "diffused" from a few latent states with respective likelihoods <InlineMath math="P(y_i \mid \psi_i)" />. This means each observation possesses a posterior state probability vector known as a posterior latent profile <InlineMath math="\Gamma_{y_i,t} = (P(y_i \mid \psi_1),P(y_1 \mid \psi_2), \cdots, P(y_i \mid \psi_n)) " /> but when undertaking 2D visualisation only <InlineMath math="\hat \psi_{i} = \arg \max_k P(\psi_k \mid y_i)" />, or the only state with the largest posterior probability is visualised. With this state now defined, the model then captures the likelihood identified states remain or transit to another state through a simple probability  <InlineMath math="P(\psi_{i,t+1} \mid \psi_{i,t} = p_{ij} )" />. This means collectively as a transition matrix, its latent state membership profile is given by: </p>
+
+ <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+
+
+
+ <InlineMath math="\mathbf{P}=\begin{bmatrix}
+p_{1,1} & p_{1,2} & \cdots & p_{1,K}\\
+p_{2,1} & p_{2,2} & \cdots & p_{2,K}\\
+\vdots & \vdots & \ddots & \vdots\\
+p_{K,1} & p_{K,2} & \cdots & p_{K,K}
+\end{bmatrix}" /> 
+
+
+
+</p>
+
+ <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+ 
+Consider a simple visualisation regarding three observed values <InlineMath math="y_1, y_2, y_3" />. Their respective individual posterior state probability vectors reveal how type I and type II errors are not considered primarily owing to the frame how latent membership is defined by different likelihoods, rather than an explicit claim that true latent state membership lies in one exclusive state only. 
+
+</p>
+
+                            
+
+
+                               <img
+                                  loading="lazy"
+                                  decoding="async"
+                                  src="/images/59.png"
+                                  alt="Latent State approache"
+                                  className="my-5 mx-auto w-full max-w-[600px] object-contain"
+                                />
+
+                                <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
+                                  A Quick Visualisation
+                                </h2>
+  
+
+                                <img
+                                  loading="lazy"
+                                  decoding="async"
+                                  src="/images/profile.png"
+                                  alt="Quick HMM visualisation"
+                                  className="my-5 mx-auto w-full max-w-[400px] object-contain"
+                                />
+
+                                <p className="text-justify text-[8px] leading-relaxed text-gray-600">
+                                  Source: Author
+                                </p>
+
+                                <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+                                  In the simplified visual example above, the
+                                  hidden regimes are identified through processing
+                                  conditional mean, variance and trend
+                                  persistence. Observably when some observations are deduced to stem from overlapping latent states, it highlights how posterior state probability vector may be visualised. This is also why again classical type 1 and type 2 errors are not appropriate for this framing since alternate memberships are defined as well, removing the need to account for erroneous profiling. 
+                                </p>
+
+
+                              </div>
+                            </div>
+
+
+
+                            {/* APPLICATION TAB */}
+                            <div
+                              className={`origin-top transition-all duration-500 ease-in-out ${
+                                hmmTab === "application"
+                                  ? "opacity-100 translate-y-0 scale-y-100"
+                                  : "pointer-events-none absolute inset-0 opacity-0 -translate-y-2 scale-y-[0.985]"
+                              }`}
+                            >
+                              <div className="space-y-5">
+                                <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
+                                  Demand of 2021 going into 2022
+                                </h2>
+
+                                <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
+                                  The live model below allows live analysis
+                                  with any time period. The
+                                  presented default view is the electricity
+                                  market from June 2021 to July 20222 to
+                                  showcase latent states present. 
+
+
+Regarding the number of latent states, Markov Modelling explores a latent mixture of prior models first from which an optimal number of states are identified using
+                                  the BIC criterion. However should an analyst
+                                  have strongly good reason to already know a
+                                  pre identified number of states, they may also
+                                  key in the number and carry out respective
+                                  analysis.
+                                </p>
+
+                                <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+                                  <iframe
+                                    loading="lazy"
+                                    src={
+                                      hmmTab === "application"
+                                        ? "https://christopherleeaung.shinyapps.io/DemandHMM/"
+                                        : undefined
+                                    }
+                                    title="Demand HMM Shiny Research Interface"
+                                    className="h-[780px] w-full"
+                                  />
+                                </div>
+
+                                <p className="text-justify text-[8px] leading-relaxed text-gray-600">
+                                  Hidden Markov Modelling applied onto
+                                  electricity demand from 2021 to 2022. Data
+                                  from National Electricity Market Singapore,
+                                  Demand 2021 to 2022. Output source: Author
+                                </p>
+
+
+                                <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
+                                  Insights from Latent Behaviour Analysis
+                                </h2>
+
+                                <h2 className="text-[12.5px] font-semibold text-[#1a1f2b]">
+                                  [1] Volatility spikes arise from frequent
+                                  regime switches
+                                </h2>
+
+                                <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
+                                  While visual summary of electricity demand
+                                  continuing cyclical behaviour with periodic
+                                  periods of heightened stress suggest
+                                  volatility is a consequence of unanticipated
+                                  demand, underlying latent state behaviour
+                                  reveal rapid remise oscillations to be
+                                  responsible instead. This means modelling
+                                  demand by incorporating exhibited behaviour
+                                  across "circuit breaker" periods are not
+                                  practical at all. A primary reason is because
+                                  demand drop is not reflective of demand pick
+                                  up. While demand dropped almost instantly
+                                  following the first circuit breaker measure,
+                                  the reopening of public spaces and working
+                                  arrangements was not overnight. Latent phases
+                                  competently tracked this behaviour noticeably
+                                  by not forcing the same closure dynamics to
+                                  model variance persistence. The only caveats
+                                  are that regimes 2 and 3 may actually be
+                                  considered the same regime as they can serve
+                                  as a single posterior distribution when
+                                  considered together, particularly in the
+                                  manner of{" "}
+                                  <InlineMath math="P(S=2 \mid S=3 )" /> . In
+                                  other worse, since state 2 represents
+                                  volatility spikes and state 3 for periods of
+                                  noticeable grid stress, this framing presented
+                                  volatility spikes to only occur when the grid
+                                  was undergoing stress. This was otherwise
+                                  undetected under regular time series
+                                  decomposition as it would firstly be muted
+                                  into a trend, and secondly the persisting
+                                  underlying cycle would give impression that no
+                                  significant changes have been made.
+                                </p>
+
+                                <h2 className="text-[12.5px] font-semibold text-[#1a1f2b]">
+                                  [2] Volatile behaviour reverts back without
+                                  lag
+                                </h2>
+
+                                <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
+                                  Before understanding this, the context of
+                                  observed behaviour so far from density
+                                  decomposition shows state 3 defining high
+                                  demand centred around 6550–6650 MW, while
+                                  states 1 and 2 are representative of lower
+                                  demand around 5900–6150 MW. State 1 seems to
+                                  behaves as an intermediate stabilisation
+                                  regime around 6350–6450 MW suggesting default anxious market behaviour, "layering" on top of default behaviour in state 2. Higher demand regimes became more frequent into 2022, presenting previous default
+                                  demand regimes to be registered as intermittent breaks rather than a reversion to a normal market regime. This means when the market is anxious, it is more practical to frame it as a new temporary reality rather than an inconsistent and unsure heightened state. This is better supported since state 4 representing volatility spikes presents relatively strong consistency and often either retains its persistence or transits to state 3. When it reverts back to previous notions of regular market behaviour, there is observably no significant shock lag with no continuous drift. 
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </details>
+ <details className="group py-5">
   <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
     <div className="flex items-start justify-between">
       <div>
-        <h2 className="text-2xl font-semibold text-[#1a1f2b]">
-          Hidden Markov Regimes in Singapore's Electricity Demand
+        <h3 className="text-[15px] font-semibold leading-snug text-[#1a1f2b]">
+          Structural Changes Beyond Temporal Behaviour in Solar Generation
+        </h3>
+
+
+      </div>
+      <span className="ml-6 text-xl leading-none text-gray-600 transition-transform duration-500 ease-out group-open:rotate-45">
+        +
+      </span>
+
+    </div>
+  </summary>
+
+  <div className="mt-6 origin-top space-y-5 opacity-0 -translate-y-2 scale-y-[0.985] transition-all duration-700 ease-out group-open:opacity-100 group-open:translate-y-0 group-open:scale-y-100">
+
+        <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+
+Solar generation has expanded steadily over recent years, reflecting continued investment in Singapore's photovoltaic energy generating capacity. This also reflects confidence in Singapore's long-term irradiance profile to be stable regardless seasonal fluctuations. However increased solar generation variance has created impressions that market participants are deploying greater amounts of capital into a competitive environment with little calculation for intermittency risk. This raises the question if rising fluctuations are a natural consequence of installing a larger solar fleet, or if it is reflective of an increasingly unoptimal operation structure. To distinguish between cyclical weather driven variability and genuine shifts in the underlying market, a Bayesian Estimator of Abrupt Change, Seasonality and Trend (BEAST) decomposition can be applied to identify structural breakpoints, evolving trends, and changes in seasonal behaviour. Such an approach allows the analysis to determine whether the observed increase in variance is sufficient evidence of industry transformation beyond normal meteorological influences, and whether new structural dynamics in capital deployment, technology adoption, or system integration are emerging within the solar sector.
+
+
+</p>
+
+
+    <div className="mb-6 flex gap-8 overflow-x-auto border-b border-gray-200">
+
+
+      {BEAST_TABS.map((tab) => (
+        <button
+          key={tab.value}
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setBeastTab(tab.value);
+          }}
+          className={`pb-2 text-[13px] font-medium transition-all duration-300 ${
+            beastTab === tab.value
+              ? "border-b-2 border-blue-950 text-blue-950"
+              : "text-gray-500 hover:text-gray-800"
+          }`}
+        >
+          {tab.label}
+        </button>
+      ))}
+    </div>
+
+
+
+    {beastTab === "profiling" && (
+      <div className="space-y-5 animate-fadeIn">
+        <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
+          Solar Generation from 2024 to 2026
         </h2>
 
         <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
 
-During the second half of 2021, Singapore was recovering from both impact and constraint measures of the COVID-19 pandemic. Higher than anticipated market volatility which resulting in six electricity retailers exiting the market prompted urgent intervention from the Electricity Market Authority (EMA). Part of this intervention saw active and committed dialogues undertaken by the authority to communicate with all market participants to assess, evaluate and prepare themselves for an uncertain environment going into 2022. This saw many market participants engage in demand forecasting using both traditional and novel approaches, among which identifying latent states was particularly promising.
-</p>
+          Formal reporting for solar generation was only published by the National Energy Market Singapore (NEMS) following March 2024. Prior, while solar generation is present in the national market, supply figures remains largely contained within stakeholder circles and relevant contracted parties only. An increasingly important characteristic of solar generation in Singapore is its propensity to be shaped more by industry policy and industrial agreements rather than technological and capital constraints. While natural factors will continue playing an important role, supply will increasingly become associated with policy measures such as virtual power plant schemes, curtailment or energy storage systems beyond conventional notions of basic grid infrastructure and technology capacity. </p>
 
-      </div>
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/solardecomp.png"
+            className="my-5 mr-auto w-full max-w-[900px] object-contain"
+          />
 
-      <span className="ml-6 text-xl transition-transform duration-500 ease-out group-open:rotate-45">
-        +
-      </span>
-    </div>
-  </summary>
-<div className="grid grid-rows-[0fr] transition-all duration-700 ease-out group-open:grid-rows-[1fr]">
-  <div className="overflow-hidden">
+        <p className="mt-3 max-w-4xl text-justify text-[8px] leading-relaxed text-gray-600">
+12 month seasonal and trend decompositions on solar supply time series. Data from National Electricity Market, March 2024 to March 2026. Output Source: Author</p>
 
-    <div className="mt-6 opacity-0 translate-y-3 transition-all duration-700 ease-out group-open:opacity-100 group-open:translate-y-0">
-
-
-
-{/* TABS */}
-<div className="mb-6 flex gap-8 overflow-x-auto border-b border-gray-200">
-  {HMM_TABS.map((tab) => (
-    <button
-      key={tab.value}
-      type="button"
-      onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setHmmTab(tab.value);
-      }}
-      className={`pb-2 text-[13px] font-medium transition-all duration-300 ${
-        hmmTab === tab.value
-          ? "border-b-2 border-blue-950 text-blue-950"
-          : "text-gray-500 hover:text-gray-800"
-      }`}
-    >
-      {tab.label}
-    </button>
-  ))}
-</div>
-
-<div className="relative min-h-[400px]">
-
-  {/* DEMAND TAB */}
-  <div
-    className={`transition-all duration-500 ease-in-out ${
-      hmmTab === "demand"
-        ? "opacity-100 translate-y-0"
-        : "pointer-events-none absolute inset-0 opacity-0 translate-y-2"
-    }`}
-  >
-    <div className="space-y-5">
-
-      <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
-        Key Shortcoming of Parameter Defined State Profiles 
-      </h2>
-
-
-<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-
-Market demand states are conventionally inferred through the behaviour of inferential statistics. For instance, periods exhibiting low volatility and mean reverting behaviour are commonly interpreted as stable market phases. While practical for quick inspection, this approach is insufficient to serve as both an inferential and diagnostic framework. This is because calculated inferred statistics are considered to be posterior elements with observations as priors, presenting the exercise of identifying and defining market phase transitions in real time to be highly susceptible to both type I and type II errors. 
-
-</p>
-
-<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-
-Consider this quick set up. Suppose in a market all index observations are strictly positive and defined to belong to the set
-
-{" "}
-  <InlineMath math="Y: \{y_i \}^{N}_{i=1}." /> 
-{" "}
-
-Let these prices be arranged by their valuation such that two subsets representing low observations and high observations be formed such that
-
-{" "}
-  <InlineMath math="\gamma_L \cup \gamma_H = Y." /> 
-{" "}
-
-At time period 
-
-{" "}
-  <InlineMath math="t," /> 
-{" "}
-
-a set of observed values is taken to exist from 
-
-
-{" "}
-  <InlineMath math="Y" /> 
-{" "}
-
-in a manner 
-
-{" "}
-  <InlineMath math="O_{t}:[y_a,y_b]" /> 
-{" "}
-
-and
-
-{" "}
-  <InlineMath math="O_{t+1}:[y_c,y_d]." /> 
-{" "}
-
-Their boundaries are taken to overlap because 
-
-{" "}
-  <InlineMath math="y_c < y_b." /> 
-{" "}
-
-Now assume that a stable market phase exists and for simplicity, it is defined by the parameter 
-
-
-{" "}
-  <InlineMath math="\theta_t" /> 
-{" "}
-
-with some empirical distribution defined by parameters betas in the manner 
-
-{" "}
-  <InlineMath math="\theta_t \sim \mathcal{f}_t (\beta_{t,i}, \beta_{t,j})." /> 
-{" "}
-
-Now suppose another set of observations have occurred at time period
-
-{" "}
-  <InlineMath math="t+1" /> 
-{" "}
-
-with an empirical distribution defined by parameters betas in the manner 
-
-{" "}
-  <InlineMath math="\theta_{t+1} \sim \mathcal{f}_{t+1} (\beta_{t+1,i}, \beta_{t+1,j})." /> 
-{" "}
-
-How valid would these two distributions be to serve as posterior inferences to inspect if the market has entered a new state when an observed index of value
-
-{" "}
-  <InlineMath math="y^*" /> 
-{" "}
-
-with likelihood 
-
-{" "}
-  <InlineMath math="P(y^*)" /> 
-{" "}
-
-has occurred?
-</p>
-
-      <img
-        loading="lazy"
-        decoding="async"
-        src="/images/52.png"
-        alt="Bayesian review of index identification"
-        className="my-5 mx-auto w-full max-w-[600px] object-contain"
-      />
-
-<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-
-In this simple example, it can be seen that inspecting 
-
-{" "}
-  <InlineMath math="y^*" /> 
-{" "}
-
-'s state membership will produce different answers depending on which prior 
-
-{" "}
-  <InlineMath math=" O_k" /> 
-{" "}
-
-it conditions itself on as
-
-{" "}
-  <InlineMath math="P(y^* \mid O_t) \neq P(y^* \mid O_{t+1})." /> 
-{" "}
-
-Again, in this simple example this is so because each market state is defined by observable parametric 
-
-{" "}
-  <InlineMath math="\theta_t" /> 
-{" "}
-
-or
-
-{" "}
-  <InlineMath math="\theta_{t+1}" /> 
-{" "}
-
-for this matter. As such, the key shortcoming is that regime identification is entirely dependent on arbitrarily defined parameter boundaries. 
-</p>
-
-<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-
-Because even in this simplified example, should all observations across 
-
-{" "}
-  <InlineMath math="t,t+1" /> 
-{" "}
-
-be grouped together then there is definite conclusion that no regime change has happened; and corresponding if observations were placed into further fragmented subsets 
-
-{" "}
-  <InlineMath math="t-k, \cdots, t, t+1, \cdots ,t+j," /> 
-{" "}
-
-then regime change would conclusively have occurred. 
-</p>
-
-<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-As such when such market states are incorporated into both market decompositional and forecasting algorithms, resulting trajectories and conclusions on the market are strongly susceptible to bias.
-</p>
-
-
-      <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
-        Electricity Demand in Singapore
-      </h2>
-
-<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-Singapore's electricity market can superficially seem to exhibit relatively well defined seasonality and trends, giving impression that strict parameter boundaries can serve as competent settings for profile states. However annual time series decompositions yield statistical differences to exist, highlighting the inappropriateness of relying on historical parameter boundaries for state analysis. This was particularly evident for demand behaviour across 2021 and 2022.
-</p>
-
-      <img
-        loading="lazy"
-        decoding="async"
-        src="/images/01a.png"
-        alt="Electricity Demand Time Series Decompositions"
-        className="my-5 mr-auto w-full max-w-[800px] object-contain"
-      />
-
-<p className="text-justify text-[8px] leading-relaxed text-gray-600">
-
-Overviewing the Singapore Electricity Market based on its Spot Price Index, (USEP) from 2021 to 2022. Data from National Electricity Market, USEP 2021 and 2022. Output Source: Author 
-</p>
-
-
-
-<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-During this post pandemic market stress period, market participants were strongly pressured by both EMA and each other to undertake responsible market profiling. The primary objective was to ensure appropriate, market participant nature respective measurements could be undertaken based on their personal profiling. For example, if the participant was a Genco, then forecasting demand to ensure supply remains undisrupted without wild market spot prices was an objective. Alternatively, if the participant was an electricity retailer, then forecasting demand to ensure adequate supply scheduling was an objective. </p>
-
-<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-By mid 2021, it was evident that utilising market behaviour from 2020 or even earlier LNG shock periods to filter data for simulating 2022 was insufficient. This was primarily owing to an inherently different market structure inferred from the degree of market liberalisation. However this was not evident to many market participants primarily on two grounds. First, there was conviction that truncated market data when treated as historical priors rather than market data as a whole would be sufficient to model future uncertainty. Secondly, existing seasonality and trends have to continue in a statistically indifferent manner as no economic expansion can occur post Covid-19; electricity demand in Singapore is strongly related to economic activity rather than consumption. </p>
-
-<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-From observable parameters visualised by the histograms above, it can be deduced why these assumptions remained unexamined; with no observable superficial differences in distributions and notable structural breaks during uncertainty, undertaking conditional modelling would have been sufficient. 
-
-</p>
-
-      <img
-        loading="lazy"
-        decoding="async"
-        src="/images/02.png"
-        alt="Statistical Tests inferring similarity between 2021 and 2022 Demand"
-        className="my-5 mr-auto w-full max-w-[800px] object-contain"
-      />
-
-<p className="text-justify text-[8px] leading-relaxed text-gray-600">
-
-Overviewing the Singapore Electricity Market based on its Spot Price Index, (USEP) from 2021 to 2022. Data from National Electricity Market, USEP 2021 and 2022. Output Source: Author 
-</p>
-
-<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-Formal statistical decompositions however present no statistical similarity between the years on hindsight. The Kolmogorov-Smirnov (KS) test to inspect differences in non-parametric distributions through vertical differences, the Wilcoxon test to identify differences in non-parametric distributions through data rank and a superficial median split comparison test to identify proportions of data above and below the respective medians present conclusively evidence that statistically significant differences exists between the two years' distributional structures. This implies 2022's anticipated demand modelled using either truncated stress behaviour or overall historical behaviour, can only yield technical and recursive forecasts which at best incorporate market exogenous factors. 
-</p>
-
-
-
-
-</div>
-</div>
-
-
-
-
-  {/* STANDARD TAB */}
-  <div
-    className={`transition-all duration-500 ease-in-out ${
-      hmmTab === "standard"
-        ? "opacity-100 translate-y-0"
-        : "pointer-events-none absolute inset-0 opacity-0 translate-y-2"
-    }`}
-  >
-    <div className="space-y-5">
-
-
-
-
-
-      <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
-        Conventional Stress Demand Modelling in 2021 for 2022
-      </h2>
-
-<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-When EMA was preparing to undertake national wide level interventions to ensure electricity supply remains undisrupted, it conducted regular consultations with both market participants and auditing consultants to gauge market conditions. This saw an official press release published on 19th October 2021 urging all relevant parties to undertake necessary measures to mitigate potentially erratic market demand. A follow up was scheduled on 31st March 2022 to evaluate if market participants independent measures undertaken were sufficient or relevant. In between this period, many industry analysts and commentators produced forecasting models for both demand and market spot price. </p>
-
-<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-
-While a large class of these models were built on either linear modelling or multi-variate regressions, for the purpose of comparing similar algorithms, only time series models that incorporated machine learning to fine tune their parameters are discussed. As such, the author will be presenting a template algorithm that is his own summary, personally tuned with modifications based on what he felt were better practices. There are two general models that cover these approaches; one to represent classical statistical models fine tuned with machine learning, and another to represent neural network algorithm based models. 
-</p>
-
-
-
-
-
-{/* SECONDARY MODELLING TABS */}
-<div className="mt-5 mb-5 inline-flex rounded-full border border-gray-200 bg-gray-50 p-1">
-
-
- <button
-    type="button"
-    onClick={() => setForecastTab("indusover")}
-    className={`rounded-full px-4 py-1.5 text-[11.5px] transition-all duration-300 ${
-      forecastTab === "indusover"
-        ? "bg-blue-950 text-white shadow-sm"
-        : "text-gray-500 hover:text-gray-800"
-    }`}
-  >
-    Industry Models Overview
-  </button>
-
-
-  <button
-    type="button"
-    onClick={() => setForecastTab("bayesian_mc")}
-    className={`rounded-full px-4 py-1.5 text-[11.5px] transition-all duration-300 ${
-      forecastTab === "bayesian_mc"
-        ? "bg-blue-950 text-white shadow-sm"
-        : "text-gray-500 hover:text-gray-800"
-    }`}
-  >
-   SARIMA Modelling
-  </button>
-
-  <button
-    type="button"
-    onClick={() => setForecastTab("bayesian_sarima")}
-    className={`rounded-full px-4 py-1.5 text-[11.5px] transition-all duration-300 ${
-      forecastTab === "bayesian_sarima"
-        ? "bg-blue-950 text-white shadow-sm"
-        : "text-gray-500 hover:text-gray-800"
-    }`}
-  >
-    TSF Modelling
-  </button>
-
-</div>
-
-{/* BAYESIAN MONTE CARLO */}
-{forecastTab === "bayesian_mc" && (
-
-  <div className="space-y-4 animate-fadeIn">
-
-      <h2 className="text-[14.5px] font-semibold text-[#1a1f2b]">
-        Bayesian filtering training data for bootstrapping 
-      </h2>
-
-     <img
-        loading="lazy"
-        decoding="async"
-        src="/images/BayeP.png"
-        alt="Monte Carlo Demand"
-        className="my-5 mx-auto w-full max-w-[800px] object-contain"
-      />
-
-<p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
-As a baseline example, consider some time series of demand. Let Event A be the event where observable demand remains above 6000 MW, and hence any demand that is 6000 MW or below will be Event -A. Let Event B be demand reaching above 6500 MW. As such only high prices given sustained high demand from previous time periods will be used to train stressful periods in the market. This means spikes are not periodic nor temporal, but conditional on the extend demand has "dipped" in its seasonal low. In this quick example,
-
-{" "}
-  <InlineMath math="P(B \mid A)" /> 
-{" "}
-
-
-is utilised to bootstrap stressed demand. This gives a set up for Monte Carlo simulations to not base trajectory on the entirety of observed behaviour but only on how the market may look if stressful conditions persist and grow.
-</p>
-
-
-
-
-      <h2 className="text-[14.5px] font-semibold text-[#1a1f2b]">
-Monte Carlo Simulations from XGBoost Residual tuned Bayesian SARIMA baseline model
-      </h2>
-     <img
-        loading="lazy"
-        decoding="async"
-        src="/images/39.png"
-        alt="Monte Carlo Demand"
-        className="my-5 mr-auto w-full max-w-[800px] object-contain"
-      />
-
-
-     <img
-        loading="lazy"
-        decoding="async"
-        src="/images/SARIMA.png"
-        alt="Monte Carlo Demand"
-        className="my-5 mr-auto w-full max-w-[800px] object-contain"
-      />
-
-<p className="text-justify text-[8px] leading-relaxed text-gray-600">
-
-Monte Carlo Simulations based on bootstrapped Bayesian filtered data trained SARIMA for stressful market projection. Data from National Electricity Market Singapore, Demand 2021 to 2022. Output source: Author
-</p>  
-
-
-<p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
-
-The standard SARIMA framework demonstrated an overall competent forecast, achieving low RMSE 199.743 with MAE 123.643 and n impressive analytical interval coverage rate of 95.7%. Seemingly the model successfully captured key characteristics of underlying demand, notably inferred by a low MAPE of 1.94% indicating produced trajectory was stable. SARIMA’s diagnosis of (0,1,1)[7] indicates regardless the degree of stress experienced by market demand, it will still reflect the regular oscillatory structure observed through historical demand. 
-
-</p>
-
-     <img
-        loading="lazy"
-        decoding="async"
-        src="/images/SARIP.png"
-        alt="Monte Carlo Demand"
-        className="my-5 mr-auto w-full max-w-[800px] object-contain"
-      />
-
-<p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
-
-Key points of less competent forecasting are highlighted when historical demand was noted to transit across different volatility regimes. Between May 2022 and September 2022, projections persistently underpredicted realised demand spikes, particularly during abrupt deviations associated with high volatility. This reflects the previously highlighted structural limitation of determining market states through observable parameter bounds regardless their technical fine tuning; SARIMA can only extrapolate and undertake profiling future states from historically stable autocorrelation structures and assumes all behaviour will eventually revert towards seasonal means. This also explains why variance from October 2022 to January 2023, the framework began to overpredict realised demand levels. Collectively this otherwise strongly powerful trait is why SARIMA models must be adapted further to anticipate abrupt and symmetric volatility shifts by incorporating nonlinear or additional state dependent correction mechanisms.
-
-</p>
-
-  </div>
-
-
-)}
-
-
-
-{/* BAYESIAN ML SARIMA */}
-{forecastTab === "bayesian_sarima" && (
-
-  <div className="space-y-4 animate-fadeIn">
-
-      <h2 className="text-[14.5px] font-semibold text-[#1a1f2b]">
-        Paradox in treating data for TimesFM
-      </h2>
-
-<p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
-
-It was surprising to note that a Bayesian treated TimesFM model based Monte Carlo simulations did not perform better than a non-treated TimesFM base. While some aspects of uncertainty calibration were noticeably better, the regular model was noticeably stronger regarding point forecast accuracy.
-
-</p>
-
-     <img
-        loading="lazy"
-        decoding="async"
-        src="/images/TimesB.png"
-        alt="Monte Carlo Demand"
-        className="my-5 mr-auto w-full max-w-[800px] object-contain"
-      />
-
-     <img
-        loading="lazy"
-        decoding="async"
-        src="/images/TimesT.png"
-        alt="Monte Carlo Demand"
-        className="my-5 mr-auto w-full max-w-[800px] object-contain"
-      />
-
-
-<p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
-
-The weaker performance of the Bayesian treated TimesFM model likely arises from Bayesian processes interfering and altering otherwise well captured structural properties of the demand process. Demand behaviour is dominated by strong deterministic seasonality and persistent cyclical behaviour which the original TimesFM algorithm already captures through directly learned temporal embeddings and autoregressive attention mechanisms. Seemingly introducing a Bayesian intervention is unwarranted as it forced stressed information into the model, possible forcing an overfit. The result is having an additional Bayesian layer act more as a variance smoothing filter than an informational one. This explains why the Bayesian model exhibits higher residual variance, RMSE, and MAE despite wider predictive intervals.
-
-</p>
-
-     <img
-        loading="lazy"
-        decoding="async"
-        src="/images/timesraw.png"
-        alt="Monte Carlo Demand"
-        className="my-5 mr-auto w-full max-w-[800px] object-contain"
-      />
-
-     <img
-        loading="lazy"
-        decoding="async"
-        src="/images/timeswell.png"
-        alt="Monte Carlo Demand"
-        className="my-5 mr-auto w-full max-w-[800px] object-contain"
-      />
-
-<p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
-
-Comparatively, the Bayesian treated model performs better only in interval estimation. Producing a wider interval with an average width 616.654 compared to 401.521, it indicates processing data using a Bayesian filter simply expands its forecast band to mask unanticipated variance. Regarding coverage rate, the Bayesian treated model boasts 78.90% underperforming the original model's 80.82%. Residual diagnostics also highlight the Bayesian model to systematically underpredict while the original model has a negative mean error of −92.919 suggesting overprediction instead. 
-</p>
-
-
-
-
-
-
-  </div>
-
-
-)}
-
-{/* Industry Overview */}
-{forecastTab === "indusover" && (
-
-  <div className="space-y-4 animate-fadeIn">
-
-
-      <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
-        Monte Carlos of Linear, Multi-linear, SARIMA Models
-
-</h2>
-
-      <img
-        loading="lazy"
-        decoding="async"
-        src="/images/13.png"
-        alt="Statistical Tests inferring similarity between 2021 and 2022 Demand"
-        className="my-5 mr-auto w-full max-w-[800px] object-contain"
-      />
-
-<p className="text-justify text-[8px] leading-relaxed text-gray-600">
-Individual Monte Carlo simulated paths expanding MSE against realised historical demand. Data from National Electricity Market, USEP 2021 and 2022. Output Source: Author 
-</p>
-
-<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-It was interesting to note some market participants preferred models that affirmed anxious outlook over certain risk. The author notes smaller industry players preferred adopting this strongly risk averse behaviour. It hints the prospect of being assessed by a market authority which determines future market participation motivates agents to undertake costlier preparations for worst case scenarios opposed to taking less expensive measures for more likely, less drastic outcomes. It is possible that without such an authority, certain agents would have incentive to undertake less expensive actions to hedge risk over long term market participation. Reviewing cumulative forecasts affirmed "doomsday" forecasting; while a majority of models did model demand relatively competently, the assumption that unregulated USEP would cause a recursive feedback loop that would contribute to even more erratic demand. The projections while not good measures of forecasts, however do capture market sentiment accurately that if demand remained characteristically indifferent, erratic market spot prices will influence economic behaviour which in turn influences demand. 
-</p>
-
-
-
-<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-
-A review of resulting MSE when comparing doomsday Monte Carlo models against historical data affirms this. The poor accuracy of overall fatalistic predictions is reflected the eventual stabilising MSE values, albeit extremely high levels, reflecting the models' inability to re-correct itself in the absence of past data where the market endogenously fixes itself. A decreasing gradient of noticeable models form a surprisingly even more fatalistic set of projections, again more telling of individual agent's risk appraisal rather than technical competency. 
-</p>
-
-      <img
-        loading="lazy"
-        decoding="async"
-        src="/images/22a.png"
-        alt="Statistical Tests inferring similarity between 2021 and 2022 Demand"
-        className="my-5 mr-auto w-full max-w-[800px] object-contain"
-      />
-
-<p className="text-justify text-[8px] leading-relaxed text-gray-600">
-Evaluation of Aggregate Monte Carlo simulated paths against realised historical demand. Data from National Electricity Market, USEP 2021 and 2022. Output Source: Author 
-</p>
-
-<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-
-Observably even with supposed "realistic" projections of how erratic the market would behave in the short run (approximately 6 months forward), the models' mean projections began faltering from February 2022 onwards, with Median performance consistently faring poorly from the start. It seems a more nuanced understanding of why certain market participants find value in these projections can be uncovered through variance projections. The progressive tighter intervals, albeit deducible only in hindsight, give indication that perhaps market participants are not seeking doomsday predictions for the sake of it, but perhaps they have see personal inside information being reflected in other models not of their own. Collectively if all agents undertake this approach, the rational on why market participants preferring paranoid predictions can be framed as a coincidentally collative decision rather than a mass self affirming attitude. 
-</p>
-
-  </div>
-
-
-)}
-
-</div>
-</div>
-
-
-
-
-
-
-
-  {/* METHODOLOGY TAB */}
-  <div
-    className={`transition-all duration-500 ease-in-out ${
-      hmmTab === "methodology"
-        ? "opacity-100 translate-y-0"
-        : "pointer-events-none absolute inset-0 opacity-0 translate-y-2"
-    }`}
-  >
-    <div className="space-y-5">
-
-      <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
-        The Framework
-      </h2>
-
-<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-
-Conventional market modelling used to profile market structures can be generalised into two broad classes. The first class utilises directly observable parameters such as mean, variance, and autocorrelation structures to determine foundational structures such as SARIMA before building subsequent frameworks. The second group utilises decomposed or transformed components of observed data obtained through statistical filtering procedures such as Bayesian filtering or spectral decomposition to construct analytical frameworks such as multi-variate regression. Competent econometric models rely some combination or permutation of inter and intra interactions between these classes; for example a Bayesian filtered SARIMA framework to estimate underlying market spot price trends can be complemented by a spectrally decomposed spot prices prior to regular regression to estimate seasonality. Often the need for cross domain frameworks owes to models struggling with frequency misaligning when handling diverse frequency combinations (Zhao, Lai & Mo, 2025). 
-
-</p>
-
-<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-While these frameworks are highly competent, they utility is 
-
- is found in its general assumption that observable market behaviour sufficiently represents underlying market states. Hidden-state frameworks depart from this assumption by distinguishing between observable outcomes and the latent mechanisms generating them. Rather than treating observations as direct representations of market structure, Hidden Markov Models (HMMs) treat observations as probabilistic manifestations of unobserved regimes.
-
-</p>
-
-<p className="text-justify text-[8px] leading-relaxed text-gray-600">
-Zhao, Q., Lai, F., & Mo, X. (2025). Exploring time series analysis in frequency domain with complex-valued spectral attention and bidirectional variable mamba. Journal of Supercomputing, 81(8). https://doi.org/10.1007/s11227-025-07277-9
-</p>
-
-      <img
-        loading="lazy"
-        decoding="async"
-        src="/images/over.png"
-        alt="Hidden Markov and traditional comparison"
-        className="my-5 mr-auto w-full max-w-[800px] object-contain"
-      />
-
-<p className="text-justify text-[8px] leading-relaxed text-gray-600">
-Source: Author 
-</p>
-
-<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-
-Applying this framework in practise to demand, it means observable parameters are used to estimate the existence of latent states. This means depending on the underlying behaviour of identified parameters, similarly valued observations can be profiled from different latent states. 
-
-</p>
-      <img
-        loading="lazy"
-        decoding="async"
-        src="/images/compare.png"
-        alt="Hidden Markov and traditional comparison"
-        className="my-5 mr-auto w-full max-w-[800px] object-contain"
-      />
-
-<p className="text-justify text-[8px] leading-relaxed text-gray-600">
-
-Source: Author 
-</p>
-
-<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-
-In the simplified visual example above, the hidden regimes are identified through conditional mean, variance and trend persistence. While these latent states are well defined, they are not mutually exclusive because observations can share common properties across different parameters. This posits that each observation cannot claim exclusive membership to a specific latent state and instead possess different likelihoods.
-</p>
-
-
-      <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
-When applying the framework to prices, each observation maps out a characteristic state as seen in the example below. Observation A has different but not necessarily unique likelihood values to arise from all three latent states, while observation C only possesses likelihoods to arise from latent state two and three. Explicitly, the likelihood of observation C arising from latent state two is 
-
-{" "}
-  <InlineMath math="b_{2,C}" /> 
-{" "}
-
-And latent state three is 
-
-{" "}
-  <InlineMath math="b_{3,C}" /> 
-{" "}. 
-
-The probabilities that these latent states either remain or transit are given by 
-
-{" "}
-  <InlineMath math="a_{i,i+1}" /> 
-{" "}
-
-where the initial state is 
-
-{" "}
-  <InlineMath math="i" /> 
-{" "}
-
-with subsequent state 
-
-{" "}
-  <InlineMath math="i+1" /> 
-{" "}. 
-
-In this simplified example, no latent state is taken to persist hence each state transits to another. These transitions are distinguished from a Markov chain process however since the latter only pertains to observable states identified from other measures. This contrast is why 
-
-{" "}
-  <InlineMath math="a_{i,i+1} \neq c_{z,\mathcal{Z}}" /> 
-{" "}. 
-
-
-
-
-</p>
-      <img
-        loading="lazy"
-        decoding="async"
-        src="/images/HiddenMarkov.png"
-        alt="Hidden Markov and Markov chain comparison"
-        className="my-5 mr-auto w-full max-w-[550px] object-contain"
-      />
-
-<p className="text-justify text-[8px] leading-relaxed text-gray-600">
-Source: Author
-</p>
-
-
-      <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
-A Hidden Markov Model is evaluated through four diagnostic layers. These layers namely profile latent states, estimate each state's persistence and long run behaviour, inspect each state's specification robustness, and finally inspect the applied coherency of identified states.</p>
-
-
-    </div>
-  </div>
-
-
-
-
-
-
-
-  {/* Forecast tab*/}
-  <div
-    className={`transition-all duration-500 ease-in-out ${
-      hmmTab === "forecast"
-        ? "opacity-100 translate-y-0"
-        : "pointer-events-none absolute inset-0 opacity-0 translate-y-2"
-    }`}
-  >
-    <div className="space-y-5">
-
-      <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
-        Hidden Markov Model Forecasts 
-      </h2>
-
-<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-
-In either cases of traditional modelling, the market is inferred based on two key classes of metrics. From observable parameters such as mean, median or variance, along with decomposed components form processing data through a partial autocorrelation function or a Bayesian process as examples, some combination of both inter and intra classified metrics are used to define the market in the respective algorithms. Latent states however only seek to characterise the markets based on observable parameters. 
-
-</p>
-
-<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-
-In the simplified visual example above, the hidden regimes are identified through conditional mean, variance and trend persistence. While these latent states are well defined, they are not mutually exclusive because observations can share common properties across different parameters. This posits that each observation cannot claim exclusive membership to a specific latent state and instead possess different likelihoods.
-</p>
-
-
-      <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
-When applying the framework to prices, each observation maps out a characteristic state as seen in the example below. Observation A has different but not necessarily unique likelihood values to arise from all three latent states, while observation C only possesses likelihoods to arise from latent state two and three. Explicitly, the likelihood of observation C arising from latent state two is 
-
-
-</p>
-
-
-    </div>
-  </div>
-
-
-
-
-
-
-
-
-  {/* APPLICATION TAB */}
-  <div
-    className={`transition-all duration-500 ease-in-out ${
-      hmmTab === "application"
-        ? "opacity-100 translate-y-0"
-        : "pointer-events-none absolute inset-0 opacity-0 translate-y-2"
-    }`}
-  >
-    <div className="space-y-5">
-
-      <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
-Demand of 2021 going into 2022
-      </h2>
-
-      <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
-       The live model below allows users to interact with any time period they wish to analyse. The presented default view is the electricity market from June 2021 to July 20222 to showcase how latent state analysis is undertaken for this period. Because Hidden Markov Modelling begins with precursor finite mixture modelling, exploratory latent mixture models are first formulated. From there, an optimal number of states are identified using the BIC criterion and the shown algorithm presents the framework based on the number of identified states. However should an analyst have strongly good reason to already know a pre identified number of states, they may also key in the number and carry out respective analysis. 
-      </p>
-
-      <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-        <iframe
-          loading="lazy"
-          src={hmmTab === "application" ? "https://christopherleeaung.shinyapps.io/DemandHMM/" : undefined}
-          title="Demand HMM Shiny Research Interface"
-          className="h-[780px] w-full"
-        />
-
-      </div>
-
-<p className="text-justify text-[8px] leading-relaxed text-gray-600">
-
-Hidden Markov Modelling applied onto electricity demand from 2021 to 2022. Data from National Electricity Market Singapore, Demand 2021 to 2022. Output source: Author 
-</p>  
-
-      <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
-The latent regime membership tab showcases a simplified overview of the different latent states; 5 states are identified to exist. While this gives a good overview of the number of states and their propagation across the period of analysis, conclusions regarding their formation, value range, and occurrence likelihood are better inferred other tabs. Decoded Demand Regimes are arguably used together with latent regime membership plots as the most dominant state is not necessarily the lowest value owing to implications how lower levels trend to carry lesser variance and instability. A good example is how state 1 may seem the lowest and most stable state, is in fact that the second highest valued state with densities even higher than supposedly more "popular" states 2 and 5. 
-      </p>
-
-      <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
-Demand through Latent States: Analysis in 2 points
-      </h2>
-
-      <h2 className="text-[12.5px] font-semibold text-[#1a1f2b]">
-[1] Volatility spikes arise from frequent regime switches and not compounded unanticipated demand
-      </h2>
-
-      <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
-
-While visual summary of electricity demand continuing cyclical behaviour with periodic periods of heightened stress suggest volatility is a consequence of unanticipated demand, underlying latent state behaviour reveal rapid remise oscillations to be responsible instead. This means modelling demand by incorporating exhibited behaviour across "circuit breaker" periods are not practical at all. A primary reason is because demand drop is not reflective of demand pick up. While demand dropped almost instantly following the first circuit breaker measure, the reopening of public spaces and working arrangements was not overnight. Latent phases competently tracked this behaviour noticeably by not forcing the same closure dynamics to model variance persistence. The only caveats are that regimes 2 and 3 may actually be considered the same regime as they can serve as a single posterior distribution when considered together, particularly in the manner of {" "}
-  <InlineMath math="P(S=2 \mid S=3 )" /> 
-{" "}. In other worse, since state 2 represents volatility spikes and state 3 for periods of noticeable grid stress, this framing presented volatility spikes to only occur when the grid was undergoing stress. This was otherwise undetected under regular time series decomposition as it would firstly be muted into a trend, and secondly the persisting underlying cycle would give impression that no significant changes have been made. 
-
-</p>
-
-      <h2 className="text-[12.5px] font-semibold text-[#1a1f2b]">
-[2] Volatile behaviour reverts back without lag
-      </h2>
-
-      <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
-
-Before understanding this, the context of observed behaviour so far from density decomposition shows state 3 defining high demand centred around 6550–6650 MW, while states 2 and 5 are representative of lower demand around 5900–6150 MW. State 1 seems to behaves as an intermediate stabilisation regime around 6350–6450 MW. This suggests these states are more representative of the market undergoing stress without the behavioural and anxious jitters, presenting volatility spokes to be highly state switching dependent. Higher demand regimes become increasingly frequent into 2022, and lower demand regimes are not the baseline but are intermittent breaks. State 4 is unstable and often reverts to either 3 or 5, giving good reason that first-order Markov dependence framing can describe market behaviour decently. This means during uncertainty periods, the market repeatedly revisits state 3 instead of drifting continuously. This contradicts the assumption that crisis period  demand continues to reflect market anxiety persistently with drag. 
- </p>
-
-    </div>
-  </div>
-
-</div>
-</div>
-</div>
-</div>
-</details>
-
-
-
-
-
-{/*
-<details className="group border-b border-gray-200 py-6">
-  <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-    <div className="flex items-start justify-between">
-      <div>
-        <h2 className="text-2xl font-semibold text-[#1a1f2b]">
-          BEAST Point Detection and Decomposition of the USEP
-        </h2>
 
         <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-          The Bayesian Estimator of Abrupt change, Seasonality and Trend
-          decomposes USEP into trend, seasonal, and abrupt-change components.
-          Its objective is to estimate how many structural breaks exist, when
-          they occur, and how much posterior probability supports each detected
-          breakpoint.
+
+Trend decompositions were interesting in the first 12 months as even following relatively strong smoothening, a fluctuating trend reflected quarterly moving structural changes that hint at capacity constraints, operational availability or system integration in the midst of weather persistence. Inspecting weather persistence also yielded interesting results; the same 12 month period reflected variations in supply that are unlikely linked to changing weather conditions. Given Singapore's relatively unchanged irradiance conditions, the change in seasonality supply hints at structural and operational changes more. 
         </p>
+
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/Solarcomp.png"
+            className="my-5 mr-auto w-full max-w-[900px] object-contain"
+          />
+
+        <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+
+Formal statistical inspections on differences in seasonally reveal that while seasonality production trends are statistically different, the median levels of solar generation remain the same. This gives good insight that inherent structures are stable despite changes in production arrangements. Regarding trend however, there is statistical evidence to reject both notions that both trends and the median trend lines are different, hinting at increased capacity of solar generation. Combining these two output it gives a promising revelation that solar generation is increasing in a stable manner, where national production has proven itself robust so far given the unchanging seasonal median. 
+        </p>
+
+
+      </div>
+    )}
+
+    {beastTab === "issues" && (
+      <div className="space-y-5 animate-fadeIn">
+        <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
+Variance in solar generation from 2024 to 2026
+        </h2>
+
+
+<section className="w-full bg-white px-1 py-1 text-[#666d7a]">
+  <div className="grid grid-cols-1 gap-5 lg:grid-cols-[300px_1fr]">
+    {/* LEFT CARD */}
+    <div className="rounded-[24px] bg-gray-50 p-6">
+      <p className="text-[10px] font-semibold leading-snug text-[#1a1f2b]">
+        Average Solar Generation Variance
+      </p>
+
+      <div className="mt-1 grid grid-cols-2 gap-8 text-[8px] text-gray-600">
+        <div>2024: March to December</div>
+        <div>2025: January to December</div>
       </div>
 
-      <span className="ml-6 text-xl transition-transform duration-500 ease-out group-open:rotate-45">
-        +
-      </span>
-    </div>
-  </summary>
+      <div className="mt-1 h-px bg-gray-300" />
 
-  <div className="grid grid-rows-[0fr] transition-all duration-700 ease-out group-open:grid-rows-[1fr]">
-    <div className="overflow-hidden">
-      <div className="mt-6 space-y-5 opacity-0 translate-y-3 transition-all duration-700 ease-out group-open:opacity-100 group-open:translate-y-0">
-
-        <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
-          This research interface applies BEAST to daily mean or median USEP
-          values in order to detect probabilistic structural changes in
-          Singapore’s wholesale electricity price series. BEAST is useful for
-          identifying breakpoints, structural breaks, joinpoints, regime shifts,
-          nonlinear trend changes, seasonal shifts, and abnormal price movements.
-          The algorithm was introduced by Zhao et al. in 2019 as a Bayesian
-          ensemble decomposition framework.
-        </p>
-
-        <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
-          The central problem BEAST addresses is model uncertainty. Traditional
-          decomposition or changepoint methods often force the analyst to select
-          one preferred model specification. BEAST instead uses Bayesian model
-          averaging, estimating many competing decompositions and weighting them
-          by posterior plausibility. This produces not only a detected break
-          date, but also a probability that a structural change exists at each
-          point in time.
-        </p>
-
-        <div className="rounded-xl bg-gray-50 p-4 text-[12.5px] leading-relaxed text-gray-700">
-          <p>yₜ = Tₜ + Sₜ + εₜ</p>
-          <p className="mt-2">Tₜ = piecewise trend component</p>
-          <p>Sₜ = seasonal or cyclic component</p>
-          <p>εₜ = irregular residual component</p>
-          <p className="mt-2">P(change at time t | y₁, ..., yₙ) = posterior changepoint probability</p>
+      <div className="mt-3 space-y-1">
+        <div className="grid grid-cols-[70px_1fr] items-center">
+          <span className="text-[8px] text-gray-600">2024</span>
+          <span className="text-[8px] font-semibold text-[#1a1f2b]">
+            7091.61 MW
+          </span>
         </div>
 
+        <div className="grid grid-cols-[70px_1fr] items-center">
+          <span className="text-[8px] text-gray-600">2025</span>
+          <span className="text-[8px] font-semibold text-[#1a1f2b]">
+            13522.05 MW
+          </span>
+        </div>
+
+        <div className="grid grid-cols-[70px_1fr] items-center pt-2">
+          <span className="text-[8px] text-gray-600">▲</span>
+          <span className="text-[8px] font-semibold text-[#1a1f2b]">
+            90.68%
+          </span>
+        </div>
+      </div>
+    </div>
+
+    {/* RIGHT CARD */}
+    <div className="rounded-[24px] bg-gray-50 p-6">
+      <p className="text-[10px] font-semibold leading-snug text-[#1a1f2b]">
+        4 Month Rolling Variance
+      </p>
+
+      <div className="mt-1 grid grid-cols-2 gap-8 text-[8px] text-gray-600">
+        <div>Mar 2024 – Feb 2025</div>
+        <div>Mar 2025 – Feb 2026</div>
+      </div>
+
+      <div className="mt-1 h-px bg-gray-300" />
+
+      <div className="mt-3 grid grid-cols-2 gap-8">
+        <div className="space-y-1">
+          {[
+            ["Q1", "6118.25 MW", ""],
+            ["Q2", "6275.00 MW", "+2.56%"],
+            ["Q3", "7929.78 MW", "+26.37%"],
+            ["Q4", "8043.40 MW", "+1.43%"],
+          ].map(([q, value, change]) => (
+            <div
+              key={q}
+              className="grid grid-cols-[22px_1fr_42px] items-center"
+            >
+              <span className="text-[8px] text-gray-600">{q}</span>
+              <span className="text-[8px] font-semibold text-[#1a1f2b]">
+                {value}
+              </span>
+              <span className="text-[8px] font-semibold text-gray-600">
+                {change}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div className="space-y-1">
+          {[
+            ["Q1", "13536.86 MW", "+68.23%"],
+            ["Q2", "12523.74 MW", "-7.48%"],
+            ["Q3", "17133.40 MW", "+36.81%"],
+            ["Q4", "10792.83 MW", "-37.01%"],
+          ].map(([q, value, change]) => (
+            <div
+              key={q}
+              className="grid grid-cols-[22px_1fr_42px] items-center"
+            >
+              <span className="text-[8px] text-gray-600">{q}</span>
+              <span className="text-[8px] font-semibold text-[#1a1f2b]">
+                {value}
+              </span>
+              <span className="text-[8px] font-semibold text-gray-600">
+                {change}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/timesvar.png"
+            className="my-5 mr-auto w-full max-w-[900px] object-contain"
+          />
+
+                                <p className="text-justify text-[8px] leading-relaxed text-gray-600">
+                                 Historical rolling monthly variance of solar energy generation, March 2024 to February 2026, National Electricity Market. Output: Author
+                                </p>
+
         <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
-          In this interface, the probability threshold controls how strongly the
-          posterior evidence must support a breakpoint before it is treated as a
-          detected regime change. A lower threshold is more exploratory and will
-          identify more candidate breaks. A higher threshold is more conservative
-          and retains only breaks with stronger posterior support. The threshold
-          should therefore be interpreted as an inspection rule, not as an
-          objective truth boundary.
+
+While growing variance hinted fundamentally different weather conditions, meteorological conditions influencing irradiance have not changed noticeably. This implies earlier seen variance in 2024 prior to extensive solar capital investment reflects the stabilised market with the given amount of capital. This means some underlying lower level of variance will reflect natural circumstances, while higher variance must be characterised by multiplicative magnitude to account for the increased variance that comes with additional solar capital. </p>
+
+        <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
+
+This can be seen in early 2025 where growing solar operations under non-unique meteorological conditions contributed to the largest variance in the later year, reaching approximately 26,000 MW. While this peak variance later declined, it remained materially higher than prior 2024 levels, suggesting the market has reached a new reality of increased capital and variance. </p>
+
+        <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
+
+A TimesFM based forecast expects monthly variance to remain elevated but broadly ranging into the remainder of 2026 based on the expectation that no further dramatic investments or expansions of solar capital are undertaken. Seemingly hints at September 2025's increment had to be some unusual spike relating to capital related factors rather than weather; Singapore's rainfall in September 2025 was not the lowest despite clocking in the highest solar generation.
+</p>
+
+  
+
+      </div>
+    )}
+
+    {beastTab === "methodology" && (
+      <div className="space-y-5 animate-fadeIn">
+        <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
+          Methodology
+        </h2>
+
+        <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+          BEAST, the Bayesian Estimator of Abrupt change, Seasonality, and Trend, is a Bayesian model-averaging algorithm for decomposing one-dimensional sequential data into abrupt-change, trend, and seasonal or periodic components. Zhao et al. describe the method as an ensemble alternative to single-best-model decomposition. Instead of selecting one deterministic specification, BEAST evaluates many possible decompositions and averages across them using posterior model probabilities.
         </p>
 
         <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
-          Applied to USEP, BEAST helps distinguish temporary price volatility
-          from structural change in the wholesale electricity market. This is
-          important because electricity price indexes can move sharply due to
-          transient demand shocks, fuel-cost pressure, reserve scarcity, generator
-          outages, or policy interventions. A decomposition framework helps
-          identify whether observed USEP movements are short-lived irregular
-          deviations or persistent changes in the underlying price process.
+          This is useful for solar generation because structural interpretation is sensitive to model choice. A linear based model may miss nonlinear supply changes while a fixed seasonal decomposition can overstate regularity, and single breakpoint models force transitions onto processes that changes gradually or repeatedly. BEAST reduces this dependence on one assumed structure, being the seasonality of expected irradiance, and by so allowing trend and seasonal change points to be inferred probabilistically.
         </p>
 
-        <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
-          For energy capital valuation, the BEAST output can inform both timing
-          and scale. If posterior break probabilities cluster around periods of
-          sustained price elevation, this may indicate a stronger case for
-          generation, storage, hedging, or grid-support investment. If breaks are
-          weak or short-lived, the valuation case may favour flexible operating
-          responses rather than large irreversible capital deployment. The
-          interface therefore converts USEP time-series behaviour into an
-          investment signal: when structural pricing pressure appears, whether it
-          is persistent, and how much capital exposure may be justified.
-        </p>
 
         <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
-          Methodologically, the framework follows Zhao et al.’s BEAST algorithm,
-          which decomposes time series through Bayesian model averaging, and the
-          Rbeast implementation, which extends the method for practical
-          changepoint, seasonality, trend, and anomaly detection workflows.
+          The method is relevant for change-point detection, breakpoints, structural breaks, joinpoints, regime shifts, anomalies, nonlinear trend detection, seasonal-trend decomposition, time-series segmentation, interrupted time-series analysis, outlier detection, curve fitting, smoothing, and gap-filling of one-dimensional curves. While the original demonstration is associated with satellite and environmental time-series data, the statistical structure is generic and can be transferred to electricity-market solar supply because the series is also sequential, seasonal, noisy, and vulnerable to abrupt changes.
+        </p>
+
+      </div>
+    )}
+
+    {beastTab === "modelling" && (
+      <div className="space-y-5 animate-fadeIn">
+        <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
+          BEAST Modelling
+        </h2>
+
+        <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+          The modelling interface applies BEAST to electricity-market data so that posterior break probabilities, trend shifts, and seasonal movements can be inspected jointly.
+          The output is read in four stages. First, it inspects whether posterior change point probabilities cluster around specific dates. Secondly, it checks whether the trend component changes level or slope after those dates. Thirdly, it inspect whether the seasonal component changes amplitude or phase. And lastly, it compare residual behaviour before and after the suspected breaks. 
+
+        </p>
+
+
+        <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
+          Observably from March to December 2024, daily mean solar output is lower across April to June, increasing again through July to October, and reaching tits highest in late September. BEAST is therefore applied to testing whether these movements represent ordinary seasonal variation or a statistically persistent change in the realised solar supply process.
         </p>
 
         <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
           <iframe
             loading="lazy"
-            src="https://christopherleeaung.shinyapps.io/BeastR/"
-            title="BEAST USEP Shiny Research Interface"
+            src={
+              beastTab === "modelling"
+                ? "https://christopherleeaung.shinyapps.io/BeastR/"
+                : undefined
+            }
+            title="BEAST Shiny Research Interface"
             className="h-[780px] w-full"
           />
         </div>
       </div>
-    </div>
+    )}
   </div>
 </details>
 
-*/}
 
-</section>
 
+                </div>
+              </div>
+            </div>
+
+            <div className="mb-11">
+              <h2 className="mb-2 text-[22px] font-semibold tracking-tight text-[#4a4a4a]">
+                Scenario and Stress Modelling
+              </h2>
+              <div className="border-t border-[#C9CCD0] pt-6">
+                <div className="space-y-2">
+                  <details
+                    className="group py-5"
+                    onToggle={(event) => {
+                      if (event.currentTarget.open) setForecastTab("indusover");
+                    }}
+                  >
+                    <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                      <div className="flex items-start justify-between">
+                        <div>
+                          <h3 className="text-[15px] font-semibold leading-snug text-[#1a1f2b]">
+                            Bayesian Applications in Classical and Machine Learning Forecasting
+                          </h3>
+                        </div>
+                        <span className="ml-6 text-xl leading-none text-gray-600 transition-transform duration-500 ease-out group-open:rotate-45">
+                          +
+                        </span>
+                      </div>
+                    </summary>
+                    <div className="mt-6 origin-top opacity-0 -translate-y-2 scale-y-[0.985] transition-all duration-700 ease-out group-open:opacity-100 group-open:translate-y-0 group-open:scale-y-100">
+                      <StandardModellingContent
+                        forecastTab={forecastTab}
+                        setForecastTab={setForecastTab}
+                      />
+                    </div>
+                  </details>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section id="policies" className="w-full max-w-5xl pt-0">
           <SectionTitle title="Policies" />
@@ -1333,6 +1770,7 @@ Before understanding this, the context of observed behaviour so far from density
           <ProjectGrid projects={commodities} />
         </section>
 
+        <EnquirySection />
       </main>
     </div>
   );
