@@ -10,6 +10,18 @@ import {
 import dynamic from "next/dynamic";
 import clsx from "clsx";
 
+type Project = {
+  title: string;
+  description: string;
+  image: string;
+  status: string;
+  statusColor: string;
+  client: string;
+  domain: string;
+  methodologies: string[];
+  href?: string;
+};
+
 const InlineMath = dynamic(
   () => import("react-katex").then((mod) => mod.InlineMath),
   { ssr: false },
