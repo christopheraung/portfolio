@@ -349,7 +349,11 @@ function StandardModellingContent({
   return (
     <div className="space-y-5">
       <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-This study compares the utility of applying Bayesian filtering to machine learning and machine learning fine tuned traditional forecasting models built on SARIMA specifications. The context relates to seeking better forecasts of an uncertain future in electricity marked by strong volatility midst a mean reverting index. Traditional models are first assessed if Bayesian filtering has any impact on forecasting performance before and after XGBoost based fine tuning. TimesFM by Google is the baseline model for ML forecasting, and comparing its performance before and after Bayesian filtering is of interest. The non-Bayesian treated SARIMA model is not of interest as it is understood as a baseline block of a model rather than a standalone component. The overall workflow is visualised as: </p>
+Designed and evaluated hybrid forecasting frameworks combining Bayesian filtering, classical econometric models, and machine learning techniques for electricity market prediction. Compared Bayesian-enhanced SARIMA models with machine learning–based approaches, including Google TimesFM and XGBoost-optimised forecasting pipelines, to assess forecast accuracy, uncertainty quantification, and predictive robustness under volatile market conditions. Implemented Monte Carlo simulation, probabilistic forecasting, and residual-learning architectures to examine the extent to which machine learning contributes incremental information beyond established statistical models. Produced a comparative assessment of forecasting performance across multiple model classes using out-of-sample validation and risk-adjusted evaluation metrics.</p>
+
+      <p className="mt-3 max-w-4xl text-justify text-[8px] leading-relaxed text-gray-600">
+Bayesian Forecasting, SARIMA, XGBoost, TimesFM, Monte Carlo Simulation, Machine Learning, Predictive Analytics, Probabilistic Forecasting, Model Validation, Forecast Evaluation, Electricity Markets.
+ </p>
 
           <img
             loading="lazy"
@@ -1043,8 +1047,14 @@ const [beastTab, setBeastTab] = useState<BeastTab>("profiling");
                         <div className="mt-6 origin-top opacity-0 -translate-y-2 scale-y-[0.985] transition-all duration-700 ease-out group-open:opacity-100 group-open:translate-y-0 group-open:scale-y-100">
                           <p className="mb-8 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
 
-        During the second half of 2021, Singapore was recovering from both economic and operational constraints imposed during the COVID-19 pandemic. As energy markets tightened, higher than anticipated volatility contributed to six electricity retailers withdrawing from the open electricity market, prompting intervention by the Electricity Market Authority (EMA). Among key issues faced by market participants and authorities, an interesting one was the limitation of relying on observable indices to predict future market states with little or no appropriate priors. Latent state modelling becomes a plausible alternative. Here market behaviour is assumed governed by underlying unobservable states. In the context of Singapore's electricity market, these latent states represent different demand regimes, supply conditions and market stress from exogenous indexes. Markov chains are then introduced to inspect latent state propensities to remain or transit following underlying seasonality and macro shocks. 
+Developed a latent-state modelling framework to identify structural demand regimes within Singapore's National Electricity Market during the post-pandemic energy volatility period. Applied Hidden Markov Models (HMMs), Bayesian inference, state-transition analysis, and probabilistic classification techniques to distinguish underlying electricity demand conditions from observable market fluctuations. Evaluated regime persistence, transition dynamics, and demand recovery patterns surrounding the 2021–2022 energy market disruption, providing insights into market resilience, supply adequacy, and policy effectiveness. Integrated time-series econometrics, statistical learning, and energy market analytics to improve demand forecasting under conditions of heightened uncertainty and structural change.
                           </p>
+
+                          <p className="mb-8 max-w-4xl text-justify text-[8px] leading-relaxed text-gray-600">
+Key Skills: Hidden Markov Models (HMM), Bayesian Statistics, Time Series Econometrics, Regime Detection, Energy Economics, Market Surveillance, Demand Forecasting, Transition Probability Modelling, Statistical Learning, Policy Evaluation.
+</p>
+
+
 
                           {/* TABS */}
                           <div className="mb-6 flex gap-12 overflow-x-auto border-b border-gray-200">
@@ -1497,7 +1507,14 @@ Transition dynamics indicate regime persistence differs substantially across sta
 
         <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
 
-Solar generation has expanded steadily over recent years, reflecting continued investment in Singapore's photovoltaic energy generating capacity. This also reflects confidence in Singapore's long-term irradiance profile to be stable regardless seasonal fluctuations. However increased solar generation variance has created impressions that market participants are deploying greater amounts of capital into a competitive environment with little calculation for intermittency risk. This raises the question if rising fluctuations are a natural consequence of installing a larger solar fleet, or if it is reflective of an increasingly unoptimal operation structure. To distinguish between cyclical weather driven variability and genuine shifts in the underlying market, a Bayesian Estimator of Abrupt Change, Seasonality and Trend (BEAST) decomposition can be applied to identify structural breakpoints, evolving trends, and changes in seasonal behaviour. Such an approach allows the analysis to determine whether the observed increase in variance is sufficient evidence of industry transformation beyond normal meteorological influences, and whether new structural dynamics in capital deployment, technology adoption, or system integration are emerging within the solar sector.
+Designed and evaluated hybrid forecasting frameworks combining Bayesian filtering, classical econometric models, and machine learning techniques for electricity market prediction. Compared Bayesian-enhanced SARIMA models with machine learning–based approaches, including Google TimesFM and XGBoost-optimised forecasting pipelines, to assess forecast accuracy, uncertainty quantification, and predictive robustness under volatile market conditions. Implemented Monte Carlo simulation, probabilistic forecasting, and residual-learning architectures to examine the extent to which machine learning contributes incremental information beyond established statistical models. Produced a comparative assessment of forecasting performance across multiple model classes using out-of-sample validation and risk-adjusted evaluation metrics.
+
+</p>
+
+        <p className="mt-3 max-w-4xl text-justify text-[8px] leading-relaxed text-gray-600">
+
+Bayesian Forecasting, SARIMA, XGBoost, TimesFM, Monte Carlo Simulation, Machine Learning, Predictive Analytics, Probabilistic Forecasting, Model Validation, Forecast Evaluation, Electricity Markets.
+
 
 
 </p>
