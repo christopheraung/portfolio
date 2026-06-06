@@ -1006,13 +1006,13 @@ const [beastTab, setBeastTab] = useState<BeastTab>("profiling");
           <SectionTitle title="Research" />
 
           <div className="w-full max-w-4xl bg-white/40">
-            <div className="mb-11">
-              <h2 className="mb-2 text-[22px] font-semibold tracking-tight text-[#4a4a4a]">
+            <div className="mb-10">
+              <h2 className="mb-2 text-[20px] font-semibold tracking-tight text-[#4a4a4a]">
                 Market Intelligence
               </h2>
-              <div className="border-t border-[#C9CCD0] pt-6">
-                <div className="space-y-2">
-                  <details className="group py-5">
+              <div className="border-t border-[#C9CCD0] pt-3">
+                <div className="space-y-1">
+                  <details className="group py-2">
                     <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
                       <div className="flex items-start justify-between">
                         <div>
@@ -1021,7 +1021,7 @@ const [beastTab, setBeastTab] = useState<BeastTab>("profiling");
                           </h3>
                         </div>
 
-                        <span className="ml-6 text-xl transition-transform duration-500 ease-out group-open:rotate-45">
+                        <span className="ml-5 text-xl transition-transform duration-600 ease-out group-open:rotate-45">
                           +
                         </span>
                       </div>
@@ -1029,13 +1029,13 @@ const [beastTab, setBeastTab] = useState<BeastTab>("profiling");
                     <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-700 ease-out group-open:grid-rows-[1fr]">
                       <div className="overflow-hidden">
                         <div className="mt-6 origin-top opacity-0 -translate-y-2 scale-y-[0.985] transition-all duration-700 ease-out group-open:opacity-100 group-open:translate-y-0 group-open:scale-y-100">
-                          <p className="mb-6 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+                          <p className="mb-8 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
 
         During the second half of 2021, Singapore was recovering from both economic and operational constraints imposed during the COVID-19 pandemic. As energy markets tightened, higher than anticipated volatility contributed to six electricity retailers withdrawing from the open electricity market, prompting intervention by the Electricity Market Authority (EMA). Among key issues faced by market participants and authorities, an interesting one was the limitation of relying on observable indices to predict future market states with little or no appropriate priors. Latent state modelling becomes a plausible alternative. Here market behaviour is assumed governed by underlying unobservable states. In the context of Singapore's electricity market, these latent states represent different demand regimes, supply conditions and market stress from exogenous indexes. Markov chains are then introduced to inspect latent state propensities to remain or transit following underlying seasonality and macro shocks. 
                           </p>
 
                           {/* TABS */}
-                          <div className="mb-6 flex gap-8 overflow-x-auto border-b border-gray-200">
+                          <div className="mb-6 flex gap-12 overflow-x-auto border-b border-gray-200">
                             {HMM_TABS.map((tab) => (
                               <button
                                 key={tab.value}
@@ -1045,7 +1045,7 @@ const [beastTab, setBeastTab] = useState<BeastTab>("profiling");
                                   e.stopPropagation();
                                   setHmmTab(tab.value);
                                 }}
-                                className={`pb-2 text-[13px] font-medium transition-all duration-300 ${
+                                className={`pb-2 text-[11.5px] font-medium transition-all duration-300 ${
                                   hmmTab === tab.value
                                     ? "border-b-2 border-blue-950 text-blue-950"
                                     : "text-gray-500 hover:text-gray-800"
@@ -1068,8 +1068,128 @@ const [beastTab, setBeastTab] = useState<BeastTab>("profiling");
                               <div className="space-y-5">
   
                                 <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
+                           Hidden Markov Model Conclusions Latent States
+                                </h2>
+
+
+
+<section className="w-full bg-white px-1 py-1 text-[#666d7a]">
+  <div className="grid grid-cols-1 gap-5 lg:grid-cols-[0.95fr_1.15fr]">
+
+    {/* LEFT CARD */}
+    <div className="rounded-[24px] bg-gray-50 p-6">
+      <p className="text-[10px] font-semibold leading-snug text-[#1a1f2b]">
+        Annual Demand Statistics
+      </p>
+
+      <div className="mt-1 grid grid-cols-2 gap-8 text-[8px] text-gray-600">
+        <div>2021</div>
+        <div>2022</div>
+      </div>
+
+      <div className="mt-1 h-px bg-gray-300" />
+
+      <div className="mt-3 grid grid-cols-2 gap-8">
+        <div className="space-y-1">
+          {[
+            ["Mean", "6447 MW", ""],
+            ["Median", "6566 MW", ""],
+            ["Variance", "110544 MW", ""],
+          ].map(([metric, value, change]) => (
+            <div key={metric} className="grid grid-cols-[50px_1fr_42px] items-center">
+              <span className="text-[8px] text-gray-600">{metric}</span>
+              <span className="text-[8px] font-semibold text-[#1a1f2b]">{value}</span>
+              <span className="text-[8px] font-semibold text-gray-600">{change}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="space-y-1">
+          {[
+            ["Mean", "6563 MW", "+1.80%"],
+            ["Median", "6714 MW", "+2.25%"],
+            ["Variance", "111265MW", "+0.65%"],
+          ].map(([metric, value, change]) => (
+            <div key={metric} className="grid grid-cols-[50px_1fr_42px] items-center">
+              <span className="text-[8px] text-gray-600">{metric}</span>
+              <span className="text-[8px] font-semibold text-[#1a1f2b]">{value}</span>
+              <span className="text-[8px] font-semibold text-gray-600">{change}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    {/* RIGHT CARD */}
+    <div className="rounded-[24px] bg-gray-50 p-6">
+      <p className="text-[10px] font-semibold leading-snug text-[#1a1f2b]">
+        Demand Regime Profiles
+      </p>
+
+      <div className="mt-1 grid grid-cols-2 gap-8 text-[8px] text-gray-600">
+        <div>Average Demand</div>
+        <div>Economic Interpretation</div>
+      </div>
+
+      <div className="mt-1 h-px bg-gray-300" />
+
+      <div className="mt-3 grid grid-cols-2 gap-8">
+        <div className="space-y-1">
+          {[
+            ["S1", "5900 MW", ""],
+            ["S5", "6100 MW", "+3.39%"],
+            ["S3", "6250 MW", "+2.46%"],
+            ["S2", "6400 MW", "+2.40%"],
+            ["S4", "6600 MW", "+3.13%"],
+          ].map(([state, value, change]) => (
+            <div key={state} className="grid grid-cols-[24px_1fr_42px] items-center">
+              <span className="text-[8px] text-gray-600">{state}</span>
+              <span className="text-[8px] font-semibold text-[#1a1f2b]">{value}</span>
+              <span className="text-[8px] font-semibold text-gray-600">{change}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="space-y-1">
+          {[
+
+  ["S1", "Demand collapse regime"],
+  ["S5", "Sub-trend demand regime"],
+  ["S3", "Baseline operating regime"],
+  ["S2", "Expansionary demand regime"],
+  ["S4", "Peak-load demand regime"],
+          ].map(([state, desc]) => (
+            <div key={state} className="grid grid-cols-[24px_1fr] items-center">
+              <span className="text-[8px] text-gray-600">{state}</span>
+              <span className="text-[8px] font-semibold text-[#1a1f2b]">{desc}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+  Hidden Markov Modelling of Singapore's electricity demand market between June 2021 and July 2022 identifies four distinct latent regimes that repeatedly reappear throughout. Regime membership plots reveal that observations transit frequently between states, indicating that electricity demand is still cyclical and recurrent rather than reacting to post pandemic realities, be it policy or price influenced constraints. State occupancy is dominated by two principal conditions; higher demand periods see large concentrations of State 1 and State 2, while lower demand markets are defined by States 3 and 4. Each latent state maintains a relatively stable demand profile over time, supporting the interpretation that demand is better profiled through persistent structural operating conditions rather than dramatic short term statistical anomalies.
+</p>
+
+<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+State distributions further confirm that the four regimes capture differences in electricity consumption behaviour. State 2 represents the highest operating regime, with observations concentrated between 6,500 MW and 6,700 MW, consistent with periods of elevated economic activity and stronger electricity consumption. State 1 forms the baseline operating regime, centred near 6,350 MW to 6,450 MW. State 3 occupies an intermediate low demand regime around 6,050 MW to 6,250 MW, while State 4 represents the lowest demand environment, centred near 5,850 MW to 6,000 MW. Although some overlap exists between neighbouring distributions, the density functions remain sufficiently separated to support reliable state classification.
+</p>
+
+<p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+Transition dynamics indicate regime persistence differs substantially across states. State 1 exhibits the highest persistence, with a self-transition probability of approximately 0.76, implying that once the market enters its baseline demand environment it is likely to remain there. State 4 also demonstrates moderate persistence with a probability near 0.58, suggesting that periods of demand contraction tend to cluster together. In contrast, States 2 and 3 display relatively low persistence, implying expansionary and transitional demand conditions are less likely to endure. Taken together, the results suggest that Singapore's electricity demand is characterised by a stable core operating regime surrounded by recurring periods of expansion and contraction. 
+</p>
+
+
+                                <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
                                   Demand across 2021 and 2022
                                 </h2>
+
+
+
 
                                 <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
                                   Singapore's electricity market can
@@ -1238,6 +1358,14 @@ The problem arises when <InlineMath math="  y_2 \in C_1 \cap C_2 " /> is concern
                                   The Framework
                                 </h2>
 
+                              <img
+                                  loading="lazy"
+                                  decoding="async"
+                                  src="/images/59.png"
+                                  alt="Latent State approache"
+                                  className="my-5 mx-auto w-full max-w-[600px] object-contain"
+                                />
+
                                 <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
 
  There are two components beyond technical methodology approach which separates Hidden Markov Modeling from classical regime modelling. First is the definition and approach to identify market states, and secondly is to also incorporate transition chains into its analysis.  A latent state model assumes that observed market index values{" "}
@@ -1261,45 +1389,11 @@ p_{K,1} & p_{K,2} & \cdots & p_{K,K}
 
  <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
  
-Consider a simple visualisation regarding three observed values <InlineMath math="y_1, y_2, y_3" />. Their respective individual posterior state probability vectors reveal how type I and type II errors are not considered primarily owing to the frame how latent membership is defined by different likelihoods, rather than an explicit claim that true latent state membership lies in one exclusive state only. 
+Consider a simple visualisation above regarding three observed values <InlineMath math="y_1, y_2, y_3" />. Their respective individual posterior state probability vectors reveal how type I and type II errors are not considered primarily owing to the frame how latent membership is defined by different likelihoods, rather than an explicit claim that true latent state membership lies in one exclusive state only. 
 
 </p>
 
                             
-
-
-                               <img
-                                  loading="lazy"
-                                  decoding="async"
-                                  src="/images/59.png"
-                                  alt="Latent State approache"
-                                  className="my-5 mx-auto w-full max-w-[600px] object-contain"
-                                />
-
-                                <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
-                                  A Quick Visualisation
-                                </h2>
-  
-
-                                <img
-                                  loading="lazy"
-                                  decoding="async"
-                                  src="/images/profile.png"
-                                  alt="Quick HMM visualisation"
-                                  className="my-5 mx-auto w-full max-w-[400px] object-contain"
-                                />
-
-                                <p className="text-justify text-[8px] leading-relaxed text-gray-600">
-                                  Source: Author
-                                </p>
-
-                                <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-                                  In the simplified visual example above, the
-                                  hidden regimes are identified through processing
-                                  conditional mean, variance and trend
-                                  persistence. Observably when some observations are deduced to stem from overlapping latent states, it highlights how posterior state probability vector may be visualised. This is also why again classical type 1 and type 2 errors are not appropriate for this framing since alternate memberships are defined as well, removing the need to account for erroneous profiling. 
-                                </p>
-
 
                               </div>
                             </div>
@@ -1355,69 +1449,14 @@ Regarding the number of latent states, Markov Modelling explores a latent mixtur
                                   Demand 2021 to 2022. Output source: Author
                                 </p>
 
+                              <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
+Regime membership plots reveal that observations transit frequently between states, indicating that electricity demand is still cyclical and recurrent rather than reacting to post pandemic realities, be it policy or price influenced constraints. State occupancy is dominated by two principal conditions; higher demand periods see large concentrations of State 1 and State 2, while lower demand markets are defined by States 3 and 4. Each latent state maintains a relatively stable demand profile over time, supporting the interpretation that demand is better profiled through persistent structural operating conditions rather than dramatic short term statistical anomalies.
 
-                                <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
-                                  Insights from Latent Behaviour Analysis
-                                </h2>
+State distributions further confirm that the four regimes capture differences in electricity consumption behaviour. State 2 represents the highest operating regime, with observations concentrated between 6,500 MW and 6,700 MW, consistent with periods of elevated economic activity and stronger electricity consumption. State 1 forms the baseline operating regime, centred near 6,350 MW to 6,450 MW. State 3 occupies an intermediate low demand regime around 6,050 MW to 6,250 MW, while State 4 represents the lowest demand environment, centred near 5,850 MW to 6,000 MW. Although some overlap exists between neighbouring distributions, the density functions remain sufficiently separated to support reliable state classification.
 
-                                <h2 className="text-[12.5px] font-semibold text-[#1a1f2b]">
-                                  [1] Volatility spikes arise from frequent
-                                  regime switches
-                                </h2>
+Transition dynamics indicate regime persistence differs substantially across states. State 1 exhibits the highest persistence, with a self-transition probability of approximately 0.76, implying that once the market enters its baseline demand environment it is likely to remain there. State 4 also demonstrates moderate persistence with a probability near 0.58, suggesting that periods of demand contraction tend to cluster together. In contrast, States 2 and 3 display relatively low persistence, implying expansionary and transitional demand conditions are less likely to endure. Taken together, the results suggest that Singapore's electricity demand is characterised by a stable core operating regime surrounded by recurring periods of expansion and contraction.
+                           </p>
 
-                                <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
-                                  While visual summary of electricity demand
-                                  continuing cyclical behaviour with periodic
-                                  periods of heightened stress suggest
-                                  volatility is a consequence of unanticipated
-                                  demand, underlying latent state behaviour
-                                  reveal rapid remise oscillations to be
-                                  responsible instead. This means modelling
-                                  demand by incorporating exhibited behaviour
-                                  across "circuit breaker" periods are not
-                                  practical at all. A primary reason is because
-                                  demand drop is not reflective of demand pick
-                                  up. While demand dropped almost instantly
-                                  following the first circuit breaker measure,
-                                  the reopening of public spaces and working
-                                  arrangements was not overnight. Latent phases
-                                  competently tracked this behaviour noticeably
-                                  by not forcing the same closure dynamics to
-                                  model variance persistence. The only caveats
-                                  are that regimes 2 and 3 may actually be
-                                  considered the same regime as they can serve
-                                  as a single posterior distribution when
-                                  considered together, particularly in the
-                                  manner of{" "}
-                                  <InlineMath math="P(S=2 \mid S=3 )" /> . In
-                                  other worse, since state 2 represents
-                                  volatility spikes and state 3 for periods of
-                                  noticeable grid stress, this framing presented
-                                  volatility spikes to only occur when the grid
-                                  was undergoing stress. This was otherwise
-                                  undetected under regular time series
-                                  decomposition as it would firstly be muted
-                                  into a trend, and secondly the persisting
-                                  underlying cycle would give impression that no
-                                  significant changes have been made.
-                                </p>
-
-                                <h2 className="text-[12.5px] font-semibold text-[#1a1f2b]">
-                                  [2] Volatile behaviour reverts back without
-                                  lag
-                                </h2>
-
-                                <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
-                                  Before understanding this, the context of
-                                  observed behaviour so far from density
-                                  decomposition shows state 3 defining high
-                                  demand centred around 6550–6650 MW, while
-                                  states 1 and 2 are representative of lower
-                                  demand around 5900–6150 MW. State 1 seems to
-                                  behaves as an intermediate stabilisation
-                                  regime around 6350–6450 MW suggesting default anxious market behaviour, "layering" on top of default behaviour in state 2. Higher demand regimes became more frequent into 2022, presenting previous default
-                                  demand regimes to be registered as intermittent breaks rather than a reversion to a normal market regime. This means when the market is anxious, it is more practical to frame it as a new temporary reality rather than an inconsistent and unsure heightened state. This is better supported since state 4 representing volatility spikes presents relatively strong consistency and often either retains its persistence or transits to state 3. When it reverts back to previous notions of regular market behaviour, there is observably no significant shock lag with no continuous drift. 
-                                </p>
                               </div>
                             </div>
                           </div>
@@ -1425,24 +1464,24 @@ Regarding the number of latent states, Markov Modelling explores a latent mixtur
                       </div>
                     </div>
                   </details>
- <details className="group py-5">
+ <details className="group py-1">
   <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
     <div className="flex items-start justify-between">
       <div>
         <h3 className="text-[15px] font-semibold leading-snug text-[#1a1f2b]">
-          Structural Changes Beyond Temporal Behaviour in Solar Generation
+          Structural Changes Beyond Temporals in Solar Generation
         </h3>
 
 
       </div>
-      <span className="ml-6 text-xl leading-none text-gray-600 transition-transform duration-500 ease-out group-open:rotate-45">
+      <span className="ml-5 text-xl leading-none text-gray-600 transition-transform duration-500 ease-out group-open:rotate-45">
         +
       </span>
 
     </div>
   </summary>
 
-  <div className="mt-6 origin-top space-y-5 opacity-0 -translate-y-2 scale-y-[0.985] transition-all duration-700 ease-out group-open:opacity-100 group-open:translate-y-0 group-open:scale-y-100">
+  <div className="mt-8 origin-top space-y-8 opacity-0 -translate-y-2 scale-y-[0.985] transition-all duration-700 ease-out group-open:opacity-100 group-open:translate-y-0 group-open:scale-y-100">
 
         <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
 
@@ -1452,7 +1491,7 @@ Solar generation has expanded steadily over recent years, reflecting continued i
 </p>
 
 
-    <div className="mb-6 flex gap-8 overflow-x-auto border-b border-gray-200">
+    <div className="mb-8 flex gap-12 overflow-x-auto border-b border-gray-200">
 
 
       {BEAST_TABS.map((tab) => (
@@ -1464,7 +1503,7 @@ Solar generation has expanded steadily over recent years, reflecting continued i
             e.stopPropagation();
             setBeastTab(tab.value);
           }}
-          className={`pb-2 text-[13px] font-medium transition-all duration-300 ${
+          className={`pb-1.5 text-[11.5px] font-medium transition-all duration-300 ${
             beastTab === tab.value
               ? "border-b-2 border-blue-950 text-blue-950"
               : "text-gray-500 hover:text-gray-800"
@@ -1476,9 +1515,127 @@ Solar generation has expanded steadily over recent years, reflecting continued i
     </div>
 
 
-
     {beastTab === "profiling" && (
       <div className="space-y-5 animate-fadeIn">
+        <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
+ Bayesian Estimator of Abrupt Change, Seasonality and Trend Conclusions on Structural Breaks
+        </h2>
+
+<section className="w-full bg-white px-1 py-1 text-[#666d7a]">
+  <div className="grid grid-cols-1 gap-5 lg:grid-cols-[0.95fr_1.15fr]">
+
+    {/* LEFT CARD */}
+    <div className="rounded-[24px] bg-gray-50 p-6">
+      <p className="text-[10px] font-semibold leading-snug text-[#1a1f2b]">
+        Solar Trend Diagnostics
+      </p>
+
+      <div className="mt-1 grid grid-cols-2 gap-8 text-[8px] text-gray-600">
+        <div>Pre-Changepoint</div>
+        <div>Post-Changepoint</div>
+      </div>
+
+      <div className="mt-1 h-px bg-gray-300" />
+
+      <div className="mt-3 grid grid-cols-2 gap-8">
+
+        <div className="space-y-1">
+          {[
+            ["Period", "Mar 2024", ""],
+            ["Trend", "150 Index", ""],
+            ["Regime", "Stable", ""],
+            ["Growth", "Low", ""],
+          ].map(([metric, value, change]) => (
+            <div key={metric} className="grid grid-cols-[50px_1fr_42px] items-center">
+              <span className="text-[8px] text-gray-600">{metric}</span>
+              <span className="text-[8px] font-semibold text-[#1a1f2b]">{value}</span>
+              <span className="text-[8px] font-semibold text-gray-600">{change}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="space-y-1">
+          {[
+            ["Period", "Mar 2026", "+24 mths"],
+            ["Trend", "220 Index", "+46.7%"],
+            ["Regime", "Expansion", ""],
+            ["Growth", "Persistent", ""],
+          ].map(([metric, value, change]) => (
+            <div key={metric} className="grid grid-cols-[50px_1fr_42px] items-center">
+              <span className="text-[8px] text-gray-600">{metric}</span>
+              <span className="text-[8px] font-semibold text-[#1a1f2b]">{value}</span>
+              <span className="text-[8px] font-semibold text-gray-600">{change}</span>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </div>
+
+    {/* RIGHT CARD */}
+    <div className="rounded-[24px] bg-gray-50 p-6">
+      <p className="text-[10px] font-semibold leading-snug text-[#1a1f2b]">
+        Solar Structural Profile
+      </p>
+
+      <div className="mt-1 grid grid-cols-2 gap-8 text-[8px] text-gray-600">
+        <div>Statistic</div>
+        <div>Interpretation</div>
+      </div>
+
+      <div className="mt-1 h-px bg-gray-300" />
+
+      <div className="mt-3 grid grid-cols-2 gap-8">
+
+        <div className="space-y-1">
+          {[
+            ["TCP", "0.30"],
+            ["Mean", "-0.34"],
+            ["Var", "1567.35"],
+            ["Skew", "-0.65"],
+            ["Kurt", "3.54"],
+            ["SW", "0.975"],
+          ].map(([state, value]) => (
+            <div key={state} className="grid grid-cols-[28px_1fr] items-center">
+              <span className="text-[8px] text-gray-600">{state}</span>
+              <span className="text-[8px] font-semibold text-[#1a1f2b]">{value}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="space-y-1">
+          {[
+            ["TCP", "Major Feb-2025 trend break"],
+            ["Mean", "No systematic bias"],
+            ["Var", "High daily uncertainty"],
+            ["Skew", "Larger downside shocks"],
+            ["Kurt", "Fat-tailed residuals"],
+            ["SW", "Reject normality"],
+          ].map(([state, desc]) => (
+            <div key={state} className="grid grid-cols-[28px_1fr] items-center">
+              <span className="text-[8px] text-gray-600">{state}</span>
+              <span className="text-[8px] font-semibold text-[#1a1f2b]">{desc}</span>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+        <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+
+BEAST decomposition reveals that Singapore's solar generation market experienced structural transition around late January to early February 2025. Prior to this, solar generation trends were relatively stable around 150MW. Following the solar capital expansion through heavy investment commitments,  the underlying trend shifted upward abruptly to around 180MW before continuing a gradual increase, hitting 220MW by March 2026. Subsequent spikes during August to September 2025 are comparatively weaker and are insufficient to indicate major structural change. This suggests that the principal driver of solar growth was a single capacity expansion event rather than a sequence of multiple investment rounds or gradual growth that accumulates to significant change. </p>
+
+        <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+
+The QQ plot and Shapiro-Wilk test (W = 0.9749, p &lt; 0.001) reject normality of error terms, implying olar deviations are influenced by occasional extreme weather events or cloud cover episodes. Given the still growing market structure of the solar industry, operational constraints should not be considered as responsible forces behind irregular behaviour. 
+</p>
+
         <h2 className="text-[15px] font-semibold text-[#1a1f2b]">
           Solar Generation from 2024 to 2026
         </h2>
@@ -1535,8 +1692,8 @@ Variance in solar generation from 2024 to 2026
       </p>
 
       <div className="mt-1 grid grid-cols-2 gap-8 text-[8px] text-gray-600">
-        <div>2024: March to December</div>
-        <div>2025: January to December</div>
+        <div>2024: March to December
+2025: January to December</div>
       </div>
 
       <div className="mt-1 h-px bg-gray-300" />
@@ -1719,10 +1876,10 @@ A TimesFM based forecast expects monthly variance to remain elevated but broadly
             </div>
 
             <div className="mb-11">
-              <h2 className="mb-2 text-[22px] font-semibold tracking-tight text-[#4a4a4a]">
+              <h2 className="mb-2 text-[20px] font-semibold tracking-tight text-[#4a4a4a]">
                 Scenario and Stress Modelling
               </h2>
-              <div className="border-t border-[#C9CCD0] pt-6">
+              <div className="border-t border-[#C9CCD0] pt-1">
                 <div className="space-y-2">
                   <details
                     className="group py-5"
