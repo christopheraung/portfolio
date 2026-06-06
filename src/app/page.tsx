@@ -1017,7 +1017,7 @@ const [beastTab, setBeastTab] = useState<BeastTab>("profiling");
                       <div className="flex items-start justify-between">
                         <div>
                           <h3 className="text-[15px] font-semibold leading-snug text-[#1a1f2b]">
-                            Latent States in Electricity Demand
+                            Hidden Markov Regimes in Singapore’s Electricity Demand
                           </h3>
                         </div>
 
