@@ -67,7 +67,7 @@ const BANKS: BankProfile[] = [
     disclosure: 5,
     productBreadth: 4,
     history:
-      "RHB’s AI profile is still closer to applied digital transformation than full enterprise AI industrialisation. Its visible AI narrative is concentrated in retail-process automation, SME financing, branch-service support, digital onboarding, and fund/product exposure to the AI investment theme. The revaluation signal is therefore weaker than DBS, OCBC, or global investment banks because fewer AI outcomes are disclosed as direct operating or earnings contributions.",
+      "RHB’s AI profile is still closer to applied digital transformation than full enterprise AI industrialisation. Its visible AI narrative is concentrated in retail-process automation, SME financing, branch service support, digital onboarding, and fund/product exposure to the AI investment theme. The revaluation signal simply reflects fewer AI outcomes from private disclosure rather than a direct valuation of operation or earning contribution.",
     timeline: [
       {
         year: "2023–2024",
@@ -111,7 +111,7 @@ const BANKS: BankProfile[] = [
     disclosure: 6,
     productBreadth: 5,
     history:
-      "CIMB’s AI positioning is regionally distributed, with more visible experimentation around AI governance, decision support, digitalisation, and customer-facing financial-advisory support. Compared with DBS and OCBC, the public evidence points less to consolidated bank-wide AI value disclosure and more to progressive embedding of AI into data governance, operational efficiency, and customer-service channels.",
+      "CIMB’s AI positioning is regionally distributed, with more visible experimentation around AI governance, decision support, digitalisation, and customer facing financial advisory support. Public evidence points less towards AI value disclosure and more towards progressive embedding of AI into data governance, operational efficiency, and customer service channels.",
     timeline: [
       {
         year: "2024–2025",
@@ -155,7 +155,7 @@ const BANKS: BankProfile[] = [
     disclosure: 6,
     productBreadth: 6,
     history:
-      "Maybank’s AI path is best read through platform modernisation and human-centred financial services. Its disclosure is not as AI-monetisation-heavy as DBS, but the bank has framed AI and machine learning as tools for productivity, data analytics, customer-centricity, cyber-risk response, and future core-banking modernisation.",
+      "Maybank’s AI path is best read through platform modernisation and human centred financial services. Its disclosure is not AI monetisation heavy because the bank frames AI and machine learning as tools for productivity, data analytics, customer centricity and cyber risk response.",
     timeline: [
       {
         year: "2024",
@@ -199,7 +199,7 @@ const BANKS: BankProfile[] = [
     disclosure: 7,
     productBreadth: 7,
     history:
-      "UOB’s AI history is more defensive and compliance-led than DBS or OCBC. The strongest early signal was anti-money-laundering AI, where machine learning was deployed across transaction monitoring and name screening. The later phase shifts toward regional customer experience, productivity, and GenAI adoption, especially after the ASEAN consumer-bank expansion.",
+      "UOB’s AI history is more defensive and compliance led. The strongest early signal was its anti money laundering AI initiative where machine learning was deployed across transaction monitoring and name screening. The later phase shifts toward regional customer experience, productivity, and GenAI adoption, especially after the ASEAN consumer bank expansion.",
     timeline: [
       {
         year: "2020",
@@ -239,7 +239,7 @@ const BANKS: BankProfile[] = [
     disclosure: 8,
     productBreadth: 8,
     history:
-      "OCBC has one of the clearest bank-level AI histories in Singapore. Its 2018 AI unit created an early institutional anchor, while later disclosure shows AI moving into fraud detection, credit-card personalisation, employee productivity, and millions of daily decisions. The strongest valuation interpretation is not one isolated AI product, but a steady migration from experimentation to embedded operating infrastructure.",
+      "OCBC has one of the clearest organisation wide level AI adoption in Singapore. Its 2018 AI unit created an early institutional anchor while later disclosures show AI moving into fraud detection, credit card personalisation, employee productivity, and automation towards assessing  daily decisions. The strongest valuation stems from steadily integrating initiatives into well larger scaled operating infrastructure.",
     timeline: [
       {
         year: "2018",
@@ -283,7 +283,7 @@ const BANKS: BankProfile[] = [
     disclosure: 7,
     productBreadth: 8,
     history:
-      "Citi’s AI profile is institutionally broad but not Singapore-specific in every disclosure. Its strongest current signal is employee-scale AI tooling through Citi Assist, Citi Stylus, and Citi Stylus Workspaces, moving from policy search and document intelligence toward agentic workflows. For Singapore, the relevance is Citi’s regional operational footprint and global-bank technology transfer.",
+      "Citi’s AI profile is institutionally broad but not Singapore specific. Its strongest current signal is employee scale AI tool through Citi Assist, Citi Stylus, and Citi Stylus Workspaces. The development from policy search and document intelligence toward agentic workflows is almost noticeably unique owing to Citi's regional operational footprint.",
     timeline: [
       {
         year: "2024",
@@ -323,7 +323,7 @@ const BANKS: BankProfile[] = [
     disclosure: 7,
     productBreadth: 8,
     history:
-      "Bank of America’s AI history is unusually visible through Erica, its virtual financial assistant. Its relevance to a Singapore banking comparison is mainly as a global benchmark for customer-facing AI at scale: proactive financial insights, mobile-banking assistance, and mass digital servicing rather than Singapore-specific deployment.",
+      "Bank of America’s AI history is most prominent through Erica, its virtual financial assistant. Its relevance to a Singapore's banking landscape is mainly as a global benchmark for customer facing AI at a much larger scale. Proactive financial insights, mobile banking assistance, and mass digital servicing abroad see slightly different implementation than within Singapore, mostly owing to demography of deployment rather than inherent bank specific processes.",
     timeline: [
       {
         year: "2018",
@@ -367,7 +367,7 @@ const BANKS: BankProfile[] = [
     disclosure: 7,
     productBreadth: 8,
     history:
-      "Barclays’ AI profile is more research, infrastructure, and controlled scaling than highly publicised retail-assistant deployment. Its public materials frame AI around productivity, safe scaling, risk controls, financial-market research, and operational modernisation. The score is high because the bank has technical depth and institutional disclosure, but less concentrated public evidence of a single measurable AI monetisation line.",
+      "Barclays’ AI profile is more research, infrastructure, and controlled scaling orientated than retail assistant deployment. Its public materials frame AI around productivity, safe scaling, risk controls, financial market research and operational modernisation. The score is high because the bank has extremely strong technical depth and institutional disclosure, but owing to its nature towards private wealth and equity it is much less concerned of deploying massive AI consumer centric products.",
     timeline: [
       {
         year: "2024",
@@ -402,7 +402,7 @@ const BANKS: BankProfile[] = [
     disclosure: 8,
     productBreadth: 8,
     history:
-      "Standard Chartered is a strong Singapore-relevant global-bank case because its AI strategy is explicitly framed around cross-border transactions, affluent clients, sustainability, and federated AI adoption. Its 2025 SC GPT rollout across 41 markets provides a clear enterprise GenAI signal, while the 2026 A*STAR partnership gives Singapore-specific research and development relevance.",
+      "Standard Chartered boasts a strong score owing to its AI strategy explicitly framed around cross border transactions, affluent clients, sustainability, and federated AI adoption. Its 2025 SC GPT rollout across 41 markets provides a clear enterprise GenAI signal, while the 2026 A*STAR partnership gave it a boost in scoring for Singapore specific research and development relevance.",
     timeline: [
       {
         year: "2024–2025",
@@ -446,7 +446,7 @@ const BANKS: BankProfile[] = [
     disclosure: 8,
     productBreadth: 8,
     history:
-      "HSBC’s AI position is mature at global scale, with hundreds of use cases spanning fraud detection, cybersecurity, transaction monitoring, customer service, and risk assessment. The later Mistral AI partnership adds a GenAI acceleration layer, but HSBC’s main strength is breadth and controlled implementation rather than a single AI revenue disclosure comparable to DBS.",
+      "HSBC’s AI position is mature at global scale, with hundreds of use cases spanning fraud detection, cybersecurity, transaction monitoring, customer service, and risk assessment. The later Mistral AI partnership adds a GenAI acceleration layer, but HSBC’s main strength continues to be its breadth and controlled implementation.",
     timeline: [
       {
         year: "2024–2025",
@@ -490,7 +490,7 @@ const BANKS: BankProfile[] = [
     disclosure: 8,
     productBreadth: 8,
     history:
-      "Morgan Stanley is one of the clearest wealth-management AI cases. Its OpenAI partnership created advisor-facing knowledge retrieval, meeting summarisation, action-item extraction, and research-query tools. The adoption logic is different from retail banking: the AI asset is used to compress advisor search costs, improve relationship documentation, and industrialise institutional research access.",
+      "Morgan Stanley is one of the clearest wealth management AI cases. Its OpenAI partnership created advisor facing knowledge retrieval, meeting summarisation, action item extraction, and research query tools. The adoption logic is different from retail banking where AI assets are used to compress advisor search costs, improve relationship documentation, and industrialise institutional research access.",
     timeline: [
       {
         year: "2023",
@@ -534,7 +534,7 @@ const BANKS: BankProfile[] = [
     disclosure: 9,
     productBreadth: 8,
     history:
-      "Goldman Sachs’ AI score is high because the firm combines AI market research, developer/productivity tooling, investment-banking automation, and firmwide GenAI deployment. Relative to commercial banks, its edge is less branch or retail-service AI and more analyst, engineering, document, risk, and capital-markets workflow augmentation.",
+      "Goldman Sachs’ AI score is high because the firm combines AI market research, developer/productivity tooling, investment banking automation, and firm wide GenAI deployment. Relative to commercial banks, its edge is less branch or retail service AI and more analyst, engineering, document, risk, and capital markets workflow augmentation.",
     timeline: [
       {
         year: "2024",
@@ -574,7 +574,7 @@ const BANKS: BankProfile[] = [
     disclosure: 9,
     productBreadth: 9,
     history:
-      "JPMorgan Chase is the highest global benchmark in this comparison because AI spans research, payments, legal-document analysis, investment advisory tools, internal LLM suites, and enterprise AI research. Its advantage comes from scale: large proprietary datasets, deep technical labour, and a long-running institutional AI research unit that can support controlled adoption across regulated banking functions.",
+      "JPMorgan Chase is the highest global benchmark in this comparison because its AI implementation spans research, payments, legal document analysis, investment advisory tools, internal LLM suites, and enterprise AI research. Its advantage comes from scale. Large proprietary datasets, deep technical labour, and a long running institutional AI research unit that support controlled adoption across regulated banking functions are what give it a strong score.",
     timeline: [
       {
         year: "2017",
@@ -619,7 +619,7 @@ const BANKS: BankProfile[] = [
     disclosure: 9,
     productBreadth: 9,
     history:
-      "DBS is the strongest Singapore bank in this scoring framework because its AI programme is disclosed as an earnings-relevant operating system rather than a collection of experiments. The key distinction is monetisation visibility: DBS reports AI and data initiatives in economic-value terms, supported by model scale, use-case breadth, data infrastructure, and formal industrialisation of analytics processes.",
+      "DBS is the strongest Singapore bank in this scoring framework because its AI programme is disclosed as an earnings relevant operating system rather than a collection of implemented products. The key distinction is monetisation visibility. DBS's approach by being strongly competent in scaling its AI models, communicating regularly case breadth reviews with the government, investor and consumers, allows it to expand with consistent feedback on its data infrastructure and other formal analytics processes.",
     timeline: [
       {
         year: "2018–2021",
@@ -922,16 +922,13 @@ export default function AIRevaluationDashboard() {
   return (
     <div className="w-full bg-white text-[#4D4D4D]">
       <div className="mb-5 border-b border-[#C9CCD0] pb-4">
-        <h3 className="text-[15px] font-semibold tracking-tight text-[#4D4D4D]">
-          A.I Adoption by bank
-        </h3>
+
         <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-[#545454]">
-          Banks are assessed on their integration of AI based on their deployment, data infrastructure,
-          human capital depth, governance discipline, public disclosure, and
-          product breadth. The objective is to propose an investigatory revaluation chain that relates degree of adoption with bank valuation. Presently, the research suggests that banks  with clearer AI monetisation, broader deployment, and stronger
-          governance are almost more likely to experience positive revaluation. 
-        </p>
+          Within Singapore’s banking sector, artificial intelligence is increasingly embedded in institutional architecture through which banks manage risk, allocate capital, serve customers and improve operating productivity. Its relevance is increasingly extending beyond automation projects as AI capability now depends on the interaction between proprietary data, model infrastructure, specialist human capital and governance control. The breadth of deployment in financial products and operations are also increasingly specialised, with implementations now seeing it within fraud detection, credit assessment, transaction monitoring, customer personalisation and internal decision support. Singapore’s domestic banks have developed distinct positions within this transition across the past year years. DBS has placed particular emphasis on measuring economic value and industrialisation of AI, OCBC on integration of AI into daily operational decisions, and UOB on compliance, risk management and regional platform development. International banks operating in Singapore on the other hand, have been noted to contribute to the industrial landscape through global technology transfer, investment banking applications and enterprise scale generative AI. The resulting relationship between banking and AI is that investors should see value through the degree and regulated capability of process building rather than direct equity revaluation.</p>
+
+
       </div>
+
 
       <ScoreBars
         banks={BANKS}
@@ -1052,12 +1049,11 @@ export default function AIRevaluationDashboard() {
             </div>
           </div>
 
-          <p className="mt-4 text-justify text-[10.5px] leading-relaxed text-[#666D7A]">
-            Scores are deliberately ordinal. They should be interpreted as a
-            research-screening device rather than audited performance measures.
-            A higher score means stronger observable AI maturity, not proof that
-            AI alone caused equity revaluation.
-          </p>
+       <p className="mt-3 max-w-4xl text-justify text-[8px] leading-relaxed text-[#545454]">
+
+The Bank AI Capability Score is a constructed ordinal composite index based on two key organisational AI maturity literature. Firstly from the Multidimensional Capability Approach by Sadiq et al. (2021) and the AI Capability Assessment Model developed by Butler, Espinoza-Limón and Seppälä (2023). The governance component is further adapted to Singapore’s financial-sector context given Monetary Authority of Singapore’s FEAT Principles and Veritas assessment methodologies, together with NIST AI Risk Management Framework and Singapore’s Model AI Governance Framework. The use case deployment and product breadth reflect the range of banking applications identified in BIS assessments of AI in financial services. Public disclosure is introduced as a study specific observability proxy because comparable internal data on model inventories, expenditure, productivity and realised AI value are generally unavailable across banks. The dimension scores, aggregation weights and maturity thresholds remain researcher-defined and should therefore be interpreted as a structured screening measure rather than an externally validated or audited AI rating.
+
+        </p>
         </div>
       </div>
     </div>

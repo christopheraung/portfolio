@@ -60,6 +60,7 @@ const NAV_ITEMS = [
   { label: "Commodities", href: "#commodities" },
 ];
 
+
 const EMAIL = "mhaung.2021@mse.smu.edu.sg";
 
 const EMAIL_TEMPLATE = `
@@ -932,14 +933,12 @@ export default function Home() {
   const [fadeIn, setFadeIn] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-const [hmmTab, setHmmTab] =
-  useState<HmmTab>("demand");
+const [aiGraphTab, setAiGraphTab] =
+  useState<"app" | "methodology" | "findings" | "policy">("app");
 
-const [forecastTab, setForecastTab] =
-  useState<ForecastTab>("indusover");
-
-const [beastTab, setBeastTab] =
-  useState<BeastTab>("profiling");
+  const [hmmTab, setHmmTab] = useState<HmmTab>("demand");
+  const [forecastTab, setForecastTab] = useState<ForecastTab>("indusover");
+  const [beastTab, setBeastTab] = useState<BeastTab>("profiling");
 
 
   useEffect(() => {
@@ -1029,7 +1028,1058 @@ const [beastTab, setBeastTab] =
           <SectionTitle title="Research" />
 
           <div className="w-full max-w-4xl bg-white/40">
-            <div className="mb-10">
+                        <div className="mb-11">
+              <h2 className="mb-2 text-[20px] font-semibold tracking-tight text-[#4a4a4a]">
+                Artificial Intelligence and Sectoral Revaluation
+              </h2>
+              <div className="border-t border-[#C9CCD0] pt-1">
+                <div className="space-y-2">
+                  <details className="group py-5">
+                    <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                      <div className="flex items-start justify-between">
+                        <div>
+                          <h3 className="text-[15px] font-semibold leading-snug text-[#1a1f2b]">
+                            Mapping Artificial Intelligence Revaluation Influences on Singapore's Banking Landscape through a Graph Augmented Structural Model 
+                          </h3>
+                        </div>
+                        <span className="ml-6 text-xl leading-none text-gray-600 transition-transform duration-500 ease-out group-open:rotate-45">
+                          +
+                        </span>
+                      </div>
+                    </summary>
+
+<div className="mt-6 origin-top opacity-0 -translate-y-2 scale-y-[0.985] transition-all duration-700 ease-out group-open:opacity-100 group-open:translate-y-0 group-open:scale-y-100">
+  <p className="mb-5 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+A simulated graph augmented structure examining how the degree of artificial intelligence policy adoption influences bank valuations in Singapore. By framing this AI to be done through transmission systems rather than direct ROI based covariate measures, it allows exploration and limit identification of AI integration in bank returns. 
+  </p>
+
+<p className="mb-5 max-w-4xl text-justify text-[10px] leading-relaxed text-gray-600 italic">
+
+This preview is a simulation of a prototype GraphRAG that showcases the results of custom queries in a generic manner. The actual model allows users to pull total custom enquiries and obtain model trained responses from a Neo4j database using Cypher that obtains information from a LLM retrieval pipeline. In this project however, the information is hard coded within and there is no deployment of a dynamic query a fetch mechanism.
+  </p>
+
+<div className="mb-6 flex gap-12 overflow-x-auto border-b border-gray-200">
+  {[
+    { id: "app", label: "Application" },
+    { id: "methodology", label: "Methodology" },
+    { id: "findings", label: "Findings" },
+    { id: "policy", label: "Policies" },
+  ].map((tab) => (
+    <button
+      key={tab.id}
+      type="button"
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setAiGraphTab(
+          tab.id as "app" | "methodology" | "findings" | "policy"
+        );
+      }}
+      className={`pb-2 text-[11.5px] font-medium transition-all duration-300 ${
+        aiGraphTab === tab.id
+          ? "border-b-2 border-blue-950 text-blue-950"
+          : "text-gray-500 hover:text-gray-800"
+      }`}
+    >
+      {tab.label}
+    </button>
+  ))}
+</div>
+
+
+
+{aiGraphTab === "policy" && (
+  <div className="animate-fadeIn space-y-5">
+
+    <p className="mb-5 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+      Singapore&apos;s AI policy environment for banking is best read as a
+      layered governance stack. National AI Strategy 2.0 provides the economic
+      and capability direction, MAS FEAT defines responsible-AI principles,
+      Project Veritas operationalises those principles into testable controls,
+      GenAI guidance and MindForge extend supervision into LLM deployment, while
+      COSMIC runs alongside the stack as financial-crime information
+      infrastructure that AI systems can exploit for AML analytics.
+    </p>
+
+    <div className="mb-6 border-t border-[#C9CCD0] pt-4">
+
+
+      <div className="space-y-4">
+        {[
+          {
+            title: "National AI Strategy 2.0",
+            tag: "Macro Strategy",
+            year: "2023",
+            hierarchy: "National economic and technological direction",
+            body:
+              "National economic and technological strategy covering talent, industry adoption, infrastructure, research, safety and international leadership.",
+            bank:
+              "Signals long-run public support for bank AI investment, data infrastructure, AI talent formation and cross-border AI services.",
+          },
+          {
+            title: "MAS FEAT Principles",
+            tag: "Responsible AI",
+            year: "2018",
+            hierarchy: "Responsible-AI principles for financial services",
+            body:
+              "Fairness, Ethics, Accountability and Transparency principles for responsible AI and data analytics in financial services.",
+            bank:
+              "Relevant to credit scoring, fraud detection, customer segmentation and wealth-management recommendation systems.",
+          },
+          {
+            title: "Project Veritas",
+            tag: "Operational Controls",
+            year: "FEAT Implementation",
+            hierarchy: "Operationalisation of FEAT into measurable controls",
+            body:
+              "Translates FEAT from abstract principles into governance templates, risk methods, explainability metrics and fairness testing frameworks.",
+            bank:
+              "Allows banks to test whether AI decisions differ systematically across groups and whether model behaviour can be explained to regulators.",
+          },
+          {
+            title: "MAS GenAI Guidelines",
+            tag: "GenAI Governance",
+            year: "LLM Controls",
+            hierarchy: "Responsible deployment guidance for Generative AI",
+            body:
+              "Guidance on hallucination risk, privacy, cybersecurity, human oversight, vendor risk and third-party model governance.",
+            bank:
+              "Clarifies how employees may use ChatGPT-like tools, how confidential data should be protected, and how outputs require validation.",
+          },
+          {
+            title: "Project MindForge",
+            tag: "GenAI Adoption",
+            year: "Supervisory Sandbox",
+            hierarchy: "Safe GenAI experimentation and regulatory engagement",
+            body:
+              "Supports safe financial-sector GenAI adoption through implementation patterns, testing environments, risk controls and regulatory engagement.",
+            bank:
+              "Applies to relationship-manager copilots, internal knowledge assistants, compliance review assistants, research and reporting automation.",
+          },
+          {
+            title: "COSMIC AML Platform",
+            tag: "AML Infrastructure",
+            year: "Financial Crime",
+            hierarchy: "Parallel financial-crime information infrastructure",
+            body:
+              "Collaborative information-sharing platform for money-laundering, terrorism-financing and suspicious-customer intelligence.",
+            bank:
+              "Not primarily an AI policy, but creates richer data conditions for transaction monitoring, network analysis and suspicious-activity detection.",
+          },
+        ].map((item, idx) => (
+          <details key={item.title} className="group border-b border-gray-200 pb-4">
+            <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+              <div className="flex items-start justify-between gap-5">
+                <div>
+                  <div className="mb-1 flex flex-wrap gap-x-3 gap-y-1 text-[8.5px] font-semibold uppercase tracking-[0.14em] text-gray-400">
+                    <span>{String(idx + 1).padStart(2, "0")}</span>
+                    <span>{item.tag}</span>
+                    <span>{item.year}</span>
+                  </div>
+
+                  <h4 className="text-[13px] font-semibold text-[#1a1f2b]">
+                    {item.title}
+                  </h4>
+
+                  <p className="mt-1 text-[11.5px] leading-relaxed text-gray-500">
+                    {item.hierarchy}
+                  </p>
+                </div>
+
+                <span className="text-[18px] leading-none text-gray-500 transition-transform duration-300 group-open:rotate-45">
+                  +
+                </span>
+              </div>
+            </summary>
+
+            <div className="mt-4 space-y-3 pl-0">
+              <p className="text-justify text-[11.5px] leading-relaxed text-gray-600">
+                {item.body}
+              </p>
+
+              <p className="text-justify text-[11.5px] leading-relaxed text-gray-600">
+                <span className="font-semibold text-[#3F3A33]">
+                  Banking implication:
+                </span>{" "}
+                {item.bank}
+              </p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+
+    <p className="mt-3 text-justify text-[8px] leading-relaxed text-gray-600">
+      Policy architecture summary for Singapore banking AI governance,
+      including FEAT, Project Veritas, Project MindForge, National AI
+      Strategy 2.0, COSMIC and MAS GenAI guidance. Source: Monetary Authority
+      of Singapore and Smart Nation Singapore. Output: Author 
+    </p>
+
+
+
+  {/* ==========================================================
+      2. STATIC POLICY-TO-VALUATION TRANSMISSION PATHWAY
+  ========================================================== */}
+  <div className="overflow-hidden rounded-[26px] border border-[#D7D2C8] bg-white shadow-sm">
+    <div className="border-b border-[#D7D2C8] bg-[#F8F5EF] px-5 py-4 md:px-6">
+
+
+      <h4 className="text-[13px] font-semibold text-[#3F3A33]">
+       Structural transmission: MAS Policy to Bank Valuation
+      </h4>
+
+      <p className="mt-2 max-w-3xl text-justify text-[11.5px] leading-relaxed text-gray-600">
+        The degree of policy adoption or adherence does not enter influence valuation as an automatic direct effect. 
+        Depending on the nature of operation of a bank, the governance requirements and implementation incentives differ vastly. As such the degree at which a bank can adopt and sincerely adapt its operations accordingly is where the first critical point is noted. From there, the second critical component relates to investor's responses to observable valuations; essentially how well can banks communicate their deployment and attribute changes in valuation to integration is also key. 
+      </p>
+    </div>
+
+    <div className="px-4 py-5 md:px-6 md:py-6">
+      <svg
+        viewBox="0 0 1160 350"
+        role="img"
+        aria-labelledby="transmissionPathTitle transmissionPathDescription"
+        className="h-auto w-full"
+      >
+        <title id="transmissionPathTitle">
+  MAS policy to bank valuation transmission pathway
+        </title>
+
+        <desc id="transmissionPathDescription">
+          MAS policy influences AI governance, which influences bank AI
+          deployment, which may produce operating and risk effects before a
+          valuation response is examined using return and structural break
+          evidence.
+        </desc>
+
+        <defs>
+          <marker
+            id="sepiaArrow"
+            viewBox="0 0 10 10"
+            refX="8.5"
+            refY="5"
+            markerWidth="7"
+            markerHeight="7"
+            orient="auto-start-reverse"
+          >
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#817463" />
+          </marker>
+
+          <filter
+            id="softShadow"
+            x="-20%"
+            y="-20%"
+            width="140%"
+            height="140%"
+          >
+            <feDropShadow
+              dx="0"
+              dy="3"
+              stdDeviation="4"
+              floodColor="#6F6253"
+              floodOpacity="0.14"
+            />
+          </filter>
+
+          <linearGradient id="policyFill" x1="0" x2="1">
+            <stop offset="0%" stopColor="#F2EEE7" />
+            <stop offset="100%" stopColor="#E5DCCF" />
+          </linearGradient>
+
+          <linearGradient id="governanceFill" x1="0" x2="1">
+            <stop offset="0%" stopColor="#EEE9E1" />
+            <stop offset="100%" stopColor="#DDD2C2" />
+          </linearGradient>
+
+          <linearGradient id="deploymentFill" x1="0" x2="1">
+            <stop offset="0%" stopColor="#E9E2D8" />
+            <stop offset="100%" stopColor="#CFC1AF" />
+          </linearGradient>
+
+          <linearGradient id="operationsFill" x1="0" x2="1">
+            <stop offset="0%" stopColor="#E2D8CB" />
+            <stop offset="100%" stopColor="#BFAF9B" />
+          </linearGradient>
+
+          <linearGradient id="valuationFill" x1="0" x2="1">
+            <stop offset="0%" stopColor="#C6B7A4" />
+            <stop offset="100%" stopColor="#93816C" />
+          </linearGradient>
+        </defs>
+
+        {/* Main arrows */}
+        {[
+          [210, 145, 252, 145],
+          [428, 145, 470, 145],
+          [646, 145, 688, 145],
+          [864, 145, 906, 145],
+        ].map(([x1, y1, x2, y2], index) => (
+          <line
+            key={index}
+            x1={x1}
+            y1={y1}
+            x2={x2}
+            y2={y2}
+            stroke="#817463"
+            strokeWidth="2.5"
+            markerEnd="url(#sepiaArrow)"
+          />
+        ))}
+
+        {/* Stage 1: MAS policy */}
+        <g filter="url(#softShadow)">
+          <rect
+            x="24"
+            y="75"
+            width="186"
+            height="140"
+            rx="21"
+            fill="url(#policyFill)"
+            stroke="#A99C8B"
+            strokeWidth="1.5"
+          />
+        </g>
+
+        <circle
+          cx="117"
+          cy="104"
+          r="14"
+          fill="#8E806E"
+          stroke="#665A4D"
+          strokeWidth="1.3"
+        />
+        <text
+          x="117"
+          y="109"
+          textAnchor="middle"
+          fontSize="12"
+          fontWeight="700"
+          fill="#FFFFFF"
+        >
+          1
+        </text>
+
+        <text
+          x="117"
+          y="138"
+          textAnchor="middle"
+          fontSize="14"
+          fontWeight="700"
+          fill="#403930"
+        >
+          MAS Policy
+        </text>
+
+        <text
+          x="117"
+          y="160"
+          textAnchor="middle"
+          fontSize="10.5"
+          fill="#665E54"
+        >
+          FEAT · Veritas · GenAI
+        </text>
+        <text
+          x="117"
+          y="177"
+          textAnchor="middle"
+          fontSize="10.5"
+          fill="#665E54"
+        >
+          MindForge · COSMIC
+        </text>
+
+        <text
+          x="117"
+          y="199"
+          textAnchor="middle"
+          fontSize="9"
+          fill="#857B6F"
+        >
+          Regulatory direction
+        </text>
+
+        {/* Stage 2: Governance */}
+        <g filter="url(#softShadow)">
+          <rect
+            x="252"
+            y="75"
+            width="176"
+            height="140"
+            rx="21"
+            fill="url(#governanceFill)"
+            stroke="#9D8F7E"
+            strokeWidth="1.5"
+          />
+        </g>
+
+        <circle
+          cx="340"
+          cy="104"
+          r="14"
+          fill="#827462"
+          stroke="#625648"
+          strokeWidth="1.3"
+        />
+        <text
+          x="340"
+          y="109"
+          textAnchor="middle"
+          fontSize="12"
+          fontWeight="700"
+          fill="#FFFFFF"
+        >
+          2
+        </text>
+
+        <text
+          x="340"
+          y="138"
+          textAnchor="middle"
+          fontSize="14"
+          fontWeight="700"
+          fill="#403930"
+        >
+          AI Governance
+        </text>
+
+        <text
+          x="340"
+          y="160"
+          textAnchor="middle"
+          fontSize="10.5"
+          fill="#665E54"
+        >
+          Accountability · fairness
+        </text>
+        <text
+          x="340"
+          y="177"
+          textAnchor="middle"
+          fontSize="10.5"
+          fill="#665E54"
+        >
+          validation · controls
+        </text>
+
+        <text
+          x="340"
+          y="199"
+          textAnchor="middle"
+          fontSize="9"
+          fill="#857B6F"
+        >
+          Institutional safeguards
+        </text>
+
+        {/* Stage 3: Deployment */}
+        <g filter="url(#softShadow)">
+          <rect
+            x="470"
+            y="75"
+            width="176"
+            height="140"
+            rx="21"
+            fill="url(#deploymentFill)"
+            stroke="#91816F"
+            strokeWidth="1.5"
+          />
+        </g>
+
+        <circle
+          cx="558"
+          cy="104"
+          r="14"
+          fill="#756653"
+          stroke="#584B3E"
+          strokeWidth="1.3"
+        />
+        <text
+          x="558"
+          y="109"
+          textAnchor="middle"
+          fontSize="12"
+          fontWeight="700"
+          fill="#FFFFFF"
+        >
+          3
+        </text>
+
+        <text
+          x="558"
+          y="138"
+          textAnchor="middle"
+          fontSize="14"
+          fontWeight="700"
+          fill="#403930"
+        >
+          Bank Deployment
+        </text>
+
+        <text
+          x="558"
+          y="160"
+          textAnchor="middle"
+          fontSize="10.5"
+          fill="#665E54"
+        >
+          Risk · AML · service
+        </text>
+        <text
+          x="558"
+          y="177"
+          textAnchor="middle"
+          fontSize="10.5"
+          fill="#665E54"
+        >
+          credit · operations
+        </text>
+
+        <text
+          x="558"
+          y="199"
+          textAnchor="middle"
+          fontSize="9"
+          fill="#857B6F"
+        >
+          Observable implementation
+        </text>
+
+        {/* Stage 4: Operating effects */}
+        <g filter="url(#softShadow)">
+          <rect
+            x="688"
+            y="75"
+            width="176"
+            height="140"
+            rx="21"
+            fill="url(#operationsFill)"
+            stroke="#837361"
+            strokeWidth="1.5"
+          />
+        </g>
+
+        <circle
+          cx="776"
+          cy="104"
+          r="14"
+          fill="#6D5D4A"
+          stroke="#514335"
+          strokeWidth="1.3"
+        />
+        <text
+          x="776"
+          y="109"
+          textAnchor="middle"
+          fontSize="12"
+          fontWeight="700"
+          fill="#FFFFFF"
+        >
+          4
+        </text>
+
+        <text
+          x="776"
+          y="138"
+          textAnchor="middle"
+          fontSize="14"
+          fontWeight="700"
+          fill="#403930"
+        >
+          Operating Effects
+        </text>
+
+        <text
+          x="776"
+          y="160"
+          textAnchor="middle"
+          fontSize="10.5"
+          fill="#5E554C"
+        >
+          Efficiency · risk control
+        </text>
+        <text
+          x="776"
+          y="177"
+          textAnchor="middle"
+          fontSize="10.5"
+          fill="#5E554C"
+        >
+          revenue · confidence
+        </text>
+
+        <text
+          x="776"
+          y="199"
+          textAnchor="middle"
+          fontSize="9"
+          fill="#766B60"
+        >
+          Economic transmission
+        </text>
+
+        {/* Stage 5: Valuation */}
+        <g filter="url(#softShadow)">
+          <rect
+            x="906"
+            y="75"
+            width="230"
+            height="140"
+            rx="21"
+            fill="url(#valuationFill)"
+            stroke="#695A49"
+            strokeWidth="1.7"
+          />
+        </g>
+
+        <circle
+          cx="1021"
+          cy="104"
+          r="14"
+          fill="#514437"
+          stroke="#3D332A"
+          strokeWidth="1.3"
+        />
+        <text
+          x="1021"
+          y="109"
+          textAnchor="middle"
+          fontSize="12"
+          fontWeight="700"
+          fill="#FFFFFF"
+        >
+          5
+        </text>
+
+        <text
+          x="1021"
+          y="138"
+          textAnchor="middle"
+          fontSize="14"
+          fontWeight="700"
+          fill="#FFFFFF"
+        >
+          Valuation Response
+        </text>
+
+        <text
+          x="1021"
+          y="160"
+          textAnchor="middle"
+          fontSize="10.5"
+          fill="#F6F1EA"
+        >
+          Abnormal returns · breaks
+        </text>
+        <text
+          x="1021"
+          y="177"
+          textAnchor="middle"
+          fontSize="10.5"
+          fill="#F6F1EA"
+        >
+          persistence · volatility
+        </text>
+
+        <text
+          x="1021"
+          y="199"
+          textAnchor="middle"
+          fontSize="9"
+          fill="#E9E0D5"
+        >
+          Market-evidence layer
+        </text>
+
+        {/* Evidence assessment line */}
+        <path
+          d="M 558 232 C 650 285, 890 285, 1021 232"
+          fill="none"
+          stroke="#9C8E7D"
+          strokeWidth="1.7"
+          strokeDasharray="6 6"
+          markerEnd="url(#sepiaArrow)"
+        />
+
+        <rect
+          x="604"
+          y="263"
+          width="380"
+          height="47"
+          rx="15"
+          fill="#F7F3ED"
+          stroke="#C9BFB2"
+          strokeWidth="1.2"
+        />
+
+        <text
+          x="783"
+          y="282"
+          textAnchor="middle"
+          fontSize="10.5"
+          fontWeight="700"
+          fill="#51493F"
+        >
+          Structural-break and event-window assessment
+        </text>
+
+        <text
+          x="783"
+          y="299"
+          textAnchor="middle"
+          fontSize="9"
+          fill="#7A7065"
+        >
+          Tests whether deployment timing corresponds with observable market repricing
+        </text>
+
+
+      </svg>
+    </div>
+
+    {/* Mobile fallback */}
+    <div className="border-t border-[#D7D2C8] bg-[#F8F5EF] px-5 py-4 md:hidden">
+      <div className="flex flex-wrap items-center justify-center gap-2 text-[9.5px] font-semibold text-[#554C42]">
+        <span className="rounded-lg border border-[#D0C6B9] bg-white px-2.5 py-1.5">
+          MAS policy
+        </span>
+        <span aria-hidden="true">→</span>
+        <span className="rounded-lg border border-[#C9BEAF] bg-[#EEE8DF] px-2.5 py-1.5">
+          AI governance
+        </span>
+        <span aria-hidden="true">→</span>
+        <span className="rounded-lg border border-[#B8AA98] bg-[#DDD2C4] px-2.5 py-1.5">
+          Bank deployment
+        </span>
+        <span aria-hidden="true">→</span>
+        <span className="rounded-lg border border-[#9F8E79] bg-[#C6B7A4] px-2.5 py-1.5">
+          Operating effects
+        </span>
+        <span aria-hidden="true">→</span>
+        <span className="rounded-lg border border-[#665746] bg-[#8E806E] px-2.5 py-1.5 text-white">
+          Valuation response
+        </span>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+
+
+)}
+
+
+
+
+
+  {aiGraphTab === "app" && (
+    <div>
+      <p className="mb-5 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+        The live interface below is a prototype built on estimated returns to demonstrate the model architecture. In the full deployment, the simulated return signals are replaced with Yahoo Finance monthly returns, realised abnormal return estimates and fit into a BASTION time series decomposition. The interface present graphical presentation of institutional exposure as a calibrated transmission model, its technical table, and finally a comparative calibration page that explains how these scores are contributed. 
+      </p>
+
+
+
+      <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+        <iframe
+          loading="lazy"
+          src="https://christopherleeaung.shinyapps.io/Neo4j_Graph_Bank_AI/"
+          title="Graph-Augmented Structural Revaluation Model Shiny Research Interface"
+          className="h-[900px] w-full"
+        />
+      </div>
+
+      <p className="mt-3 text-justify text-[8px] leading-relaxed text-gray-600">
+        Interactive graph augmented AI revaluation model for Singapore's banking landscape. The interface demonstrates edge strength calibration, policy to bank transmission pathways, adoption scoring, structural break alignment, and ML optimised parameter weighting. Output Source: Author.
+      </p>
+    </div>
+  )}
+
+{aiGraphTab === "methodology" && (
+  <div>
+
+
+    <img
+      loading="lazy"
+      decoding="async"
+      src="/images/method.png"
+      alt="Methodology"
+      className="my-5 mx-auto w-full max-w-[800px] object-contain"
+    />
+
+<p className="mb-5 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+  Policy nodes enter the framework through two related channels. First, each
+  policy is connected to AI evaluation dimensions that pertains governance and, or adoption and integration. Second, each policy characterised by
+  implementation dates alongside any public or private news regarding evaluation windows. These dates determine each institution's timeline against which changes in bank returns are examined.
+  The policy layer therefore does not directly determine revaluation but relies on
+timing and regulatory context in which an AI-related valuation response occurs.
+</p>
+
+<p className="mb-5 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+  Bank return nodes form the market evidence layer with each return series presenting market valuation of the corresponding bank over time. These are subjected to a BASTION decomposition process where identification of statistically significant changes in structural trend, volatility, regime behaviour, and changepoint probability are assessed.
+</p>
+
+<p className="mb-5 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+  The central analytical step is the comparison between two dated objects:
+  policy or AI-evaluation dates are evaluated against BASTION detected structural break dates.
+  For some policy event occurring within a particular bank, temporal alignment reflected in its evaluation series may be represented as
+  <InlineMath math="A_{i,e}=\exp\left(-\frac{|\tau^{B}_{i}-\tau^{AI}_{e}|}{h}\right)" />,
+  where <InlineMath math="\tau^{AI}_{e}" /> is the implementation or evaluation
+  date of the AI related event or policy window, and <InlineMath math="\tau^{B}_{i}" /> is the
+  corresponding BASTION break date. <InlineMath math="h" /> controls how
+  quickly the alignment score declines across time. A high
+  value indicates that a return break occurred close to the AI policy subject 
+  window, while a low value indicates weak temporal correspondence.
+</p>
+
+<p className="mb-5 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+  The structural break assessment node summarises this comparison. It receives
+  the implementation dates from the policy layer and the identified return breaks
+  from BASTION then evaluates whether the timing, direction, and persistence of
+  the market response are consistent with the proposed AI transmission
+  mechanism. The assessment is stronger when a break occurs close to the event
+  date, abnormal returns are economically aligned with publications and stakeholder announcements alongside volatility or regime
+  behaviour changes.
+</p>
+
+<p className="mb-5 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+  The final revaluation assessment combines two forms of support. The return
+  evidence indicates whether the bank experienced unusual market repricing,
+  while the structural evidence indicates whether that repricing coincided with
+  a relevant AI or policy implementation period. The graph should therefore be
+  read as Country and Segment
+  <InlineMath math="\rightarrow" /> Bank Context,
+  Bank <InlineMath math="\rightarrow" /> AI Capability,
+  Policy <InlineMath math="\rightarrow" /> Dated Implementation Window,
+  Bank Returns <InlineMath math="\rightarrow" /> BASTION Decomposition,
+  and Policy Dates plus BASTION Break Dates
+  <InlineMath math="\rightarrow" /> Structural-Break Assessment
+  <InlineMath math="\rightarrow" /> Revaluation Assessment.
+</p>
+
+<p className="mb-5 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+  This framework proposes that evidence of AI policy influence on bank valuation can be detected after establishing explicit channels regarding its adoption, rather than a mere alignment of bank valuation and stakeholder published dates. It is a structured diagnostic relying on
+  three jointly present conditions. First, that the bank exhibits relevant AI capability.
+  Secondly, the policy or AI adoption occurs within a clearly defined period and lastly that
+  the bank&apos;s return series displays significant changes in structural response near AI implementation, policy or adoption
+  periods. 
+</p>
+
+
+
+    <p className="mb-8 max-w-4xl text-justify text-[8px] leading-relaxed text-gray-600">
+      Key Skills: Neo4j Graph Modelling, Graph Augmented Structural Modelling, Financial Econometrics, AI Adoption Scoring, Policy Transmission Analysis, Edge-Weight Calibration, Shortest-Path Analysis, Structural Break Detection, BASTION, BEAST, R, Shiny, visNetwork, plotly, igraph.
+    </p>
+  </div>
+)}
+
+
+
+  {aiGraphTab === "findings" && (
+    <div>
+
+    <p className="text-justify text-[12.5px] leading-relaxed text-gray-600">
+      The comparison matrix evaluates whether a bank possesses the capabilities
+      required for a credible AI transmission channel. The pathway diagram then
+      specifies the ordered mechanism through which those capabilities may
+      become relevant to valuation. A high maturity bank does not automatically
+      receive a high revaluation score: the model must additionally observe an AI related 
+      dated policy or adoption event, an economically plausible operating
+      channel regarding its implementation, and market evidence that price valuations occur nearby or across a corresponding evaluation window.
+    </p>
+
+<br></br>
+
+{/* ============================================================
+    BANK COMPARISON MATRIX + TRANSMISSION PATHWAY
+    Insert inside: aiGraphTab === "findings"
+    Replace the existing "Suggested Visual Extensions" card.
+============================================================ */}
+
+<section className="mb-8 space-y-6">
+  {/* ==========================================================
+      1. BANK AI CAPABILITY COMPARISON MATRIX
+  ========================================================== */}
+  
+<div className="border-b border-[#D7D2C8]">
+  <div className="border-b border-[#D7D2C8] px-5 py-4 md:px-6">
+    <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <div>
+        <h4 className="text-[13px] font-semibold text-[#3F3A33]">
+          Bank AI Capability Comparison Matrix
+        </h4>
+
+      </div>
+
+    </div>
+  </div>
+{/* Comparison table */}
+<div className="overflow-x-auto px-0 py-3">
+  <table className="w-full min-w-[940px] table-fixed border-collapse border border-[#D8D8D8] bg-white">
+    <caption className="sr-only">
+      Relative AI capability maturity by bank and capability dimension
+    </caption>
+
+    <thead>
+      <tr>
+        <th scope="col" className="w-[145px] border border-[#D8D8D8] px-2 py-2 text-left text-[8.5px] font-semibold uppercase tracking-[0.1em] text-[#545454]">
+          Bank
+        </th>
+
+        {[
+          "Deployment",
+          "Data readiness",
+          "AI talent",
+          "Governance",
+          "Disclosure",
+          "Product breadth",
+          "Overall",
+        ].map((dimension) => (
+          <th
+            key={dimension}
+            scope="col"
+            className="border border-[#D8D8D8] px-1.5 py-2 text-center text-[8px] font-semibold uppercase leading-snug tracking-[0.06em] text-[#545454]"
+          >
+            {dimension}
+          </th>
+        ))}
+      </tr>
+    </thead>
+
+    <tbody>
+      {[
+        ["DBS Group", 9, 9, 9, 9, 9, 9, "High"],
+        ["OCBC", 8, 8, 7, 8, 8, 8, "High"],
+        ["UOB", 7, 8, 7, 8, 7, 7, "Medium"],
+        ["Citibank SG", 8, 8, 8, 8, 7, 8, "High"],
+        ["Standard Chartered", 8, 8, 8, 8, 8, 8, "High"],
+        ["Bank of America", 8, 8, 8, 8, 7, 8, "High"],
+        ["HSBC", 8, 8, 8, 8, 8, 8, "High"],
+        ["CIMB", 6, 6, 6, 6, 6, 5, "Medium"],
+        ["RHB Bank", 5, 5, 5, 5, 5, 4, "Low"],
+        ["Maybank", 6, 6, 6, 6, 6, 6, "Medium"],
+        ["JPMorgan Chase", 9, 9, 9, 8, 9, 9, "High"],
+        ["Goldman Sachs", 9, 9, 9, 8, 9, 8, "High"],
+        ["Morgan Stanley", 8, 9, 8, 8, 8, 8, "High"],
+        ["Barclays", 8, 8, 8, 8, 7, 8, "High"],
+      ].map((row) => {
+        const maturityLabel = (score: number | string) => {
+          if (typeof score === "string") return score;
+          if (score >= 8) return "High";
+          if (score >= 6) return "Medium";
+          return "Low";
+        };
+
+        return (
+          <tr key={row[0] as string} className="bg-white hover:bg-gray-50">
+            <th
+              scope="row"
+              className="border border-[#D8D8D8] px-2 py-1.5 text-left text-[9.5px] font-semibold text-[#3F3F3A]"
+            >
+              {row[0]}
+            </th>
+
+            {row.slice(1).map((value, index) => (
+              <td
+                key={`${row[0]}-${index}`}
+                className="border border-[#D8D8D8] px-1.5 py-1.5 text-center text-[9px] font-medium text-[#545454]"
+              >
+                {maturityLabel(value)}
+              </td>
+            ))}
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+
+  <p className="mt-2 text-[8.5px] leading-relaxed text-[#6B6B5E]">
+    Note: Classifications follow the Shiny application&apos;s AI adoption scoring logic: scores of 8 and above are High, scores of 6 to below 8 are Medium, and lower scores are Low.
+  </p>
+</div>
+</div>
+
+
+
+</section>
+
+
+
+
+
+        <h4 className="mb-3 text-[13px] font-semibold text-[#3F3A33]">
+          A.I integration can only contributions to valuation when well defined and supported transmission channels exist
+        </h4>
+
+      <p className="mb-5 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+Ultimately beyond media hype be it through mass media, social media or industrial publications, AI-related banking revaluation is better interpreted as a layered transmission process than a direct and explicit relationship defined by AI announcements and respective bank stock returns. The graph structure suggests that valuation sensitivity depends on whether AI adoption is supported by policy alignment, governance credibility, operational deployment, disclosure intensity, and observable market response behaviour.
+      </p>
+
+      <p className="mb-5 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+        Local Singapore banks are expected to show stronger structural relevance in this framework because DBS, OCBC, and UOB are more directly exposed to domestic regulatory signalling, MAS-linked digital finance initiatives, and Singapore-specific AI governance architecture. Foreign banks may exhibit high global AI capability, but their Singapore revaluation channel is likely weaker unless the local entity has visible AI deployment, local disclosure, or Singapore-specific operational integration.
+      </p>
+
+        <h4 className="mb-3 text-[13px] font-semibold text-[#3F3A33]">
+AI adoption must be coupled with visibility to investors to boost chances of positive valuation
+        </h4>
+
+      <p className="mb-5 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+        The model also highlights revaluation strength is conditional on both AI adoption maturity and its visibility on top of communication to investors. A bank can score highly on AI deployment yet show limited local revaluation sensitivity if its AI initiatives are not visible to investors or not linked to Singapore policy events. Conversely, a bank with moderate AI adoption can produce stronger revaluation exposure if its much more communicative and active in managing stakeholder relationships where AI adoption is persistently and highlighted in a well regulated manner.
+      </p>
+
+        <h4 className="mb-3 text-[13px] font-semibold text-[#3F3A33]">
+ Framework closing note
+        </h4>
+
+
+      <p className="mb-5 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+        The main empirical implication is that AI valuation should not be assessed through event study logic nor basic time series based correlation studies alone. Combinations of policy event timing, bank specific AI adoption scores, textual disclosure similarity, abnormal return behaviour, and structural break probabilities or any other factors reflecting their relevant representations to inspect a network of relations should be the minimum. This allows any framework to distinguish between publicity driven AI announcements and bank specific AI investments from underlying factors to conclude sincerely the effectiveness of investing in AI implementation. 
+      </p>
+
+
+    </div>
+  )}
+</div>
+
+
+                  </details>
+
+                  <details className="group py-5">
+                    <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                      <div className="flex items-start justify-between">
+                        <div>
+                          <h3 className="text-[15px] font-semibold leading-snug text-[#1a1f2b]">
+                           Ranking Artificial Intelligence Integration within Singapore's Banking Landscape
+                          </h3>
+                        </div>
+                        <span className="ml-6 text-xl leading-none text-gray-600 transition-transform duration-500 ease-out group-open:rotate-45">
+                          +
+                        </span>
+                      </div>
+                    </summary>
+
+                    <div className="mt-6 origin-top opacity-0 -translate-y-2 scale-y-[0.985] transition-all duration-700 ease-out group-open:opacity-100 group-open:translate-y-0 group-open:scale-y-100">
+
+
+
+
+                      <div className="w-full bg-transparent">
+                        <AIRevaluationDashboard />
+                      </div>
+
+                      <p className="mt-3 text-justify text-[8px] leading-relaxed text-gray-600">
+                        Interactive AI adoption and stock-performance dashboard for DBS, OCBC, UOB, and SGX. Built with Claude Sonnet 4.6 and ChatGPT 5.5. Output Source: Author.
+                      </p>
+                    </div>
+                  </details>
+                </div>
+              </div>
+            </div>
+
+
+<div className="mb-10">
               <h2 className="mb-2 text-[20px] font-semibold tracking-tight text-[#4a4a4a]">
                 Market Intelligence
               </h2>
@@ -1916,48 +2966,6 @@ A TimesFM based forecast expects monthly variance to remain elevated but broadly
               </div>
             </div>
 
-
-            <div className="mb-11">
-              <h2 className="mb-2 text-[20px] font-semibold tracking-tight text-[#4a4a4a]">
-                Artificial Intelligence and Sectoral Revaluation
-              </h2>
-              <div className="border-t border-[#C9CCD0] pt-1">
-                <div className="space-y-2">
-                  <details className="group py-5">
-                    <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-                      <div className="flex items-start justify-between">
-                        <div>
-                          <h3 className="text-[15px] font-semibold leading-snug text-[#1a1f2b]">
-                            How Artificial Intelligence contribute to positive Revaluations in Singapore's Commercial Banks
-                          </h3>
-                        </div>
-                        <span className="ml-6 text-xl leading-none text-gray-600 transition-transform duration-500 ease-out group-open:rotate-45">
-                          +
-                        </span>
-                      </div>
-                    </summary>
-
-                    <div className="mt-6 origin-top opacity-0 -translate-y-2 scale-y-[0.985] transition-all duration-700 ease-out group-open:opacity-100 group-open:translate-y-0 group-open:scale-y-100">
-
-
-
-                      <p className="mb-5 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-
-Rapid revaluations in Singapore's commercial banking landscape following 2024 reflected board artificial intelligence and digitalisation capabilities among the largest banks. While rising interest rates contributed to record level profits, observed persistence in share price gains suggest investors have found their assessment of these institutions to materialise AI powered productivity to be not only well founded, but also sustained for continued investment. This shift was most prominent through DBS which disclosed its AI and data initiatives generated approximately SGD 780 million in economic value during 2024. Similar digital transformation strategies reflected across OCBC and UOB as well, serving as industrial evidence that banks which see immediate improvements in operation automation, advanced analytics, compliance optimisation and customer intelligence will result in positive revaluation. 
-                      </p>
-
-                      <div className="w-full bg-transparent">
-                        <AIRevaluationDashboard />
-                      </div>
-
-                      <p className="mt-3 text-justify text-[8px] leading-relaxed text-gray-600">
-                        Interactive AI adoption and stock-performance dashboard for DBS, OCBC, UOB, and SGX. Built with Claude Sonnet 4.6 and ChatGPT 5.5. Output Source: Author.
-                      </p>
-                    </div>
-                  </details>
-                </div>
-              </div>
-            </div>
 
             <div className="mb-11">
               <h2 className="mb-2 text-[20px] font-semibold tracking-tight text-[#4a4a4a]">
