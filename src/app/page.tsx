@@ -2093,7 +2093,7 @@ AI adoption must be coupled with visibility to investors to boost chances of pos
                       <div className="flex items-start justify-between">
                         <div>
                           <h3 className="text-[15px] font-semibold leading-snug text-[#1a1f2b]">
-                            BASTION Decompositions of Singapore Bank-Equity Returns during the Emergence of Artificial Intelligence
+                            BASTION Decompositions of Bank Equity Returns during the Emergence of Artificial Intelligence
                           </h3>
                         </div>
 
@@ -2107,47 +2107,25 @@ AI adoption must be coupled with visibility to investors to boost chances of pos
                       <div className="overflow-hidden">
                         <div className="mt-6 origin-top -translate-y-2 scale-y-[0.985] opacity-0 transition-all duration-700 ease-out group-open:translate-y-0 group-open:scale-y-100 group-open:opacity-100">
                           <p className="mb-5 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-Bayesian Adaptive Seasonality and Trend Decomposition Incorporating Outliers and Noise (BASTION) is a R package that decomposes univariate time series data through a Bayesian framework. It is locally adaptive in its estimation of trend and seasonality, it models outliers and time varying volatility, and provides robust quantification of variance through intervals. It was adopted to address existing decomposition methods'several limitations. Namely,</p>
-<p className="mb-5 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-
-Difficulty in adapting to abrupt changes in the trend, <br></br>
-Lack of robustness to outliers and heteroskedasticity<br></br>
-Absence of uncertainty quantification,<br></br>
-Inability to accommodate multiple seasonal patterns,<br></br>
-BASTION is the first Bayesian method to effectively address all these challenges in a unified framework.
-
+Bayesian Adaptive Seasonality and Trend Decomposition Incorporating Outliers and Noise (BASTION) is a R package that decomposes univariate time series data through a Bayesian framework. It is locally adaptive estimating trend and seasonality, aptly modelling outliers and time varying volatility. It addresses key limitations in existing decomposition methods, particularly regarding difficulty in adapting to abrupt changes in trend, heteroskedasticity, absence of quantifying uncertainty, and poor ability in accommodating multiple seasonal patterns.
 </p>
 
 <p className="mb-5 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
 
-The application here provides an all inclusive user dash board that allows practical financial-econometric decomposition based on observed bank equity returns. The summary of all findings is that in an informationally efficient market, credible AI investment may be capitalised through revised expectations of operating efficiency, risk control, fee generating capacity, data productivity, and long run cash flows. However, since same period returns also reflect interest rate repricing, credit conditions, and capital distributions, BASTION seeks to identify if the return generating process displays a persistent change, a transitory innovation, or a change in residual risk near documented events of AI-adoption, AI integration periods or policy reference date.
+The application is an all inclusive user dash board that allows practical financial-econometric decomposition based on observed bank equity returns. The summary of all findings is that in an informationally efficient market, credible AI investment may be capitalised through revised expectations of operating efficiency, risk control, fee generating capacity, data productivity, and long run cash flows. However, since in real life information is not perfect and it also incorporates interest rate behaviour, bank specific credit conditions, and investor capital distributions, BASTION seeks to identify if AI touted return generating processes display persistent change, transitory innovation, or a change in residual risks near documented events of AI adoption.
                           </p>
 
            
-                          <p className="mb-8 max-w-4xl text-justify text-[8px] leading-relaxed text-gray-600">
-                            Key Skills: Financial Econometrics, Bank-Equity Analysis, Return Decomposition, Rolling Volatility, Structural-Break Screening, HAC Inference, Ljung-Box Diagnostics, Comparative Market Intelligence, AI Event Profiling, R, Shiny, tidyverse, plotly, zoo, DT, xts.
-                          </p>
 
-                          {BASTION_APP_URL ? (
-                            <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-                              <iframe
-                                loading="lazy"
-                                src={"https://christopherleeaung.shinyapps.io/BASTION_com/"}
-                                title="BASTION Bank-Equity Decomposition Shiny Research Interface"
-                                className="h-[980px] w-full"
-                              />
-                            </div>
-                          ) : (
-                            <div className="rounded-2xl border border-dashed border-gray-300 bg-gray-50 px-5 py-6">
-                              <p className="text-justify text-[11.5px] leading-relaxed text-gray-600">
-                                The BASTION application URL has not yet been configured. Set
-                                <code className="mx-1 rounded bg-white px-1.5 py-0.5 text-[10.5px]">
-                                  NEXT_PUBLIC_BASTION_APP_URL
-                                </code>
-                                to the deployed Shiny application URL.
-                              </p>
-                            </div>
-                          )}
+<div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+  <iframe
+    loading="lazy"
+    src="https://christopherleeaung.shinyapps.io/BASTION_com/"
+    title="BASTION Bank-Equity Decomposition Shiny Research Interface"
+    className="h-[980px] w-full"
+  />
+</div>
+
 
                           <p className="mt-3 text-justify text-[8px] leading-relaxed text-gray-600">
                             Interactive BASTION bank-equity return decomposition and comparative market-intelligence interface. The application presents monthly log returns, local trend estimates, residual-risk dynamics, regime-shift screening, AI-reference alignment, annual diagnostics, and cross-bank performance comparisons. Output Source: Author.
