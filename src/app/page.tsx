@@ -63,6 +63,9 @@ const NAV_ITEMS = [
 
 const EMAIL = "mhaung.2021@mse.smu.edu.sg";
 
+const BASTION_APP_URL =
+  process.env.NEXT_PUBLIC_BASTION_APP_URL?.trim() ?? "";
+
 const EMAIL_TEMPLATE = `
 
 Salutation:
@@ -1050,12 +1053,12 @@ const [aiGraphTab, setAiGraphTab] =
 
 <div className="mt-6 origin-top opacity-0 -translate-y-2 scale-y-[0.985] transition-all duration-700 ease-out group-open:opacity-100 group-open:translate-y-0 group-open:scale-y-100">
   <p className="mb-5 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
-A simulated graph augmented structure examining how the degree of artificial intelligence policy adoption influences bank valuations in Singapore. By framing this AI to be done through transmission systems rather than direct ROI based covariate measures, it allows exploration and limit identification of AI integration in bank returns. 
+A Retrieval-Augmented Generation (RAG) graph structure examining the degree of artificial intelligence policy adoption that influences bank valuations operating in Singapore. Given artificial intelligence becoming increasingly deployed in daily bank ordinance and operations, evaluating its relevance beyond productivity and into capital appreciation, be it human, technical or technological, is increasingly on investor's watch list. By incorporating different dimensions of information ranging from policy adherence to product depth implementation, a visual overview identifying where banks draw their degree of implementation can be identified. 
   </p>
 
 <p className="mb-5 max-w-4xl text-justify text-[10px] leading-relaxed text-gray-600 italic">
 
-This preview is a simulation of a prototype GraphRAG that showcases the results of custom queries in a generic manner. The actual model allows users to pull total custom enquiries and obtain model trained responses from a Neo4j database using Cypher that obtains information from a LLM retrieval pipeline. In this project however, the information is hard coded within and there is no deployment of a dynamic query a fetch mechanism.
+This preview is a simulation of a prototype GraphRAG that showcases the results of custom queries in a generic manner. The actual model allows users to pull total custom enquiries and obtain model trained responses from a Neo4j database using Cypher that obtains information from a LLM retrieval pipeline. In this project however, the information is hard coded within and there is no deployment of a dynamic query fetch mechanism.
   </p>
 
 <div className="mb-6 flex gap-12 overflow-x-auto border-b border-gray-200">
@@ -2090,6 +2093,75 @@ AI adoption must be coupled with visibility to investors to boost chances of pos
                       <div className="flex items-start justify-between">
                         <div>
                           <h3 className="text-[15px] font-semibold leading-snug text-[#1a1f2b]">
+                            BASTION Decompositions of Singapore Bank-Equity Returns during the Emergence of Artificial Intelligence
+                          </h3>
+                        </div>
+
+                        <span className="ml-5 text-xl transition-transform duration-600 ease-out group-open:rotate-45">
+                          +
+                        </span>
+                      </div>
+                    </summary>
+
+                    <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-700 ease-out group-open:grid-rows-[1fr]">
+                      <div className="overflow-hidden">
+                        <div className="mt-6 origin-top -translate-y-2 scale-y-[0.985] opacity-0 transition-all duration-700 ease-out group-open:translate-y-0 group-open:scale-y-100 group-open:opacity-100">
+                          <p className="mb-5 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+Bayesian Adaptive Seasonality and Trend Decomposition Incorporating Outliers and Noise (BASTION) is a R package that decomposes univariate time series data through a Bayesian framework. It is locally adaptive in its estimation of trend and seasonality, it models outliers and time varying volatility, and provides robust quantification of variance through intervals. It was adopted to address existing decomposition methods'several limitations. Namely,</p>
+<p className="mb-5 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+
+Difficulty in adapting to abrupt changes in the trend, <br></br>
+Lack of robustness to outliers and heteroskedasticity<br></br>
+Absence of uncertainty quantification,<br></br>
+Inability to accommodate multiple seasonal patterns,<br></br>
+BASTION is the first Bayesian method to effectively address all these challenges in a unified framework.
+
+</p>
+
+<p className="mb-5 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
+
+The application here provides an all inclusive user dash board that allows practical financial-econometric decomposition based on observed bank equity returns. The summary of all findings is that in an informationally efficient market, credible AI investment may be capitalised through revised expectations of operating efficiency, risk control, fee generating capacity, data productivity, and long run cash flows. However, since same period returns also reflect interest rate repricing, credit conditions, and capital distributions, BASTION seeks to identify if the return generating process displays a persistent change, a transitory innovation, or a change in residual risk near documented events of AI-adoption, AI integration periods or policy reference date.
+                          </p>
+
+           
+                          <p className="mb-8 max-w-4xl text-justify text-[8px] leading-relaxed text-gray-600">
+                            Key Skills: Financial Econometrics, Bank-Equity Analysis, Return Decomposition, Rolling Volatility, Structural-Break Screening, HAC Inference, Ljung-Box Diagnostics, Comparative Market Intelligence, AI Event Profiling, R, Shiny, tidyverse, plotly, zoo, DT, xts.
+                          </p>
+
+                          {BASTION_APP_URL ? (
+                            <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+                              <iframe
+                                loading="lazy"
+                                src={"https://christopherleeaung.shinyapps.io/BASTION_com/"}
+                                title="BASTION Bank-Equity Decomposition Shiny Research Interface"
+                                className="h-[980px] w-full"
+                              />
+                            </div>
+                          ) : (
+                            <div className="rounded-2xl border border-dashed border-gray-300 bg-gray-50 px-5 py-6">
+                              <p className="text-justify text-[11.5px] leading-relaxed text-gray-600">
+                                The BASTION application URL has not yet been configured. Set
+                                <code className="mx-1 rounded bg-white px-1.5 py-0.5 text-[10.5px]">
+                                  NEXT_PUBLIC_BASTION_APP_URL
+                                </code>
+                                to the deployed Shiny application URL.
+                              </p>
+                            </div>
+                          )}
+
+                          <p className="mt-3 text-justify text-[8px] leading-relaxed text-gray-600">
+                            Interactive BASTION bank-equity return decomposition and comparative market-intelligence interface. The application presents monthly log returns, local trend estimates, residual-risk dynamics, regime-shift screening, AI-reference alignment, annual diagnostics, and cross-bank performance comparisons. Output Source: Author.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </details>
+
+                  <details className="group py-2">
+                    <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                      <div className="flex items-start justify-between">
+                        <div>
+                          <h3 className="text-[15px] font-semibold leading-snug text-[#1a1f2b]">
                             Hidden Markov Regimes in Singapore’s Electricity Demand
                           </h3>
                         </div>
@@ -2553,7 +2625,7 @@ Transition dynamics indicate regime persistence differs substantially across sta
     <div className="flex items-start justify-between">
       <div>
         <h3 className="text-[15px] font-semibold leading-snug text-[#1a1f2b]">
-          Structural Changes Beyond Temporals in Solar Generation
+          BEAST Decompositions in Solar Generation to Identify Structural Changes beyond Temporals
         </h3>
 
 
@@ -2569,7 +2641,7 @@ Transition dynamics indicate regime persistence differs substantially across sta
 
         <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-gray-600">
 
-Designed and evaluated hybrid forecasting frameworks combining Bayesian filtering, classical econometric models, and machine learning techniques for electricity market prediction. Compared Bayesian-enhanced SARIMA models with machine learning–based approaches, including Google TimesFM and XGBoost-optimised forecasting pipelines, to assess forecast accuracy, uncertainty quantification, and predictive robustness under volatile market conditions. Implemented Monte Carlo simulation, probabilistic forecasting, and residual-learning architectures to examine the extent to which machine learning contributes incremental information beyond established statistical models. Produced a comparative assessment of forecasting performance across multiple model classes using out-of-sample validation and risk-adjusted evaluation metrics.
+Applied the Bayesian Estimator of Abrupt Change, Seasonality and Trend (BEAST) to Singapore solar-generation data to distinguish durable structural expansion from recurring temporal variation and short-lived production noise. The framework decomposes observed generation into time-varying trend and seasonal components while estimating posterior support for abrupt changes in their level, slope, and periodic structure. This allows increases in solar output to be evaluated as possible capacity-led or system-level transitions rather than being inferred directly from raw growth, daylight cycles, weather-sensitive fluctuations, or conventional seasonal averages. The project reviews changepoint timing, posterior uncertainty, trend persistence, seasonal amplitude, and residual behaviour to determine whether apparent growth reflects a sustained change in the underlying generation process. The resulting decomposition provides a more defensible basis for market surveillance, infrastructure assessment, and policy evaluation where structural development must be separated from effects that are merely temporal.
 
 </p>
 
