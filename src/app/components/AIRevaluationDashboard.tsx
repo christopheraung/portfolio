@@ -693,9 +693,9 @@ function ScoreBars({
 }) {
   const sorted = [...banks].sort((a, b) => scoreBank(a) - scoreBank(b));
 
-  const width = 920;
+  const width = 700;
   const height = 260;
-  const margin = { top: 22, right: 26, bottom: 82, left: 54 };
+  const margin = { top: 0, right: 50, bottom: 60, left:0 };
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
   const barGap = 7;
@@ -708,7 +708,7 @@ function ScoreBars({
     <div className="w-full overflow-x-auto">
       <svg
         viewBox={`0 0 ${width} ${height}`}
-        className="min-w-[860px]"
+className="w-[820px] h-[260px] flex-none"
         role="img"
         aria-label="AI adoption scores by bank"
       >
@@ -789,7 +789,7 @@ function ScoreBars({
               />
               <text
                 x={x + barWidth / 2}
-                y={height - 48}
+                y={height - 50}
                 textAnchor="end"
                 transform={`rotate(-38 ${x + barWidth / 2} ${height - 48})`}
                 fontSize={9.5}
@@ -924,12 +924,13 @@ export default function AIRevaluationDashboard() {
       <div className="mb-5 border-b border-[#C9CCD0] pb-4">
 
         <p className="mt-3 max-w-4xl text-justify text-[12.5px] leading-relaxed text-[#545454]">
-          Within Singapore’s banking sector, artificial intelligence is increasingly embedded in institutional architecture through which banks manage risk, allocate capital, serve customers and improve operating productivity. Its relevance is increasingly extending beyond automation projects as AI capability now depends on the interaction between proprietary data, model infrastructure, specialist human capital and governance control. The breadth of deployment in financial products and operations are also increasingly specialised, with implementations now seeing it within fraud detection, credit assessment, transaction monitoring, customer personalisation and internal decision support. Singapore’s domestic banks have developed distinct positions within this transition across the past year years. DBS has placed particular emphasis on measuring economic value and industrialisation of AI, OCBC on integration of AI into daily operational decisions, and UOB on compliance, risk management and regional platform development. International banks operating in Singapore on the other hand, have been noted to contribute to the industrial landscape through global technology transfer, investment banking applications and enterprise scale generative AI. The resulting relationship between banking and AI is that investors should see value through the degree and regulated capability of process building rather than direct equity revaluation.</p>
-
-
+ An explolatory dashboard exploring AI adoption among banks in Singapore. The dashboard visualises how a custom AI adoption score is constructed across multiple indicators.
+ While this presentation is neither an official rating nor endorsement of any bank, it provides a comparative view how
+ ranking organisations undertaking non-homogenous approach to common macroeconomic phenomena can be studied. 
+ Present high scoring institutions are significantly more aligned with national adoption strategies
+ rather than having ingrained highly integrated services which translate to earnings. 
+ </p>
       </div>
-
-
       <ScoreBars
         banks={BANKS}
         selectedBank={selectedBank}
@@ -1048,12 +1049,10 @@ export default function AIRevaluationDashboard() {
               ))}
             </div>
           </div>
-
-       <p className="mt-3 max-w-4xl text-justify text-[8px] leading-relaxed text-[#545454]">
-
-The Bank AI Capability Score is a constructed ordinal composite index based on two key organisational AI maturity literature. Firstly from the Multidimensional Capability Approach by Sadiq et al. (2021) and the AI Capability Assessment Model developed by Butler, Espinoza-Limón and Seppälä (2023). The governance component is further adapted to Singapore’s financial-sector context given Monetary Authority of Singapore’s FEAT Principles and Veritas assessment methodologies, together with NIST AI Risk Management Framework and Singapore’s Model AI Governance Framework. The use case deployment and product breadth reflect the range of banking applications identified in BIS assessments of AI in financial services. Public disclosure is introduced as a study specific observability proxy because comparable internal data on model inventories, expenditure, productivity and realised AI value are generally unavailable across banks. The dimension scores, aggregation weights and maturity thresholds remain researcher-defined and should therefore be interpreted as a structured screening measure rather than an externally validated or audited AI rating.
-
-        </p>
+         <br></br> <p className="text-justify text-[7px] leading-relaxed text-[#545454]">The Bank AI Capability Score is an ordinal composite index based on two key literatures in organisation AI maturity, namely the Multidimensional Capability Approach by Sadiq et al. (2021) and the AI Capability Assessment Model developed by Butler, Espinoza-Limón and Seppälä (2023). 
+"Governance" component strictly relates to Monetary Authority of Singapore’s FEAT Principles and Veritas assessment methodologies, together with NIST AI Risk Management Framework and Singapore’s Model AI Governance Framework. 
+The use case deployment and product breadth categories reflect the range of banking applications identified in BIS assessments of AI in financial services. 
+Public disclosure is estimated because internal data on model inventories, expenditure, productivity and realised AI value are generally publically unavailable. The dimension scores, aggregation weights and maturity thresholds are therefore strictly author defined and not interpreted as structured screening measures of an audited AI rating. </p>
         </div>
       </div>
     </div>
